@@ -5,7 +5,7 @@ date: 2017-03-15 19:53:19 +0800
 comments: true
 categories: 
 ---
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+<script type="text/javascript" src="<script type="text/javascript" src="/Users/chenlini/octopress/MathJax/MathJax.js"?config=default"></script>
 ####总结：感知机属于二分类的算法，输入为一系列的特征向量，输出为＋1或者是－1.输入空间到输出空间用的是sign()函数。
 ### 感知机定义了一个超平面：WX＋B＝0
 其中W为权重向量，X为输入的特征向量，B为误差常数。
@@ -23,7 +23,7 @@ categories:
     
     $$L(w,b)=\sum_{x_i \in M}y_i(w \bullet x_i+b)$$
    
-    <img src="http://chart.googleapis.com/chart?cht=tx&chl=\Large x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}" style="border:none;">
+   
     
     求解方法就是求导之后用梯度下降的方法解决。
     
