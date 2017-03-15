@@ -22,7 +22,8 @@ categories:
     损失函数最后的形式就是：
     
     $$L(w,b)=\sum_{x_i \in M}y_i(w \bullet x_i+b)$$
-    
+   
+    <img src="http://chart.googleapis.com/chart?cht=tx&chl=\Large x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}" style="border:none;">
     
     求解方法就是求导之后用梯度下降的方法解决。
     
