@@ -1,4 +1,12 @@
-#C++中static和const
+---
+layout: post
+title: "C++中static和const"
+date: 2017-03-15 15:14:26 +0800
+comments: true
+categories: 
+---
+
+
 
 static是静态常量，const是指类的内部是静态的。
 const定义的常量在超出其作用域之后其空间会被释放，而static定义的静态常量在函数执行后不会释放其存储空间。
