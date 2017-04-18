@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://chenlini.github.io/blog/2017/03/15/tcp-and-udp/</loc>
+<lastmod>2017-03-15T22:40:05+08:00</lastmod>
+</url>
+<url>
+<loc>http://chenlini.github.io/blog/2017/03/15/pai-xu-hui-zong/</loc>
+<lastmod>2017-03-15T22:12:55+08:00</lastmod>
+</url>
+<url>
 <loc>http://chenlini.github.io/blog/2017/03/15/gan-zhi-ji/</loc>
 <lastmod>2017-03-15T19:53:19+08:00</lastmod>
 </url>
@@ -20,5 +28,14 @@
 </url>
 <url>
 <loc>http://chenlini.github.io/blog/categories/</loc>
+</url>
+<url>
+<loc>http://chenlini.github.io/blog/categories/shu-ju-wa-jue/</loc>
+</url>
+<url>
+<loc>http://chenlini.github.io/blog/categories/shu-ju-jie-gou/</loc>
+</url>
+<url>
+<loc>http://chenlini.github.io/blog/categories/cao-zuo-xi-tong/</loc>
 </url>
 </urlset>

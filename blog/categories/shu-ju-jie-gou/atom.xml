@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: 数据结构 | Chenlini]]></title>
+  <link href="http://chenlini.github.io/blog/categories/shu-ju-jie-gou/atom.xml" rel="self"/>
+  <link href="http://chenlini.github.io/"/>
+  <updated>2017-03-15T23:20:07+08:00</updated>
+  <id>http://chenlini.github.io/</id>
+  <author>
+    <name><![CDATA[Chenlini]]></name>
+    <email><![CDATA[chenlini1234@126.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[排序汇总]]></title>
+    <link href="http://chenlini.github.io/blog/2017/03/15/pai-xu-hui-zong/"/>
+    <updated>2017-03-15T22:12:55+08:00</updated>
+    <id>http://chenlini.github.io/blog/2017/03/15/pai-xu-hui-zong</id>
+    <content type="html"><![CDATA[<h2>简单选择排序</h2>
+
+<pre><code class="cpp">
+    void simpleRank(vector&lt;int&gt; R){
+            int s;
+            for(int i=0;i&lt;R.size();i++){
+                s=0;
+                for(int j=i+1;R.size();j++){
+                    if(R[j]&lt;R[s])s=j;
+                }
+                swap(R[i],R[s]);
+            }
+
+        }
+</code></pre>
+
+<p>时间复杂度O（n<sup>2</sup> ）,是不稳定的排序算法。空间复杂度为O（n）</p>
+
+<h2>直接插入排序</h2>
+
+<pre><code class="cpp">   void InsertRank(vector&lt;int&gt; R){
+
+       for(int i=1;i&lt;R.size();i++){
+        int tmp=R[i];
+        int j=i;
+        while(j&gt;0&amp;&amp;tmp&lt;R[j-1]){
+            R[j]=R[j-1];j--;
+        }
+        R[j]=tmp;
+    }
+
+    }
+    ```
+当原始数据是有序的，直接插入排序最好的时间复杂度是O（n）最坏情况为O（n^2 ），是稳定的排序算法。空间复杂度为O（n）
+
+##冒泡排序
+</code></pre>
+
+<pre><code>void maopaoRank(vector&lt;int&gt; R){
+int j=R.size()-1;
+    while(j&gt;0){
+        int last=0;
+        for(int i=0;i&lt;j;i++){
+            if(R[i]&gt;R[i+1]){swap(R[i],R[i+1]);
+                        last=i;}
+        }
+        j=last;
+    }
+}
+</code></pre>
+
+<pre><code>注意并不是一定要进行R.size()趟，当没有交换的元素的时候就可以结束循环了。当原始数据是有序的，直接插入排序最好的时间复杂度是O（n）最坏情况为O（n^2 ），是稳定的排序算法。需要额外的栈资源。
+
+##快速排序
+</code></pre>
+
+<pre><code>    //函数封装
+    void QuickSort(vector&lt;int&gt; R){
+Quick(R,0,R.size()-1);
+    }
+    void Quick(vector&lt;int&gt; R, int left,int right){
+int i,j;
+if(left&lt;right){//待排元素多于一个
+    i=left;
+    j=right+1;
+    do{
+        do i++;while(R[i]&lt;R[left]);//寻找第一个大于R[left]的元素
+        do j--;while(R[j]&gt;R[left]);//寻找第一个小于R[left]的元素
+        if(i&lt;j)swap(R[i],R[j]);//交换元素，如果此时i&gt;j久不用交换了
+    }while(i&lt;j);
+    swap(R[left],R[j]);
+    Quick(R,left,j-1);//低端
+    Quick(R,j,right);//高端
+}}
+</code></pre>
+
+<pre><code>快速排序有三种选择分割点的方法：
+
+1. A[(left+right)/2]作为分割点，与第一个点交换
+2. 取随机数与第一个点交换
+3. 比较A[left],A[right],A[(left+right)/2]，取中间的和第一个点交换。
+
+优化方法：先排短的子序列，再排长的子序列。
+
+时间复杂度：平均情况O(nlogn)，最坏情况为O(n^2).快速排序是不稳定的排序算法。
+
+##二路合并排序
+</code></pre>
+
+<p>include<iostream>
+using namespace std;
+int * Merge(){
+}</p>
+
+<p>```</p>
+]]></content>
+  </entry>
+  
+</feed>

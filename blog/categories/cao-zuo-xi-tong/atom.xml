@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: 操作系统 | Chenlini]]></title>
+  <link href="http://chenlini.github.io/blog/categories/cao-zuo-xi-tong/atom.xml" rel="self"/>
+  <link href="http://chenlini.github.io/"/>
+  <updated>2017-03-15T23:20:07+08:00</updated>
+  <id>http://chenlini.github.io/</id>
+  <author>
+    <name><![CDATA[Chenlini]]></name>
+    <email><![CDATA[chenlini1234@126.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[TCP and UDP]]></title>
+    <link href="http://chenlini.github.io/blog/2017/03/15/tcp-and-udp/"/>
+    <updated>2017-03-15T22:40:05+08:00</updated>
+    <id>http://chenlini.github.io/blog/2017/03/15/tcp-and-udp</id>
+    <content type="html"><![CDATA[<h3>TCP(Transmission Control protocal)</h3>
+
+<p>TCP is based on <strong>connection</strong> which means sending end must creat a stable connection to receiving end. This operation called <strong>three-way handshake</strong>.</p>
+
+<h3>UDP(User Data protocal)</h3>
+
+<p>Data transmission based on UDP don&rsquo;t need to build connection before. The sending post send out data as soon as possible. It doesn&rsquo;t make sure the receiver can receive data completely and correctly.</p>
+
+<table>
+<thead>
+<tr>
+<th>TCP </th>
+<th> UDP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>reliable and stable</td>
+<td> not reliable</td>
+</tr>
+<tr>
+<td>mass of data  </td>
+<td> small data</td>
+</tr>
+<tr>
+<td>slow </td>
+<td>fast</td>
+</tr>
+<tr>
+<td>O2 byte stream   </td>
+<td> O2 message</td>
+</tr>
+<tr>
+<td>one to one</td>
+<td> one to many</td>
+</tr>
+<tr>
+<td>more system resource</td>
+<td>less system resourse</td>
+</tr>
+<tr>
+<td>HTTP,FTP</td>
+<td>QQ Voice QQ video</td>
+</tr>
+</tbody>
+</table>
+
+]]></content>
+  </entry>
+  
+</feed>
