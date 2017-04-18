@@ -3,7 +3,7 @@ layout: post
 title: "感知机"
 date: 2017-03-15 19:53:19 +0800
 comments: true
-categories: 
+categories: 数据挖掘
 ---
 
 <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
