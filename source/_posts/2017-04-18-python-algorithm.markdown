@@ -36,7 +36,7 @@ Github: https://github.com/Theano/Theano
 
 Theano允许你定义、优化和评估涉及多维数组的数学表达式。能够很好的支持NumPy，有完善的文档以及教程，如下图所示。该库比较偏向学术研究，方向为神经网络与深度学习的领域。
 
-![](/images/Theano.png)
+![](img/images/Theano.png)
 
 >* [Pylearn2](http://deeplearning.net/software/pylearn2/)就是在Theano基础上建立的，把一些较为常用的深度学习的模型以及训练算法封装成了包，可以直接调用。
 >* [Keras](https://keras.io/)也是在Theano基础上建立的，是较为流行的，高度模块化的深度学习框架。
@@ -48,7 +48,7 @@ Github: https://github.com/tensorflow/tensorflow/issues
 Tensorflow是现在最流行的深度学习库，利用数据流图形进行数值计算。被评选为2016年最值得fork的项目之一。该库主要由C++实现，但是有Python的API。最重要的是有中文社区以及中文文档！
 
 主要的研究方向是**神经网络**。
-![](/images/tensorflow.png)
+![](img/images/tensorflow.png)
 
 #####其他库：
 >* [Pyevolve](http://pyevolve.sourceforge.net/):遗传算法
