@@ -4,7 +4,7 @@
   <title><![CDATA[Chenlini]]></title>
   <link href="http://chenlini.github.io/atom.xml" rel="self"/>
   <link href="http://chenlini.github.io/"/>
-  <updated>2017-03-15T23:20:07+08:00</updated>
+  <updated>2017-05-05T11:16:59+08:00</updated>
   <id>http://chenlini.github.io/</id>
   <author>
     <name><![CDATA[Chenlini]]></name>
@@ -12,6 +12,91 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Python_algorithm]]></title>
+    <link href="http://chenlini.github.io/blog/2017/04/18/python-algorithm/"/>
+    <updated>2017-04-18T13:21:33+08:00</updated>
+    <id>http://chenlini.github.io/blog/2017/04/18/python-algorithm</id>
+    <content type="html"><![CDATA[<h1>Python 常用的机器学习算法库介绍</h1>
+
+<hr />
+
+<p>Python作为目前最火的学习机器学习算法的语言之一拥有如下三个优点：</p>
+
+<blockquote><ol>
+<li>语法简单，上手容易</li>
+<li>功能多样</li>
+<li>强大的社区</li>
+<li>丰富的机器学习库</li>
+</ol>
+</blockquote>
+
+<h2><a href="http://scikit-learn.org/stable/">Scikit-learn</a></h2>
+
+<p>GitHub: <a href="https://github.com/scikit-learn/scikit-learn">https://github.com/scikit-learn/scikit-learn</a></p>
+
+<p>Scikit-learn是建立在Scipy和Numpy基础上的机器学习库。包含丰富的分类，回归，聚类，降维，模型选择以及预处理的方法。</p>
+
+<blockquote><p>注：NumPy 是以矩阵为基础的数学计算模块，Scipy是科学计算函数库。NumPy主要是纯数学的函数，Scipy包含一些高阶的抽象模型。</p></blockquote>
+
+<p><img src="http://chenlini.github.io/Users/chenlini/octopress/pic/Scikit-learn.png" alt="" /></p>
+
+<h6>其中非监督的学习算法包括：岭回归，lasso回归，Elastic Net，逻辑回归，核函回归，SVM，朴素贝叶斯，决策树，增强算法等。</h6>
+
+<h6>非监督学习算法有K-Means，Affinity propagation，Mean-shift，Spectral clustering，Ward hierarchical clustering（层次聚类），Agglomerative clustering（密度聚类），DBSCAN，Gaussian mixtures。</h6>
+
+<h2><a href="http://deeplearning.net/software/theano/">Theano</a></h2>
+
+<p>Github: <a href="https://github.com/Theano/Theano">https://github.com/Theano/Theano</a></p>
+
+<p>Theano允许你定义、优化和评估涉及多维数组的数学表达式。能够很好的支持NumPy，有完善的文档以及教程，如下图所示。该库比较偏向学术研究，方向为神经网络与深度学习的领域。</p>
+
+<p><img src="http://chenlini.github.io/Users/chenlini/octopress/pic/Theano.png" alt="" /></p>
+
+<blockquote><ul>
+<li><a href="http://deeplearning.net/software/pylearn2/">Pylearn2</a>就是在Theano基础上建立的，把一些较为常用的深度学习的模型以及训练算法封装成了包，可以直接调用。</li>
+<li><a href="https://keras.io/">Keras</a>也是在Theano基础上建立的，是较为流行的，高度模块化的深度学习框架。</li>
+</ul>
+</blockquote>
+
+<h2><a href="http://www.tensorfly.cn/tfdoc/tutorials/overview.html">Tensorflow</a></h2>
+
+<p>Github: <a href="https://github.com/tensorflow/tensorflow/issues">https://github.com/tensorflow/tensorflow/issues</a></p>
+
+<p>Tensorflow是现在最流行的深度学习库，利用数据流图形进行数值计算。被评选为2016年最值得fork的项目之一。该库主要由C++实现，但是有Python的API。最重要的是有中文社区以及中文文档！</p>
+
+<p>主要的研究方向是<strong>神经网络</strong>。
+<img src="http://chenlini.github.io/Users/chenlini/octopress/pic/tensorflow.png" alt="" /></p>
+
+<h5>其他库：</h5>
+
+<blockquote><ul>
+<li><a href="http://pyevolve.sourceforge.net/">Pyevolve</a>:遗传算法</li>
+<li><a href="http://www.numenta.org/">nupic</a>:HIM算法（层次时间记忆）</li>
+<li><a href="http://www.clips.ua.ac.be/pattern">pattern</a>:web挖掘</li>
+<li><a href="http://caffe.berkeleyvision.org/">Caffe</a>:视觉领域</li>
+<li><a href="http://www.csie.ntu.edu.tw/~cjlin/libsvm/">LibSVM</a>:针对SVM算法</li>
+<li><a href="http://nilearn.github.io/">Nilearn</a>:神经影像</li>
+<li><a href="http://statsmodels.sourceforge.net/">Statsmodels</a>:基于统计学</li>
+<li><a href="http://pymc-devs.github.io/pymc/README.html#purpose">PyMC</a>:贝叶斯统计模型，MCMC等。</li>
+<li><a href="http://www.pymvpa.org/">PYMVPA</a>:大数据的统计学习分析</li>
+<li><a href="http://radimrehurek.com/gensim/">gensim</a>:自然语言处理，主题模型</li>
+<li><a href="https://pypi.python.org/pypi/featureforge">featureforge</a>:专门用来构建或者测试特征的库。</li>
+<li><a href="https://pypi.python.org/pypi/vaderSentiment">vaderSentiment</a>:语义分析</li>
+</ul>
+</blockquote>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Linux常用指令]]></title>
+    <link href="http://chenlini.github.io/blog/2017/03/19/linuxchang-yong-zhi-ling/"/>
+    <updated>2017-03-19T23:14:19+08:00</updated>
+    <id>http://chenlini.github.io/blog/2017/03/19/linuxchang-yong-zhi-ling</id>
+    <content type="html"><![CDATA[<h3>linux</h3>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[TCP and UDP]]></title>
@@ -64,6 +149,31 @@
 </tr>
 </tbody>
 </table>
+
+
+<p>　　</p>
+
+<h3>UDP应用场景：</h3>
+
+<ol>
+<li>面向数据报方式</li>
+<li>网络数据大多为短消息</li>
+<li>拥有大量Client</li>
+<li>对数据安全性无特殊要求</li>
+<li>网络负担非常重，但对响应速度要求高</li>
+</ol>
+
+
+<h3>其他区别</h3>
+
+<ol>
+<li>socket()的参数不同</li>
+<li>UDP Server不需要调用listen和accept</li>
+<li>UDP收发数据用sendto/recvfrom函数</li>
+<li>TCP：地址信息在connect/accept时确定</li>
+<li>UDP：在sendto/recvfrom函数中每次均 需指定地址信息</li>
+<li>UDP：shutdown函数无效</li>
+</ol>
 
 ]]></content>
   </entry>

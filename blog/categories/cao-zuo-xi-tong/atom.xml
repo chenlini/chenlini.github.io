@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 操作系统 | Chenlini]]></title>
   <link href="http://chenlini.github.io/blog/categories/cao-zuo-xi-tong/atom.xml" rel="self"/>
   <link href="http://chenlini.github.io/"/>
-  <updated>2017-03-15T23:20:07+08:00</updated>
+  <updated>2017-05-05T11:16:59+08:00</updated>
   <id>http://chenlini.github.io/</id>
   <author>
     <name><![CDATA[Chenlini]]></name>
@@ -64,6 +64,31 @@
 </tr>
 </tbody>
 </table>
+
+
+<p>　　</p>
+
+<h3>UDP应用场景：</h3>
+
+<ol>
+<li>面向数据报方式</li>
+<li>网络数据大多为短消息</li>
+<li>拥有大量Client</li>
+<li>对数据安全性无特殊要求</li>
+<li>网络负担非常重，但对响应速度要求高</li>
+</ol>
+
+
+<h3>其他区别</h3>
+
+<ol>
+<li>socket()的参数不同</li>
+<li>UDP Server不需要调用listen和accept</li>
+<li>UDP收发数据用sendto/recvfrom函数</li>
+<li>TCP：地址信息在connect/accept时确定</li>
+<li>UDP：在sendto/recvfrom函数中每次均 需指定地址信息</li>
+<li>UDP：shutdown函数无效</li>
+</ol>
 
 ]]></content>
   </entry>
