@@ -21,7 +21,7 @@ GitHub: https://github.com/scikit-learn/scikit-learn
 Scikit-learn是建立在Scipy和Numpy基础上的机器学习库。包含丰富的分类，回归，聚类，降维，模型选择以及预处理的方法。
 >注：NumPy 是以矩阵为基础的数学计算模块，Scipy是科学计算函数库。NumPy主要是纯数学的函数，Scipy包含一些高阶的抽象模型。
 
-![](/images/Scikit-learn.png)
+![](chenlini.github.io/source/images/Scikit-learn.png)
 
 ######其中非监督的学习算法包括：岭回归，lasso回归，Elastic Net，逻辑回归，核函回归，SVM，朴素贝叶斯，决策树，增强算法等。
 
