@@ -1,8 +1,8 @@
 <div class="profilepic">
-	<script src="{{ root_url }}/javascripts/md5.js">{{ site.title }}</script>
+	<script src="{{ root_url }}/javascripts/md5.js"></script>
 	<script type="text/javascript">
 		$(function(){
-			$('.profilepic').append("<img alt='Profile Picture' src=“/Users/chenlini/octopress/source/images/touxiang.png” style='width: 160px;' />");
+			$('.profilepic').append("<img src='http://www.gravatar.com/avatar/" + MD5("{{ site.email | downcase }}") + "?s=160' alt='Profile Picture' style='width: 160px;' />");
 		});
 	</script>
 </div>
@@ -10,9 +10,6 @@
 <nav id="main-nav">{% include navigation.html %}</nav>
 <nav id="sub-nav">
 	<div class="social">
-		{% if site.subtitle %}
-		{{ site.subtitle }}
-        {% endif %}​
 		{% if site.weibo_user %}
 		<a class="weibo" href="http://www.weibo.com/{{ site.weibo_user }}" title="Weibo">新浪微博</a>
 		{% if site.facebook_user %}
