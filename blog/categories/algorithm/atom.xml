@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: 数据挖掘 | Chenlini]]></title>
-  <link href="http://chenlini.github.io/blog/categories/shu-ju-wa-jue/atom.xml" rel="self"/>
+  <title><![CDATA[Category: Algorithm | Chenlini]]></title>
+  <link href="http://chenlini.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://chenlini.github.io/"/>
-  <updated>2017-05-09T10:52:39+08:00</updated>
+  <updated>2017-05-09T12:51:45+08:00</updated>
   <id>http://chenlini.github.io/</id>
   <author>
     <name><![CDATA[Chenlini]]></name>
@@ -53,6 +53,15 @@
 <li>样本线性可分的充要条件是正向实例构成的凸壳与负向实例构成的凸壳不相交。</li>
 </ol>
 
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[深入浅出SVM]]></title>
+    <link href="http://chenlini.github.io/blog/2017/03/15/shen-ru-qian-chu-svm/"/>
+    <updated>2017-03-15T15:14:26+08:00</updated>
+    <id>http://chenlini.github.io/blog/2017/03/15/shen-ru-qian-chu-svm</id>
+    <content type="html"><![CDATA[
 ]]></content>
   </entry>
   

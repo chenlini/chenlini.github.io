@@ -24,7 +24,17 @@ const成员变量也不能在类定义处初始化 &hellip;">
 	<link rel="canonical" href="http://chenlini.github.io/blog/2017/03/15/my-first-blog/">
 	<link href="/favicon.png" rel="shortcut icon">
 	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<!--[if lt IE 9]><script src="//libs.baidu.com/jquery/1.7.2/jquery.min.js></script><![endif]-->
+<script>
+	function addBlankTargetForLinks () {
+	  $('a[href^="http"]').each(function(){
+		  $(this).attr('target', '_blank');
+	  });
+	}
+	$(document).bind('DOMNodeInserted', function(event) {
+	  addBlankTargetForLinks();
+	});
+</script>
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
 	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
@@ -168,8 +178,6 @@ const定义的常量在超出其作用域之后其空间会被释放，而static
 	
 	<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
 	
-	
-	<a class="addthis_button_tweet"></a>
 	
 	
 	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>

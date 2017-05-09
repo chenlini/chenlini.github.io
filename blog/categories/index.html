@@ -9,7 +9,7 @@
 	<meta name="author" content="Chenlini">
 
 	
-	<meta name="description" content=" 数据挖掘 [ 1 ] 数据结构 [ 1 ] 操作系统 [ 1 ] ">
+	<meta name="description" content=" C++ [ 1 ] Algorithm [ 2 ] 数据结构 [ 1 ] 操作系统 [ 1 ] Tools [ 1 ] ">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -22,7 +22,17 @@
 	<link rel="canonical" href="http://chenlini.github.io/blog/categories/">
 	<link href="/favicon.png" rel="shortcut icon">
 	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<!--[if lt IE 9]><script src="//libs.baidu.com/jquery/1.7.2/jquery.min.js></script><![endif]-->
+<script>
+	function addBlankTargetForLinks () {
+	  $('a[href^="http"]').each(function(){
+		  $(this).attr('target', '_blank');
+	  });
+	}
+	$(document).bind('DOMNodeInserted', function(event) {
+	  addBlankTargetForLinks();
+	});
+</script>
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
 	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
@@ -76,11 +86,15 @@
     
     <div class="entry-content"><ul>
 
-    <li><a href="/blog/categories/数据挖掘/">数据挖掘</a> [ 1 ]</li>
+    <li><a href="/blog/categories/c++/">C++</a> [ 1 ]</li>
+
+    <li><a href="/blog/categories/algorithm/">Algorithm</a> [ 2 ]</li>
 
     <li><a href="/blog/categories/数据结构/">数据结构</a> [ 1 ]</li>
 
     <li><a href="/blog/categories/操作系统/">操作系统</a> [ 1 ]</li>
+
+    <li><a href="/blog/categories/tools/">Tools</a> [ 1 ]</li>
 
 </ul>
 

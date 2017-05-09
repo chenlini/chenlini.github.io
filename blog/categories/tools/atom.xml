@@ -1,92 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
 
-<!DOCTYPE HTML>
+  <title><![CDATA[Category: Tools | Chenlini]]></title>
+  <link href="http://chenlini.github.io/blog/categories/tools/atom.xml" rel="self"/>
+  <link href="http://chenlini.github.io/"/>
+  <updated>2017-05-09T12:51:45+08:00</updated>
+  <id>http://chenlini.github.io/</id>
+  <author>
+    <name><![CDATA[Chenlini]]></name>
+    <email><![CDATA[chenlini1234@126.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
 
-<html>
-
-<head>
-	<meta charset="utf-8">
-	<title>Python_algorithm - Chenlini</title>
-	<meta name="author" content="Chenlini">
-
-	
-	<meta name="description" content="Python_algorithm Python 常用的机器学习算法库介绍 Python作为目前最火的学习机器学习算法的语言之一拥有如下三个优点： 语法简单，上手容易
-功能多样
-强大的社区
-丰富的机器学习库
-&lt;!-—more—-> Scikit-learn GitHub: https:// &hellip;">
-	
-
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-	<link href="" rel="alternate" title="Chenlini" type="application/atom+xml">
-	
-	<link rel="canonical" href="http://chenlini.github.io/blog/2017/04/18/python-algorithm/">
-	<link href="/favicon.png" rel="shortcut icon">
-	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-	<!--[if lt IE 9]><script src="//libs.baidu.com/jquery/1.7.2/jquery.min.js></script><![endif]-->
-<script>
-	function addBlankTargetForLinks () {
-	  $('a[href^="http"]').each(function(){
-		  $(this).attr('target', '_blank');
-	  });
-	}
-	$(document).bind('DOMNodeInserted', function(event) {
-	  addBlankTargetForLinks();
-	});
-</script>
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
-	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-
-</head>
-
-
-<body>
-	<div class="container">
-		<div class="left-col">
-			<div class="intrude-less">
-			<header id="header" class="inner"><div class="profilepic">
-	<script src="/javascripts/md5.js"></script>
-	<script type="text/javascript">
-		$(function(){
-			$('.profilepic').append("<img src='http://www.gravatar.com/avatar/" + MD5("chenlini1234@126.com") + "?s=160' alt='Profile Picture' style='width: 160px;' />");
-		});
-	</script>
-</div>
-<hgroup>
-  <h1><a href="/">Chenlini</a></h1>
   
-    <h2>Stay hundry stay foolish.</h2>
-  
-</hgroup>
-
-<nav id="main-nav"><ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-</ul>
-
-</nav>
-<nav id="sub-nav">
-	<div class="social">
-		
-		
-	</div>
-</nav>
-</header>				
-			</div>
-		</div>	
-		<div class="mid-col">
-			
-				
-			
-			<div class="mid-col-container">
-				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-	<h1 class="title" itemprop="name">Python_algorithm</h1>
-	<div class="entry-content" itemprop="articleBody"><h1>Python 常用的机器学习算法库介绍</h1>
+  <entry>
+    <title type="html"><![CDATA[Python_algorithm]]></title>
+    <link href="http://chenlini.github.io/blog/2017/04/18/python-algorithm/"/>
+    <updated>2017-04-18T13:21:33+08:00</updated>
+    <id>http://chenlini.github.io/blog/2017/04/18/python-algorithm</id>
+    <content type="html"><![CDATA[<h1>Python 常用的机器学习算法库介绍</h1>
 
 <hr />
 
@@ -156,50 +88,7 @@
 <li><a href="https://pypi.python.org/pypi/vaderSentiment">vaderSentiment</a>:语义分析</li>
 </ul>
 </blockquote>
-</div>
-
-</article>
-
-	<div class="share">
-	<div class="addthis_toolbox addthis_default_style ">
-	
-	<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-	
-	
-	
-	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
-	
-	<a class="addthis_counter addthis_pill_style"></a>
-	</div>
-  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
-</div>
-
-
-</div>
-			</div>
-			<footer id="footer" class="inner"><p>
-  Copyright &copy; 2017 - Chenlini -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
-
-Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
-			<script src="/javascripts/slash.js"></script>
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-
-<script src="/javascripts/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-(function($){
-	$('.fancybox').fancybox();
-})(jQuery);
-</script> <!-- Delete or comment this line to disable Fancybox -->
-
-
-
-
-
-
-
-		</div>
-	</div>
-</body>
-</html>
+]]></content>
+  </entry>
+  
+</feed>
