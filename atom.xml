@@ -4,7 +4,7 @@
   <title><![CDATA[Chenlini]]></title>
   <link href="http://chenlini.github.io/atom.xml" rel="self"/>
   <link href="http://chenlini.github.io/"/>
-  <updated>2017-05-09T12:51:45+08:00</updated>
+  <updated>2017-05-09T14:26:30+08:00</updated>
   <id>http://chenlini.github.io/</id>
   <author>
     <name><![CDATA[Chenlini]]></name>
@@ -28,10 +28,12 @@
 <li>语法简单，上手容易</li>
 <li>功能多样</li>
 <li>强大的社区</li>
-<li>丰富的机器学习库
-&lt;!-—more—-></li>
+<li>丰富的机器学习库</li>
 </ol>
 </blockquote>
+
+<!--more-->
+
 
 <h2><a href="http://scikit-learn.org/stable/">Scikit-learn</a></h2>
 
