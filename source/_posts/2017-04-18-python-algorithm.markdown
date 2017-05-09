@@ -13,7 +13,8 @@ Python作为目前最火的学习机器学习算法的语言之一拥有如下�
 >2. 功能多样
 >3. 强大的社区
 >4. 丰富的机器学习库
-<!-—more—->
+
+<!--more-->
 
 ##[Scikit-learn](http://scikit-learn.org/stable/)
 GitHub: https://github.com/scikit-learn/scikit-learn
