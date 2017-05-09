@@ -22,7 +22,7 @@ Scikit-learn是建立在Scipy和Numpy基础上的机器学习库。包含丰富�
 >注：NumPy 是以矩阵为基础的数学计算模块，Scipy是科学计算函数库。NumPy主要是纯数学的函数，Scipy包含一些高阶的抽象模型。
 
 
-![](https://github.com/chenlini/chenlini.github.io/blob/source/source/images/Scikit-learn.png)
+![](https://raw.githubusercontent.com/chenlini/chenlini.github.io/source/source/images/Scikit-learn.png)
 
 ######其中非监督的学习算法包括：岭回归，lasso回归，Elastic Net，逻辑回归，核函回归，SVM，朴素贝叶斯，决策树，增强算法等。
 
@@ -38,7 +38,7 @@ Github: https://github.com/Theano/Theano
 Theano允许你定义、优化和评估涉及多维数组的数学表达式。能够很好的支持NumPy，有完善的文档以及教程，如下图所示。该库比较偏向学术研究，方向为神经网络与深度学习的领域。
 
 
-![](https://github.com/chenlini/chenlini.github.io/blob/source/source/images/Theano.png)
+![](https://raw.githubusercontent.com/chenlini/chenlini.github.io/source/source/images/Theano.png)
 
 >* [Pylearn2](http://deeplearning.net/software/pylearn2/)就是在Theano基础上建立的，把一些较为常用的深度学习的模型以及训练算法封装成了包，可以直接调用。
 >* [Keras](https://keras.io/)也是在Theano基础上建立的，是较为流行的，高度模块化的深度学习框架。
@@ -51,7 +51,7 @@ Tensorflow是现在最流行的深度学习库，利用数据流图形进行数�
 
 主要的研究方向是**神经网络**。
 
-![](https://github.com/chenlini/chenlini.github.io/blob/source/source/images/tensorflow.png)
+![](https://raw.githubusercontent.com/chenlini/chenlini.github.io/source/source/images/tensorflow.png)
 
 #####其他库：
 >* [Pyevolve](http://pyevolve.sourceforge.net/):遗传算法
