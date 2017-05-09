@@ -3,7 +3,7 @@ layout: post
 title: "Python_algorithm"
 date: 2017-04-18 13:21:33 +0800
 comments: true
-categories: 
+categories: tools
 ---
 # Python 常用的机器学习算法库介绍
 ------
@@ -13,7 +13,7 @@ Python作为目前最火的学习机器学习算法的语言之一拥有如下�
 >2. 功能多样
 >3. 强大的社区
 >4. 丰富的机器学习库
-
+<!-—more—->
 
 ##[Scikit-learn](http://scikit-learn.org/stable/)
 GitHub: https://github.com/scikit-learn/scikit-learn
@@ -22,7 +22,8 @@ Scikit-learn是建立在Scipy和Numpy基础上的机器学习库。包含丰富�
 >注：NumPy 是以矩阵为基础的数学计算模块，Scipy是科学计算函数库。NumPy主要是纯数学的函数，Scipy包含一些高阶的抽象模型。
 
 
-![](https://raw.githubusercontent.com/chenlini/chenlini.github.io/source/source/images/Scikit-learn.png)
+![](https://raw.githubusercontent.com/chenlini/chenlini.github.io/source/source/images/Scikit-learn.png
+)
 
 ######其中非监督的学习算法包括：岭回归，lasso回归，Elastic Net，逻辑回归，核函回归，SVM，朴素贝叶斯，决策树，增强算法等。
 
