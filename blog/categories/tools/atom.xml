@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Tools | Chenlini]]></title>
-  <link href="http://chenlini.github.io/blog/categories/tools/atom.xml" rel="self"/>
-  <link href="http://chenlini.github.io/"/>
-  <updated>2017-05-10T12:59:17+08:00</updated>
-  <id>http://chenlini.github.io/</id>
+  <link href="chenlini.github.io/blog/categories/tools/atom.xml" rel="self"/>
+  <link href="chenlini.github.io/"/>
+  <updated>2017-05-10T13:29:29+08:00</updated>
+  <id>chenlini.github.io/</id>
   <author>
     <name><![CDATA[Chenlini]]></name>
     <email><![CDATA[chenlini1234@126.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Python_algorithm]]></title>
-    <link href="http://chenlini.github.io/blog/2017/04/18/python-algorithm/"/>
+    <link href="chenlini.github.io/blog/2017/04/18/python-algorithm/"/>
     <updated>2017-04-18T13:21:33+08:00</updated>
-    <id>http://chenlini.github.io/blog/2017/04/18/python-algorithm</id>
+    <id>chenlini.github.io/blog/2017/04/18/python-algorithm</id>
     <content type="html"><![CDATA[<h1>Python 常用的机器学习算法库介绍</h1>
 
 <hr />

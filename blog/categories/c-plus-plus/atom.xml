@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: C++ | Chenlini]]></title>
-  <link href="http://chenlini.github.io/blog/categories/c-plus-plus/atom.xml" rel="self"/>
-  <link href="http://chenlini.github.io/"/>
-  <updated>2017-05-10T12:59:17+08:00</updated>
-  <id>http://chenlini.github.io/</id>
+  <link href="chenlini.github.io/blog/categories/c-plus-plus/atom.xml" rel="self"/>
+  <link href="chenlini.github.io/"/>
+  <updated>2017-05-10T13:29:29+08:00</updated>
+  <id>chenlini.github.io/</id>
   <author>
     <name><![CDATA[Chenlini]]></name>
     <email><![CDATA[chenlini1234@126.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[C++中static和const]]></title>
-    <link href="http://chenlini.github.io/blog/2017/03/15/my-first-blog/"/>
+    <link href="chenlini.github.io/blog/2017/03/15/my-first-blog/"/>
     <updated>2017-03-15T15:14:26+08:00</updated>
-    <id>http://chenlini.github.io/blog/2017/03/15/my-first-blog</id>
+    <id>chenlini.github.io/blog/2017/03/15/my-first-blog</id>
     <content type="html"><![CDATA[<p>static是静态常量，const是指类的内部是静态的。
 const定义的常量在超出其作用域之后其空间会被释放，而static定义的静态常量在函数执行后不会释放其存储空间。</p>
 
