@@ -35,10 +35,10 @@
 <loc>http://chenlini.github.io/</loc>
 </url>
 <url>
-<loc>http://chenlini.github.io/categories/</loc>
+<loc>http://chenlini.github.io/blog/categories/</loc>
 </url>
 <url>
-<loc>http://chenlini.github.io/blog/categories/</loc>
+<loc>http://chenlini.github.io/about/</loc>
 </url>
 <url>
 <loc>http://chenlini.github.io/blog/categories/c-plus-plus/</loc>
@@ -54,5 +54,9 @@
 </url>
 <url>
 <loc>http://chenlini.github.io/blog/categories/tools/</loc>
+</url>
+<url>
+<loc>http://chenlini.github.io/blog/categories/index.html</loc>
+<lastmod>2017-05-10T00:43:54+08:00</lastmod>
 </url>
 </urlset>
