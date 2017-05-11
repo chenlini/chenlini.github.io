@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Algorithm | Chenlini]]></title>
-  <link href="chenlini.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
-  <link href="chenlini.github.io/"/>
-  <updated>2017-05-10T13:29:29+08:00</updated>
-  <id>chenlini.github.io/</id>
+  <link href="http://chenlini.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
+  <link href="http://chenlini.github.io/"/>
+  <updated>2017-05-11T16:35:47+08:00</updated>
+  <id>http://chenlini.github.io/</id>
   <author>
     <name><![CDATA[Chenlini]]></name>
     <email><![CDATA[chenlini1234@126.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[感知机]]></title>
-    <link href="chenlini.github.io/blog/2017/03/15/gan-zhi-ji/"/>
+    <link href="http://chenlini.github.io/blog/2017/03/15/gan-zhi-ji/"/>
     <updated>2017-03-15T19:53:19+08:00</updated>
-    <id>chenlini.github.io/blog/2017/03/15/gan-zhi-ji</id>
+    <id>http://chenlini.github.io/blog/2017/03/15/gan-zhi-ji</id>
     <content type="html"><![CDATA[<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
 
@@ -58,9 +58,9 @@
   
   <entry>
     <title type="html"><![CDATA[深入浅出SVM]]></title>
-    <link href="chenlini.github.io/blog/2017/03/15/shen-ru-qian-chu-svm/"/>
+    <link href="http://chenlini.github.io/blog/2017/03/15/shen-ru-qian-chu-svm/"/>
     <updated>2017-03-15T15:14:26+08:00</updated>
-    <id>chenlini.github.io/blog/2017/03/15/shen-ru-qian-chu-svm</id>
+    <id>http://chenlini.github.io/blog/2017/03/15/shen-ru-qian-chu-svm</id>
     <content type="html"><![CDATA[
 ]]></content>
   </entry>

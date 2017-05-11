@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: chenlini.github.io/sitemap.xml 
+Sitemap: http://chenlini.github.io/sitemap.xml 

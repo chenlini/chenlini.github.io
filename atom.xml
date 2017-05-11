@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Chenlini]]></title>
-  <link href="chenlini.github.io/atom.xml" rel="self"/>
-  <link href="chenlini.github.io/"/>
-  <updated>2017-05-10T13:29:29+08:00</updated>
-  <id>chenlini.github.io/</id>
+  <link href="http://chenlini.github.io/atom.xml" rel="self"/>
+  <link href="http://chenlini.github.io/"/>
+  <updated>2017-05-11T16:35:47+08:00</updated>
+  <id>http://chenlini.github.io/</id>
   <author>
     <name><![CDATA[Chenlini]]></name>
     <email><![CDATA[chenlini1234@126.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Python_algorithm]]></title>
-    <link href="chenlini.github.io/blog/2017/04/18/python-algorithm/"/>
+    <link href="http://chenlini.github.io/blog/2017/04/18/python-algorithm/"/>
     <updated>2017-04-18T13:21:33+08:00</updated>
-    <id>chenlini.github.io/blog/2017/04/18/python-algorithm</id>
+    <id>http://chenlini.github.io/blog/2017/04/18/python-algorithm</id>
     <content type="html"><![CDATA[<h1>Python 常用的机器学习算法库介绍</h1>
 
 <hr />
@@ -95,18 +95,18 @@
   
   <entry>
     <title type="html"><![CDATA[linux常用指令]]></title>
-    <link href="chenlini.github.io/blog/2017/03/19/linuxchang-yong-zhi-ling/"/>
+    <link href="http://chenlini.github.io/blog/2017/03/19/linuxchang-yong-zhi-ling/"/>
     <updated>2017-03-19T23:14:19+08:00</updated>
-    <id>chenlini.github.io/blog/2017/03/19/linuxchang-yong-zhi-ling</id>
+    <id>http://chenlini.github.io/blog/2017/03/19/linuxchang-yong-zhi-ling</id>
     <content type="html"><![CDATA[<h3>linux</h3>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[TCP and UDP]]></title>
-    <link href="chenlini.github.io/blog/2017/03/15/tcp-and-udp/"/>
+    <link href="http://chenlini.github.io/blog/2017/03/15/tcp-and-udp/"/>
     <updated>2017-03-15T22:40:05+08:00</updated>
-    <id>chenlini.github.io/blog/2017/03/15/tcp-and-udp</id>
+    <id>http://chenlini.github.io/blog/2017/03/15/tcp-and-udp</id>
     <content type="html"><![CDATA[<h3>TCP(Transmission Control protocal)</h3>
 
 <p>TCP is based on <strong>connection</strong> which means sending end must creat a stable connection to receiving end. This operation called <strong>three-way handshake</strong>.</p>
@@ -184,9 +184,9 @@
   
   <entry>
     <title type="html"><![CDATA[排序汇总]]></title>
-    <link href="chenlini.github.io/blog/2017/03/15/pai-xu-hui-zong/"/>
+    <link href="http://chenlini.github.io/blog/2017/03/15/pai-xu-hui-zong/"/>
     <updated>2017-03-15T22:12:55+08:00</updated>
-    <id>chenlini.github.io/blog/2017/03/15/pai-xu-hui-zong</id>
+    <id>http://chenlini.github.io/blog/2017/03/15/pai-xu-hui-zong</id>
     <content type="html"><![CDATA[<h2>简单选择排序</h2>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -334,9 +334,9 @@ int * Merge(){
   
   <entry>
     <title type="html"><![CDATA[感知机]]></title>
-    <link href="chenlini.github.io/blog/2017/03/15/gan-zhi-ji/"/>
+    <link href="http://chenlini.github.io/blog/2017/03/15/gan-zhi-ji/"/>
     <updated>2017-03-15T19:53:19+08:00</updated>
-    <id>chenlini.github.io/blog/2017/03/15/gan-zhi-ji</id>
+    <id>http://chenlini.github.io/blog/2017/03/15/gan-zhi-ji</id>
     <content type="html"><![CDATA[<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
 
@@ -377,18 +377,18 @@ int * Merge(){
   
   <entry>
     <title type="html"><![CDATA[深入浅出SVM]]></title>
-    <link href="chenlini.github.io/blog/2017/03/15/shen-ru-qian-chu-svm/"/>
+    <link href="http://chenlini.github.io/blog/2017/03/15/shen-ru-qian-chu-svm/"/>
     <updated>2017-03-15T15:14:26+08:00</updated>
-    <id>chenlini.github.io/blog/2017/03/15/shen-ru-qian-chu-svm</id>
+    <id>http://chenlini.github.io/blog/2017/03/15/shen-ru-qian-chu-svm</id>
     <content type="html"><![CDATA[
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[C++中static和const]]></title>
-    <link href="chenlini.github.io/blog/2017/03/15/my-first-blog/"/>
+    <link href="http://chenlini.github.io/blog/2017/03/15/my-first-blog/"/>
     <updated>2017-03-15T15:14:26+08:00</updated>
-    <id>chenlini.github.io/blog/2017/03/15/my-first-blog</id>
+    <id>http://chenlini.github.io/blog/2017/03/15/my-first-blog</id>
     <content type="html"><![CDATA[<p>static是静态常量，const是指类的内部是静态的。
 const定义的常量在超出其作用域之后其空间会被释放，而static定义的静态常量在函数执行后不会释放其存储空间。</p>
 
