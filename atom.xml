@@ -4,7 +4,7 @@
   <title><![CDATA[Chenlini]]></title>
   <link href="http://chenlini.github.io/atom.xml" rel="self"/>
   <link href="http://chenlini.github.io/"/>
-  <updated>2017-05-12T14:19:19+08:00</updated>
+  <updated>2017-05-12T14:48:16+08:00</updated>
   <id>http://chenlini.github.io/</id>
   <author>
     <name><![CDATA[Chenlini]]></name>
@@ -115,6 +115,9 @@
 
 <p>Data transmission based on UDP don&rsquo;t need to build connection before. The sending post send out data as soon as possible. It doesn&rsquo;t make sure the receiver can receive data completely and correctly.</p>
 
+<!--more-->
+
+
 <table>
 <thead>
 <tr>
@@ -187,7 +190,12 @@
     <link href="http://chenlini.github.io/blog/2017/03/15/pai-xu-hui-zong/"/>
     <updated>2017-03-15T22:12:55+08:00</updated>
     <id>http://chenlini.github.io/blog/2017/03/15/pai-xu-hui-zong</id>
-    <content type="html"><![CDATA[<h2>简单选择排序</h2>
+    <content type="html"><![CDATA[<p>几种简单排序算法实现</p>
+
+<!--more-->
+
+
+<h2>简单选择排序</h2>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -348,6 +356,9 @@ int * Merge(){
 
 <p>对于感知机算法来说，训练数据集如果能够被一个超平面完美的划分成正实例和负实例，则称这个数据集为线性可分的，否则就是线性不可分的。</p>
 
+<!--more-->
+
+
 <ol>
 <li><p>损失函数的定义：</p>
 
@@ -391,6 +402,9 @@ int * Merge(){
     <id>http://chenlini.github.io/blog/2017/03/15/my-first-blog</id>
     <content type="html"><![CDATA[<p>static是静态常量，const是指类的内部是静态的。
 const定义的常量在超出其作用域之后其空间会被释放，而static定义的静态常量在函数执行后不会释放其存储空间。</p>
+
+<!--more-->
+
 
 <ol>
 <li><p>static静态成员变量不能在类的内部初始化。</p></li>

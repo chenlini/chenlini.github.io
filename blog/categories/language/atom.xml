@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: C++ | Chenlini]]></title>
-  <link href="http://chenlini.github.io/blog/categories/c-plus-plus/atom.xml" rel="self"/>
+  <title><![CDATA[Category: Language | Chenlini]]></title>
+  <link href="http://chenlini.github.io/blog/categories/language/atom.xml" rel="self"/>
   <link href="http://chenlini.github.io/"/>
-  <updated>2017-05-12T14:19:19+08:00</updated>
+  <updated>2017-05-13T00:14:13+08:00</updated>
   <id>http://chenlini.github.io/</id>
   <author>
     <name><![CDATA[Chenlini]]></name>
@@ -20,6 +20,9 @@
     <id>http://chenlini.github.io/blog/2017/03/15/my-first-blog</id>
     <content type="html"><![CDATA[<p>static是静态常量，const是指类的内部是静态的。
 const定义的常量在超出其作用域之后其空间会被释放，而static定义的静态常量在函数执行后不会释放其存储空间。</p>
+
+<!--more-->
+
 
 <ol>
 <li><p>static静态成员变量不能在类的内部初始化。</p></li>

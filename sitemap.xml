@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://chenlini.github.io/blog/2017/05/13/hiveyou-hua/</loc>
+<lastmod>2017-05-13T00:12:34+08:00</lastmod>
+</url>
+<url>
 <loc>http://chenlini.github.io/blog/2017/04/18/python-algorithm/</loc>
 <lastmod>2017-04-18T13:21:33+08:00</lastmod>
 </url>
@@ -32,6 +36,9 @@
 <loc>http://chenlini.github.io/blog/archives/</loc>
 </url>
 <url>
+<loc>http://chenlini.github.io/blog/categories/</loc>
+</url>
+<url>
 <loc>http://chenlini.github.io/</loc>
 </url>
 <url>
@@ -41,18 +48,24 @@
 <loc>http://chenlini.github.io/about/</loc>
 </url>
 <url>
-<loc>http://chenlini.github.io/blog/categories/c-plus-plus/</loc>
+<loc>http://chenlini.github.io/blog/categories/language/</loc>
 </url>
 <url>
 <loc>http://chenlini.github.io/blog/categories/algorithm/</loc>
 </url>
 <url>
-<loc>http://chenlini.github.io/blog/categories/shu-ju-jie-gou/</loc>
+<loc>http://chenlini.github.io/blog/categories/datastructure/</loc>
 </url>
 <url>
-<loc>http://chenlini.github.io/blog/categories/cao-zuo-xi-tong/</loc>
+<loc>http://chenlini.github.io/blog/categories/os/</loc>
 </url>
 <url>
-<loc>http://chenlini.github.io/blog/categories/tools/</loc>
+<loc>http://chenlini.github.io/blog/categories/linux/</loc>
+</url>
+<url>
+<loc>http://chenlini.github.io/blog/categories/python/</loc>
+</url>
+<url>
+<loc>http://chenlini.github.io/blog/categories/hive/</loc>
 </url>
 </urlset>

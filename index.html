@@ -9,10 +9,10 @@
 	<meta name="author" content="Chenlini">
 
 	
-	<meta name="description" content="tools Python_algorithm Python 常用的机器学习算法库介绍 Python作为目前最火的学习机器学习算法的语言之一拥有如下三个优点： 语法简单，上手容易
+	<meta name="description" content="python Python_algorithm Python 常用的机器学习算法库介绍 Python作为目前最火的学习机器学习算法的语言之一拥有如下三个优点： 语法简单，上手容易
 功能多样
 强大的社区
-丰富的机器学习库 Read on &rarr; Linux常用指令 linux 操作系统 TCP &hellip;">
+丰富的机器学习库 Read on &rarr; linux Linux常用指令 linux &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -107,7 +107,7 @@
 		<div class="tags">
 
 
-	<a class='category' href='/blog/categories/tools/'>tools</a>
+	<a class='category' href='/blog/categories/python/'>python</a>
 
 
 </div>
@@ -154,6 +154,10 @@
 <time datetime="2017-03-19T23:14:19+08:00" data-updated="true" itemprop="datePublished"></time></div>
 		<div class="tags">
 
+
+	<a class='category' href='/blog/categories/linux/'>linux</a>
+
+
 </div>
 		
 	</div>
@@ -186,7 +190,7 @@
 		<div class="tags">
 
 
-	<a class='category' href='/blog/categories/cao-zuo-xi-tong/'>操作系统</a>
+	<a class='category' href='/blog/categories/os/'>os</a>
 
 
 </div>
@@ -202,73 +206,9 @@
 
 <p>Data transmission based on UDP don&rsquo;t need to build connection before. The sending post send out data as soon as possible. It doesn&rsquo;t make sure the receiver can receive data completely and correctly.</p>
 
-<table>
-<thead>
-<tr>
-<th>TCP </th>
-<th> UDP</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>reliable and stable</td>
-<td> not reliable</td>
-</tr>
-<tr>
-<td>mass of data  </td>
-<td> small data</td>
-</tr>
-<tr>
-<td>slow </td>
-<td>fast</td>
-</tr>
-<tr>
-<td>O2 byte stream   </td>
-<td> O2 message</td>
-</tr>
-<tr>
-<td>one to one</td>
-<td> one to many</td>
-</tr>
-<tr>
-<td>more system resource</td>
-<td>less system resourse</td>
-</tr>
-<tr>
-<td>HTTP,FTP</td>
-<td>QQ Voice QQ video</td>
-</tr>
-</tbody>
-</table>
-
-
-<p>　　</p>
-
-<h3>UDP应用场景：</h3>
-
-<ol>
-<li>面向数据报方式</li>
-<li>网络数据大多为短消息</li>
-<li>拥有大量Client</li>
-<li>对数据安全性无特殊要求</li>
-<li>网络负担非常重，但对响应速度要求高</li>
-</ol>
-
-
-<h3>其他区别</h3>
-
-<ol>
-<li>socket()的参数不同</li>
-<li>UDP Server不需要调用listen和accept</li>
-<li>UDP收发数据用sendto/recvfrom函数</li>
-<li>TCP：地址信息在connect/accept时确定</li>
-<li>UDP：在sendto/recvfrom函数中每次均 需指定地址信息</li>
-<li>UDP：shutdown函数无效</li>
-</ol>
-
 
 		
-		
+		<a href="/blog/2017/03/15/tcp-and-udp/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>
@@ -292,7 +232,7 @@
 		<div class="tags">
 
 
-	<a class='category' href='/blog/categories/shu-ju-jie-gou/'>数据结构</a>
+	<a class='category' href='/blog/categories/datastructure/'>datastructure</a>
 
 
 </div>
@@ -300,151 +240,11 @@
 	</div>
 	<h1 class="title" itemprop="name"><a href="/blog/2017/03/15/pai-xu-hui-zong/" itemprop="url">排序汇总</a></h1>
 	<div class="entry-content" itemprop="articleBody">
-		<h2>简单选择排序</h2>
+		<p>几种简单排序算法实现</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'>
-</span><span class='line'><span class="kt">void</span> <span class="nf">simpleRank</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">R</span><span class="p">){</span>
-</span><span class='line'>        <span class="kt">int</span> <span class="n">s</span><span class="p">;</span>
-</span><span class='line'>        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">R</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-</span><span class='line'>            <span class="n">s</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
-</span><span class='line'>            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="n">R</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
-</span><span class='line'>                <span class="k">if</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">&lt;</span><span class="n">R</span><span class="p">[</span><span class="n">s</span><span class="p">])</span><span class="n">s</span><span class="o">=</span><span class="n">j</span><span class="p">;</span>
-</span><span class='line'>            <span class="p">}</span>
-</span><span class='line'>            <span class="n">swap</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">R</span><span class="p">[</span><span class="n">s</span><span class="p">]);</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>时间复杂度O（n<sup>2</sup> ）,是不稳定的排序算法。空间复杂度为O（n）</p>
-
-<h2>直接插入排序</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'>   <span class="kt">void</span> <span class="nf">InsertRank</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">R</span><span class="p">){</span>
-</span><span class='line'>  
-</span><span class='line'>     <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">R</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-</span><span class='line'>      <span class="kt">int</span> <span class="n">tmp</span><span class="o">=</span><span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-</span><span class='line'>      <span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="n">i</span><span class="p">;</span>
-</span><span class='line'>      <span class="k">while</span><span class="p">(</span><span class="n">j</span><span class="o">&gt;</span><span class="mi">0</span><span class="o">&amp;&amp;</span><span class="n">tmp</span><span class="o">&lt;</span><span class="n">R</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]){</span>
-</span><span class='line'>          <span class="n">R</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">R</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span><span class="n">j</span><span class="o">--</span><span class="p">;</span>
-</span><span class='line'>      <span class="p">}</span>
-</span><span class='line'>      <span class="n">R</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">tmp</span><span class="p">;</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>  
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>    <span class="err">```</span>
-</span><span class='line'><span class="err">当原始数据是有序的，直接插入排序最好的时间复杂度是</span><span class="n">O</span><span class="err">（</span><span class="n">n</span><span class="err">）最坏情况为</span><span class="n">O</span><span class="err">（</span><span class="n">n</span><span class="o">^</span><span class="mi">2</span> <span class="err">），是稳定的排序算法。空间复杂度为</span><span class="n">O</span><span class="err">（</span><span class="n">n</span><span class="err">）</span>
-</span><span class='line'>
-</span><span class='line'><span class="cp">##冒泡排序</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>cpp
-    void maopaoRank(vector<int> R){
-    int j=R.size()-1;
-        while(j>0){
-            int last=0;
-            for(int i=0;i&lt;j;i++){
-                if(R[i]>R[i+1]){swap(R[i],R[i+1]);
-                            last=i;}
-            }
-            j=last;
-        }
-    }</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="err">注意并不是一定要进行</span><span class="n">R</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="err">趟，当没有交换的元素的时候就可以结束循环了。当原始数据是有序的，直接插入排序最好的时间复杂度是</span><span class="n">O</span><span class="err">（</span><span class="n">n</span><span class="err">）最坏情况为</span><span class="n">O</span><span class="err">（</span><span class="n">n</span><span class="o">^</span><span class="mi">2</span> <span class="err">），是稳定的排序算法。需要额外的栈资源。</span>
-</span><span class='line'>
-</span><span class='line'><span class="cp">##快速排序</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>cpp
-        //函数封装
-        void QuickSort(vector<int> R){
-    Quick(R,0,R.size()-1);
-        }
-        void Quick(vector<int> R, int left,int right){
-    int i,j;
-    if(left&lt;right){//待排元素多于一个
-        i=left;
-        j=right+1;
-        do{
-            do i++;while(R[i]&lt;R[left]);//寻找第一个大于R[left]的元素
-            do j&ndash;;while(R[j]>R[left]);//寻找第一个小于R[left]的元素
-            if(i&lt;j)swap(R[i],R[j]);//交换元素，如果此时i>j久不用交换了
-        }while(i&lt;j);
-        swap(R[left],R[j]);
-        Quick(R,left,j-1);//低端
-        Quick(R,j,right);//高端
-    }}</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="err">快速排序有三种选择分割点的方法：</span>
-</span><span class='line'>
-</span><span class='line'><span class="mf">1.</span> <span class="n">A</span><span class="p">[(</span><span class="n">left</span><span class="o">+</span><span class="n">right</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">]</span><span class="err">作为分割点，与第一个点交换</span>
-</span><span class='line'><span class="mf">2.</span> <span class="err">取随机数与第一个点交换</span>
-</span><span class='line'><span class="mf">3.</span> <span class="err">比较</span><span class="n">A</span><span class="p">[</span><span class="n">left</span><span class="p">],</span><span class="n">A</span><span class="p">[</span><span class="n">right</span><span class="p">],</span><span class="n">A</span><span class="p">[(</span><span class="n">left</span><span class="o">+</span><span class="n">right</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">]</span><span class="err">，取中间的和第一个点交换。</span>
-</span><span class='line'>
-</span><span class='line'><span class="err">优化方法：先排短的子序列，再排长的子序列。</span>
-</span><span class='line'>
-</span><span class='line'><span class="err">时间复杂度：平均情况</span><span class="n">O</span><span class="p">(</span><span class="n">nlogn</span><span class="p">)</span><span class="err">，最坏情况为</span><span class="n">O</span><span class="p">(</span><span class="n">n</span><span class="o">^</span><span class="mi">2</span><span class="p">).</span><span class="err">快速排序是不稳定的排序算法。</span>
-</span><span class='line'>
-</span><span class='line'><span class="cp">##二路合并排序</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>cpp
-include<iostream>
-using namespace std;
-int * Merge(){
-}</p>
-
-<p>```</p>
 
 		
-		
+		<a href="/blog/2017/03/15/pai-xu-hui-zong/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>
@@ -487,33 +287,9 @@ int * Merge(){
 
 <p>对于感知机算法来说，训练数据集如果能够被一个超平面完美的划分成正实例和负实例，则称这个数据集为线性可分的，否则就是线性不可分的。</p>
 
-<ol>
-<li><p>损失函数的定义：</p>
-
-<p> 那么如何评价这个感知机算法构造的分割平面是不是好的呢？最直观的方法就是统计该误分点的个数，但是以此来作为损失函数的话，对于W和B来说并不是连续可导的，因此可以将误分点到分割平面的距离之和作为损失函数来进行优化。</p>
-
-<p> （1）误分点的定义：
-     实际上，点到分割平面的距离就是｜WX+B｜除以W的F范数（可以不用考虑）。如果是误分点的话，－y(WX+B)肯定是大于0的，以此代替绝对值符号。</p>
-
-<p> 损失函数最后的形式就是：</p>
-
-<p> $$L(w,b)=\sum_{x_i \in M}y_i(w \bullet x_i+b)$$</p>
-
-<p> 求解方法就是求导之后用梯度下降的方法解决。</p></li>
-<li><p>感知机除了这个原始形式以外还有一种对偶的形式。主要的思想是W和B可以表示为实例（x,y）的线性组合。</p></li>
-</ol>
-
-
-<p>注意：</p>
-
-<ol>
-<li>感知机是线性模型，不能表示复杂的函数</li>
-<li>样本线性可分的充要条件是正向实例构成的凸壳与负向实例构成的凸壳不相交。</li>
-</ol>
-
 
 		
-		
+		<a href="/blog/2017/03/15/gan-zhi-ji/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>
@@ -572,7 +348,7 @@ int * Merge(){
 		<div class="tags">
 
 
-	<a class='category' href='/blog/categories/c-plus-plus/'>c++</a>
+	<a class='category' href='/blog/categories/language/'>language</a>
 
 
 </div>
@@ -583,91 +359,9 @@ int * Merge(){
 		<p>static是静态常量，const是指类的内部是静态的。
 const定义的常量在超出其作用域之后其空间会被释放，而static定义的静态常量在函数执行后不会释放其存储空间。</p>
 
-<ol>
-<li><p>static静态成员变量不能在类的内部初始化。</p></li>
-<li><p>const成员变量也不能在类定义处初始化，只能通过构造函数初始化列表进行，并且必须有构造函数。</p></li>
-<li>const修饰指针变量时：</li>
-</ol>
-
-
-<p>　　(1)只有一个const，如果const位于*左侧，表示指针所指数据是常量，不能通过解引用修改该数据；指针本身是变量，可以指向其他的内存单元。</p>
-
-<p>　　(2)只有一个const，如果const位于*右侧，表示指针本身是常量，不能指向其他内存地址；指针所指的数据可以通过解引用修改。</p>
-
-<p>　　(3)两个const，*左右各一个，表示指针和指针所指数据都不能修改。</p>
-
-<ol>
-<li><p>cosnt成员函数主要目的是防止成员函数修改对象的内容。即const成员函数不能修改成员变量的值，但可以访问成员变量。const成员函数不能调用非const成员函数，因为非const成员函数可以会修改成员变量</p></li>
-<li><p>static成员函数主要目的是作为类作用域的全局函数。不能访问类的非静态数据成员。类的静态成员函数没有this指针，这导致：1、不能直接存取类的非静态成员变量，调用非静态成员函数2、不能被声明为const、volatile</p></li>
-<li>const static 的成员也只能在外部初始化，而且不带static字样。</li>
-</ol>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'>    <span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">class</span> <span class="nc">A</span>
-</span><span class='line'>    <span class="p">{</span>
-</span><span class='line'>    <span class="k">public</span><span class="o">:</span>
-</span><span class='line'>        <span class="n">A</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">);</span>
-</span><span class='line'>        <span class="k">static</span> <span class="kt">void</span> <span class="nf">print</span><span class="p">();</span><span class="c1">//静态成员函数  </span>
-</span><span class='line'>    <span class="k">private</span><span class="o">:</span>
-</span><span class='line'>    <span class="k">static</span> <span class="kt">int</span> <span class="n">aa</span><span class="p">;</span><span class="c1">//静态数据成员的声明  </span>
-</span><span class='line'>    <span class="k">static</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">count</span><span class="p">;</span><span class="c1">//常量静态数据成员（可以在构造函数中初始化）  </span>
-</span><span class='line'>     <span class="k">const</span> <span class="kt">int</span> <span class="n">bb</span><span class="p">;</span><span class="c1">//常量数据成员  </span>
-</span><span class='line'>    <span class="p">};</span>
-</span><span class='line'>    <span class="kt">int</span> <span class="n">A</span><span class="o">::</span><span class="n">aa</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="c1">//静态成员的定义+初始化  </span>
-</span><span class='line'>    <span class="k">const</span> <span class="kt">int</span> <span class="n">A</span><span class="o">::</span><span class="n">count</span><span class="o">=</span><span class="mi">25</span><span class="p">;</span><span class="c1">//静态常量成员定义+初始化  </span>
-</span><span class='line'>    <span class="n">A</span><span class="o">::</span><span class="n">A</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">)</span><span class="o">:</span><span class="n">bb</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="c1">//常量成员的初始化  </span>
-</span><span class='line'>    <span class="p">{</span>
-</span><span class='line'>         <span class="n">aa</span><span class="o">+=</span><span class="mi">1</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>    <span class="kt">void</span> <span class="n">A</span><span class="o">::</span><span class="n">print</span><span class="p">()</span>
-</span><span class='line'>    <span class="p">{</span>
-</span><span class='line'>          <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&quot;count=&quot;</span><span class="o">&lt;&lt;</span><span class="n">count</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
-</span><span class='line'>          <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&quot;aa=&quot;</span><span class="o">&lt;&lt;</span><span class="n">aa</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>    <span class="err">#</span><span class="n">endif</span>
-</span><span class='line'>    <span class="kt">void</span> <span class="n">main</span><span class="p">()</span>
-</span><span class='line'>    <span class="p">{</span>
-</span><span class='line'>        <span class="n">A</span> <span class="n">a</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
-</span><span class='line'>        <span class="n">A</span><span class="o">::</span><span class="n">print</span><span class="p">();</span><span class="c1">//通过类访问静态成员函数  </span>
-</span><span class='line'>        <span class="n">a</span><span class="p">.</span><span class="n">print</span><span class="p">();</span><span class="c1">//通过对象访问静态成员函数  </span>
-</span><span class='line'>    <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
 
 		
-		
+		<a href="/blog/2017/03/15/my-first-blog/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: 操作系统 | Chenlini]]></title>
-  <link href="http://chenlini.github.io/blog/categories/cao-zuo-xi-tong/atom.xml" rel="self"/>
+  <title><![CDATA[Category: Os | Chenlini]]></title>
+  <link href="http://chenlini.github.io/blog/categories/os/atom.xml" rel="self"/>
   <link href="http://chenlini.github.io/"/>
-  <updated>2017-05-12T14:19:19+08:00</updated>
+  <updated>2017-05-13T00:14:13+08:00</updated>
   <id>http://chenlini.github.io/</id>
   <author>
     <name><![CDATA[Chenlini]]></name>
@@ -25,6 +25,9 @@
 <h3>UDP(User Data protocal)</h3>
 
 <p>Data transmission based on UDP don&rsquo;t need to build connection before. The sending post send out data as soon as possible. It doesn&rsquo;t make sure the receiver can receive data completely and correctly.</p>
+
+<!--more-->
+
 
 <table>
 <thead>

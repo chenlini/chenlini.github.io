@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: 数据结构 | Chenlini]]></title>
-  <link href="http://chenlini.github.io/blog/categories/shu-ju-jie-gou/atom.xml" rel="self"/>
+  <title><![CDATA[Category: Datastructure | Chenlini]]></title>
+  <link href="http://chenlini.github.io/blog/categories/datastructure/atom.xml" rel="self"/>
   <link href="http://chenlini.github.io/"/>
-  <updated>2017-05-12T14:19:19+08:00</updated>
+  <updated>2017-05-13T00:14:13+08:00</updated>
   <id>http://chenlini.github.io/</id>
   <author>
     <name><![CDATA[Chenlini]]></name>
@@ -18,7 +18,12 @@
     <link href="http://chenlini.github.io/blog/2017/03/15/pai-xu-hui-zong/"/>
     <updated>2017-03-15T22:12:55+08:00</updated>
     <id>http://chenlini.github.io/blog/2017/03/15/pai-xu-hui-zong</id>
-    <content type="html"><![CDATA[<h2>简单选择排序</h2>
+    <content type="html"><![CDATA[<p>几种简单排序算法实现</p>
+
+<!--more-->
+
+
+<h2>简单选择排序</h2>
 
 <pre><code class="cpp">
     void simpleRank(vector&lt;int&gt; R){

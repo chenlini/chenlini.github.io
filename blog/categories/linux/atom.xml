@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Linux | Chenlini]]></title>
+  <link href="http://chenlini.github.io/blog/categories/linux/atom.xml" rel="self"/>
+  <link href="http://chenlini.github.io/"/>
+  <updated>2017-05-13T00:14:13+08:00</updated>
+  <id>http://chenlini.github.io/</id>
+  <author>
+    <name><![CDATA[Chenlini]]></name>
+    <email><![CDATA[chenlini1234@126.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Linux常用指令]]></title>
+    <link href="http://chenlini.github.io/blog/2017/03/19/linuxchang-yong-zhi-ling/"/>
+    <updated>2017-03-19T23:14:19+08:00</updated>
+    <id>http://chenlini.github.io/blog/2017/03/19/linuxchang-yong-zhi-ling</id>
+    <content type="html"><![CDATA[<h3>linux</h3>
+]]></content>
+  </entry>
+  
+</feed>

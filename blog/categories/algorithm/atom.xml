@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Algorithm | Chenlini]]></title>
   <link href="http://chenlini.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://chenlini.github.io/"/>
-  <updated>2017-05-12T14:19:19+08:00</updated>
+  <updated>2017-05-13T00:14:13+08:00</updated>
   <id>http://chenlini.github.io/</id>
   <author>
     <name><![CDATA[Chenlini]]></name>
@@ -28,6 +28,9 @@
 <p>其中W为权重向量，X为输入的特征向量，B为误差常数。</p>
 
 <p>对于感知机算法来说，训练数据集如果能够被一个超平面完美的划分成正实例和负实例，则称这个数据集为线性可分的，否则就是线性不可分的。</p>
+
+<!--more-->
+
 
 <ol>
 <li><p>损失函数的定义：</p>
