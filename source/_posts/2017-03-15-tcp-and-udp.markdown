@@ -3,7 +3,7 @@ layout: post
 title: "TCP and UDP"
 date: 2017-03-15 22:40:05 +0800
 comments: true
-categories: 操作系统
+categories: OS 
 ---
 
 ###TCP(Transmission Control protocal)
@@ -11,6 +11,8 @@ TCP is based on **connection** which means sending end must creat a stable conne
 
 ###UDP(User Data protocal)
 Data transmission based on UDP don't need to build connection before. The sending post send out data as soon as possible. It doesn't make sure the receiver can receive data completely and correctly.
+
+<!--more-->
 
  TCP | UDP
 ------|----

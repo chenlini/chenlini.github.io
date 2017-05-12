@@ -3,7 +3,7 @@ layout: post
 title: "Python_algorithm"
 date: 2017-04-18 13:21:33 +0800
 comments: true
-categories: tools
+categories: python
 ---
 # Python 常用的机器学习算法库介绍
 ------
