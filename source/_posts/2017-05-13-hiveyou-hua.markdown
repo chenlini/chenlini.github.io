@@ -1,11 +1,10 @@
 ---
 layout: post
 title: "hive优化"
-date: 2017-05-13 00:12:34 +0800
+date: 2017-05-13 00:20:56 +0800
 comments: true
-categories: Hive
+categories: hive
 ---
-
 ##Hive 语句简单优化
 
 使用Hive的过程中，因为数据倾斜的问题可能会造成效率十分地下，以下记录一些hive的简单语句的优化操作。大部分都来自网络，查资料的时候看到就顺便记录一下。
