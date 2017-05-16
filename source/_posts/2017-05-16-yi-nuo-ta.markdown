@@ -1,0 +1,45 @@
+---
+layout: post
+title: "汉诺塔"
+date: 2017-05-16 10:59:25 +0800
+comments: true
+categories: Others
+---
+
+##汉诺塔问题
+递归问题
+n个盘子，三个柱子。一个柱子为起始柱子，一个为终点柱子，一个为中间柱子。
+步骤： 
+
+1.将n-1个盘子移到中间柱子。
+
+2.将第n个盘子移到终点柱子。
+
+问题就变成了将n-1个盘子移到终点柱子的问题，重复。
+
+
+```  
+        #include<iostream>
+        using namespace std;
+        int i;
+        void move(int n,char from,char to){
+	           printf("step %d: the number %d from %c to %c ",i++,n,from,to);
+        }
+        void Hanio(int n,char start,char end,char mid){
+	           if(n==1)move(n,start,end);
+	           else{
+		              Hanio(n-1,start,mid,end);
+		              move(n,start,end);
+		              Hanio(n-1,mid,end,start);
+	               }
+        }
+        int main(){
+	           int n;  
+            while(cin<<n){  
+            i = 1;   //全局变量赋初始值  
+            Hanio(n,'1','2','3');  
+            printf("最后总的步数为%d\n",i-1);  
+         }  
+        return 0; 
+        }
+```       
