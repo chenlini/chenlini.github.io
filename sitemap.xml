@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://chenlini.github.io/blog/2017/05/16/yi-nuo-ta/</loc>
+<lastmod>2017-05-16T10:59:25+08:00</lastmod>
+</url>
+<url>
+<loc>http://chenlini.github.io/blog/2017/05/14/neo4j-1/</loc>
+<lastmod>2017-05-14T23:53:49+08:00</lastmod>
+</url>
+<url>
+<loc>http://chenlini.github.io/blog/2017/05/14/rubysheng-ji/</loc>
+<lastmod>2017-05-14T23:21:38+08:00</lastmod>
+</url>
+<url>
 <loc>http://chenlini.github.io/blog/2017/05/13/hive-note/</loc>
 <lastmod>2017-05-13T00:35:27+08:00</lastmod>
 </url>
@@ -67,5 +79,14 @@
 </url>
 <url>
 <loc>http://chenlini.github.io/blog/categories/hive/</loc>
+</url>
+<url>
+<loc>http://chenlini.github.io/blog/categories/ruby/</loc>
+</url>
+<url>
+<loc>http://chenlini.github.io/blog/categories/neo4j/</loc>
+</url>
+<url>
+<loc>http://chenlini.github.io/blog/categories/others/</loc>
 </url>
 </urlset>

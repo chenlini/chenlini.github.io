@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Ruby | Chenlini]]></title>
+  <link href="http://chenlini.github.io/blog/categories/ruby/atom.xml" rel="self"/>
+  <link href="http://chenlini.github.io/"/>
+  <updated>2017-05-16T11:14:13+08:00</updated>
+  <id>http://chenlini.github.io/</id>
+  <author>
+    <name><![CDATA[Chenlini]]></name>
+    <email><![CDATA[chenlini1234@126.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby升级]]></title>
+    <link href="http://chenlini.github.io/blog/2017/05/14/rubysheng-ji/"/>
+    <updated>2017-05-14T23:21:38+08:00</updated>
+    <id>http://chenlini.github.io/blog/2017/05/14/rubysheng-ji</id>
+    <content type="html"><![CDATA[<h2>Mac升级系统后需要更新ruby</h2>
+
+<p>前段时间学学怎么用octopress写博客，更新了mac版本后就发现不能rake preview了，网上查了一下发现需要更新ruby，中间遇到了一些问题，记录如下：</p>
+
+<p>之前没有通过rvm安装ruby，要更新比较麻烦，因此现在从新安装rvm.</p>
+
+<pre><code>#安装rvm
+curl -L https://get.rvm.io | bash -s stable
+source ~/.bashrc
+source ~/.bash_profile
+#查看已知ruby版本
+rvm list know
+#安装版本
+rvm install 2.3.3
+</code></pre>
+
+<p>注意：在install的时候可能会出现错误，错误原因是brew需要update，因此需要执行以下语句</p>
+
+<pre><code>brew update
+</code></pre>
+
+<p>如果brew update 出现错误，"The /usr/local directory is not writable.&ldquo; 需要去到/usr/local/目录下面执行：</p>
+
+<pre><code>sudo chown -R $(whoami) /usr/local
+brew prune
+</code></pre>
+
+<p>这样就可以brew update了。</p>
+
+<p>完成ruby的更新之后，发现还是不能rake preview,还是会报错！发现需要重新安装bundler</p>
+
+<pre><code>gem install bundler
+</code></pre>
+
+<p>但是重新安装完了之后又又问题了，rake不见了！只能再走一遍。</p>
+
+<pre><code>bundle install
+</code></pre>
+
+<h5>补充rvm的命令</h5>
+
+<pre><code>rvm use 2.3.3
+#卸载
+rvm remote 2.3.3
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>

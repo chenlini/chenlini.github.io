@@ -23,6 +23,7 @@
 	<link rel="canonical" href="http://chenlini.github.io/blog/2017/05/13/hive-note/">
 	<link href="/favicon.png" rel="shortcut icon">
 	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	
 	<!--[if lt IE 9]><script src="//libs.baidu.com/jquery/1.7.2/jquery.min.js></script><![endif]-->
 <script>
 	function addBlankTargetForLinks () {
@@ -35,6 +36,7 @@
 	});
 </script>
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="/stylesheets/pygments.css">
 	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
@@ -69,6 +71,9 @@
 <li><a href="/about">About me</a></li>
 </ul>
 </nav>
+
+
+
 <nav id="sub-nav">
 	<div class="social">
 		
@@ -88,6 +93,9 @@
 	<div class="entry-content" itemprop="articleBody"><h2>Hive 语句简单优化</h2>
 
 <p>使用Hive的过程中，因为数据倾斜的问题可能会造成效率十分地下，以下记录一些hive的简单语句的优化操作。大部分都来自网络，查资料的时候看到就顺便记录一下。</p>
+
+<!--more-->
+
 
 <h3>1. 设置</h3>
 

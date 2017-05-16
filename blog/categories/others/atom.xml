@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Others | Chenlini]]></title>
+  <link href="http://chenlini.github.io/blog/categories/others/atom.xml" rel="self"/>
+  <link href="http://chenlini.github.io/"/>
+  <updated>2017-05-16T11:14:13+08:00</updated>
+  <id>http://chenlini.github.io/</id>
+  <author>
+    <name><![CDATA[Chenlini]]></name>
+    <email><![CDATA[chenlini1234@126.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[汉诺塔]]></title>
+    <link href="http://chenlini.github.io/blog/2017/05/16/yi-nuo-ta/"/>
+    <updated>2017-05-16T10:59:25+08:00</updated>
+    <id>http://chenlini.github.io/blog/2017/05/16/yi-nuo-ta</id>
+    <content type="html"><![CDATA[<h2>汉诺塔问题</h2>
+
+<p>递归问题
+n个盘子，三个柱子。一个柱子为起始柱子，一个为终点柱子，一个为中间柱子。
+步骤：</p>
+
+<p>1.将n-1个盘子移到中间柱子。</p>
+
+<p>2.将第n个盘子移到终点柱子。</p>
+
+<p>问题就变成了将n-1个盘子移到终点柱子的问题，重复。</p>
+
+<pre><code class="">        #include&lt;iostream&gt;
+        using namespace std;
+        int i;
+        void move(int n,char from,char to){
+               printf("step %d: the number %d from %c to %c ",i++,n,from,to);
+        }
+        void Hanio(int n,char start,char end,char mid){
+               if(n==1)move(n,start,end);
+               else{
+                      Hanio(n-1,start,mid,end);
+                      move(n,start,end);
+                      Hanio(n-1,mid,end,start);
+                   }
+        }
+        int main(){
+               int n;  
+            while(cin&lt;&lt;n){  
+            i = 1;   //全局变量赋初始值  
+            Hanio(n,'1','2','3');  
+            printf("最后总的步数为%d\n",i-1);  
+         }  
+        return 0; 
+        }
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>

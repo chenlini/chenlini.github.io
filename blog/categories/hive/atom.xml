@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Hive | Chenlini]]></title>
   <link href="http://chenlini.github.io/blog/categories/hive/atom.xml" rel="self"/>
   <link href="http://chenlini.github.io/"/>
-  <updated>2017-05-13T00:43:50+08:00</updated>
+  <updated>2017-05-16T11:14:13+08:00</updated>
   <id>http://chenlini.github.io/</id>
   <author>
     <name><![CDATA[Chenlini]]></name>
@@ -21,6 +21,9 @@
     <content type="html"><![CDATA[<h2>Hive 语句简单优化</h2>
 
 <p>使用Hive的过程中，因为数据倾斜的问题可能会造成效率十分地下，以下记录一些hive的简单语句的优化操作。大部分都来自网络，查资料的时候看到就顺便记录一下。</p>
+
+<!--more-->
+
 
 <h3>1. 设置</h3>
 

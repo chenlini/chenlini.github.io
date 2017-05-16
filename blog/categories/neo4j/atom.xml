@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Neo4j | Chenlini]]></title>
+  <link href="http://chenlini.github.io/blog/categories/neo4j/atom.xml" rel="self"/>
+  <link href="http://chenlini.github.io/"/>
+  <updated>2017-05-16T11:14:13+08:00</updated>
+  <id>http://chenlini.github.io/</id>
+  <author>
+    <name><![CDATA[Chenlini]]></name>
+    <email><![CDATA[chenlini1234@126.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Neo4j(1)]]></title>
+    <link href="http://chenlini.github.io/blog/2017/05/14/neo4j-1/"/>
+    <updated>2017-05-14T23:53:49+08:00</updated>
+    <id>http://chenlini.github.io/blog/2017/05/14/neo4j-1</id>
+    <content type="html"><![CDATA[<h1>neo4j安装步骤</h1>
+
+<p>注：</p>
+
+<blockquote><ol>
+<li>先安装好java</li>
+<li>官网上直接通过apt-get不行</li>
+</ol>
+</blockquote>
+
+<p>需要到<a href="http://neo4j.com/download/">http://neo4j.com/download/</a> 下载对应的版本，解压安装。</p>
+
+<ol>
+<li><p>解压：</p>
+
+<blockquote><p>$ tar –zvxf neo4j-community-3.1.3.-unix.tar.gz</p></blockquote></li>
+<li><p>启动neo4j</p>
+
+<blockquote><p>$ ./neo4j console</p></blockquote></li>
+<li><p>打开浏览器进入工作环境  <a href="http://localhost/7474">http://localhost/7474</a></p></li>
+<li>第一次进入会要求修改用户名和密码，该用户名和密码一定要记住，后面会用到！！！</li>
+</ol>
+
+
+<p>注：最新版的neo4j暂时不需要修改配置文件，如果是以前的版本需要去conf/neo4j-server.properties里面下面这句话前面的注释符删掉。</p>
+
+<pre><code>    #org.neo4j.server.webserver.address=0.0.0.0
+</code></pre>
+
+<h1>Python+neo4j 小demo笔记</h1>
+
+<pre><code>
+from __future__ import print_function
+
+import sys
+
+from py2neo import Graph, Node, Relationship
+graph = Graph(
+    "http://localhost:7474",
+    username="xxx",
+    password="xxx"
+)
+#删除所有的点和边
+#graph.delete_all()
+#定义点
+node_1 = Node(label = "Person",name = "node_1")
+node_2 = Node(label = "Person",name = "node_2")
+node_3 = Node(label = "Person",name = "node_3")
+node_4 = Node(label = "Person",name = "node_4")
+node_5 = Node(label = "Person",name = "node_5")
+node_6 = Node(label = "Person",name = "node_6")
+
+#创建点
+graph.create(node_1)
+graph.create(node_2)
+graph.create(node_3)
+graph.create(node_4)
+graph.create(node_5)
+graph.create(node_6)
+#定义关系
+node_1_F_node_2 = Relationship(node_1,'w12',node_2)
+node_1_F_node_3 = Relationship(node_1,'w13',node_3)
+node_1_F_node_4 = Relationship(node_1,'w14',node_4)
+node_2_F_node_1 = Relationship(node_2,'w21',node_1)
+node_2_F_node_3 = Relationship(node_2,'w23',node_3)
+node_2_F_node_4 = Relationship(node_2,'w24',node_4)
+
+node_3_F_node_1 = Relationship(node_3,'w31',node_1)
+node_3_F_node_2 = Relationship(node_3,'w32',node_2)
+node_3_F_node_4 = Relationship(node_3,'w34',node_4)
+
+node_4_F_node_1 = Relationship(node_4,'w41',node_1)
+node_4_F_node_2 = Relationship(node_4,'w42',node_2)
+node_4_F_node_3 = Relationship(node_4,'w43',node_3)
+
+node_5_F_node_4 = Relationship(node_5,'w54',node_4)
+node_4_F_node_5 = Relationship(node_4,'w45',node_5)
+node_5_F_node_6 = Relationship(node_5,'w56',node_6)
+node_6_F_node_5 = Relationship(node_6,'w65',node_5)
+
+#为关系设定权重
+node_1_F_node_2['weight'] = 1
+node_1_F_node_2['weight'] = 2
+node_1_F_node_3['weight'] = 1
+node_2_F_node_1['weight'] = 2
+node_2_F_node_3['weight'] = 1
+node_2_F_node_4['weight'] = 2
+node_3_F_node_1['weight'] = 1
+node_3_F_node_2['weight'] = 2
+node_3_F_node_4['weight'] = 1
+node_4_F_node_1['weight'] = 2
+node_4_F_node_2['weight'] = 1
+node_4_F_node_3['weight'] = 2
+
+node_5_F_node_4['weight'] = 2
+node_4_F_node_5['weight'] = 1
+node_5_F_node_6['weight'] = 2
+node_6_F_node_5['weight'] = 2
+#创建关系
+graph.create(node_1_F_node_2)
+graph.create(node_1_F_node_2)
+graph.create(node_1_F_node_3)
+graph.create(node_2_F_node_1)
+graph.create(node_2_F_node_3)
+graph.create(node_2_F_node_4)
+graph.create(node_3_F_node_1)
+graph.create(node_3_F_node_2)
+graph.create(node_3_F_node_4)
+graph.create(node_4_F_node_1)
+graph.create(node_4_F_node_2)
+graph.create(node_4_F_node_3)
+
+graph.create(node_4_F_node_5)
+graph.create(node_5_F_node_4)
+graph.create(node_5_F_node_6)
+graph.create(node_6_F_node_5)
+#更新
+node_1_F_node_2['count'] += 1
+node_1['name'] = "peter"
+graph.push(node_1_F_node_2)
+graph.push(node_1)
+#查询语句
+## find_one返回一个
+find_1 = graph.find_one(
+  label="Person",
+  property_key="name",
+  property_value="node_1"
+)
+#find返回的是游标
+findA = graph.find(
+    lable="Person"
+)
+for it in findA:
+    print(it['name'])
+#查找关系用mactch和macth_one,用法与上面相似，注意start_node和end_node至少有一个
+# bidirectional指的是否可以是双向的，true表示不考虑方向，false表示必须是start指向end的边
+#start_node后面可以是单个的node也可以是查询出来的一系列node.
+relationship = graph.match_one(start_node=node_1, end_node=node_2, bidirectional=False)
+</code></pre>
+
+<p>from <strong>future</strong> import print_function</p>
+
+<p>import sys</p>
+
+<p>from py2neo import Graph, Node, Relationship
+graph = Graph(
+    &ldquo;<a href="http://localhost:7474">http://localhost:7474</a>&rdquo;,
+    username=&ldquo;xxx&rdquo;,
+    password=&ldquo;xxx&rdquo;
+)</p>
+
+<h1>删除所有的点和边</h1>
+
+<h1>graph.delete_all()</h1>
+
+<h1>定义点</h1>
+
+<p>node_1 = Node(label = &ldquo;Person&rdquo;,name = &ldquo;node_1&rdquo;)
+node_2 = Node(label = &ldquo;Person&rdquo;,name = &ldquo;node_2&rdquo;)
+node_3 = Node(label = &ldquo;Person&rdquo;,name = &ldquo;node_3&rdquo;)
+node_4 = Node(label = &ldquo;Person&rdquo;,name = &ldquo;node_4&rdquo;)
+node_5 = Node(label = &ldquo;Person&rdquo;,name = &ldquo;node_5&rdquo;)
+node_6 = Node(label = &ldquo;Person&rdquo;,name = &ldquo;node_6&rdquo;)</p>
+
+<h1>创建点</h1>
+
+<p>graph.create(node_1)
+graph.create(node_2)
+graph.create(node_3)
+graph.create(node_4)
+graph.create(node_5)
+graph.create(node_6)</p>
+
+<h1>定义关系</h1>
+
+<p>node_1_F_node_2 = Relationship(node_1,&lsquo;w12&rsquo;,node_2)
+node_1_F_node_3 = Relationship(node_1,&lsquo;w13&rsquo;,node_3)
+node_1_F_node_4 = Relationship(node_1,&lsquo;w14&rsquo;,node_4)
+node_2_F_node_1 = Relationship(node_2,&lsquo;w21&rsquo;,node_1)
+node_2_F_node_3 = Relationship(node_2,&lsquo;w23&rsquo;,node_3)
+node_2_F_node_4 = Relationship(node_2,&lsquo;w24&rsquo;,node_4)</p>
+
+<p>node_3_F_node_1 = Relationship(node_3,&lsquo;w31&rsquo;,node_1)
+node_3_F_node_2 = Relationship(node_3,&lsquo;w32&rsquo;,node_2)
+node_3_F_node_4 = Relationship(node_3,&lsquo;w34&rsquo;,node_4)</p>
+
+<p>node_4_F_node_1 = Relationship(node_4,&lsquo;w41&rsquo;,node_1)
+node_4_F_node_2 = Relationship(node_4,&lsquo;w42&rsquo;,node_2)
+node_4_F_node_3 = Relationship(node_4,&lsquo;w43&rsquo;,node_3)</p>
+
+<p>node_5_F_node_4 = Relationship(node_5,&lsquo;w54&rsquo;,node_4)
+node_4_F_node_5 = Relationship(node_4,&lsquo;w45&rsquo;,node_5)
+node_5_F_node_6 = Relationship(node_5,&lsquo;w56&rsquo;,node_6)
+node_6_F_node_5 = Relationship(node_6,&lsquo;w65&rsquo;,node_5)</p>
+
+<h1>为关系设定权重</h1>
+
+<p>node_1_F_node_2[&lsquo;weight&rsquo;] = 1
+node_1_F_node_2[&lsquo;weight&rsquo;] = 2
+node_1_F_node_3[&lsquo;weight&rsquo;] = 1
+node_2_F_node_1[&lsquo;weight&rsquo;] = 2
+node_2_F_node_3[&lsquo;weight&rsquo;] = 1
+node_2_F_node_4[&lsquo;weight&rsquo;] = 2
+node_3_F_node_1[&lsquo;weight&rsquo;] = 1
+node_3_F_node_2[&lsquo;weight&rsquo;] = 2
+node_3_F_node_4[&lsquo;weight&rsquo;] = 1
+node_4_F_node_1[&lsquo;weight&rsquo;] = 2
+node_4_F_node_2[&lsquo;weight&rsquo;] = 1
+node_4_F_node_3[&lsquo;weight&rsquo;] = 2</p>
+
+<p>node_5_F_node_4[&lsquo;weight&rsquo;] = 2
+node_4_F_node_5[&lsquo;weight&rsquo;] = 1
+node_5_F_node_6[&lsquo;weight&rsquo;] = 2
+node_6_F_node_5[&lsquo;weight&rsquo;] = 2</p>
+
+<h1>创建关系</h1>
+
+<p>graph.create(node_1_F_node_2)
+graph.create(node_1_F_node_2)
+graph.create(node_1_F_node_3)
+graph.create(node_2_F_node_1)
+graph.create(node_2_F_node_3)
+graph.create(node_2_F_node_4)
+graph.create(node_3_F_node_1)
+graph.create(node_3_F_node_2)
+graph.create(node_3_F_node_4)
+graph.create(node_4_F_node_1)
+graph.create(node_4_F_node_2)
+graph.create(node_4_F_node_3)</p>
+
+<p>graph.create(node_4_F_node_5)
+graph.create(node_5_F_node_4)
+graph.create(node_5_F_node_6)
+graph.create(node_6_F_node_5)</p>
+
+<h1>更新</h1>
+
+<p>node_1_F_node_2[&lsquo;count&rsquo;] += 1
+node_1[&lsquo;name&rsquo;] = &ldquo;peter&rdquo;
+graph.push(node_1_F_node_2)
+graph.push(node_1)</p>
+
+<h1>查询语句</h1>
+
+<h2>find_one返回一个</h2>
+
+<p>find_1 = graph.find_one(
+  label=&ldquo;Person&rdquo;,
+  property_key=&ldquo;name&rdquo;,
+  property_value=&ldquo;node_1&rdquo;
+)</p>
+
+<h1>find返回的是游标</h1>
+
+<p>findA = graph.find(
+    lable=&ldquo;Person&rdquo;
+)
+for it in findA:
+    print(it[&lsquo;name&rsquo;])</p>
+
+<h1>查找关系用mactch和macth_one,用法与上面相似，注意start_node和end_node至少有一个</h1>
+
+<h1>bidirectional指的是否可以是双向的，true表示不考虑方向，false表示必须是start指向end的边</h1>
+
+<h1>start_node后面可以是单个的node也可以是查询出来的一系列node.</h1>
+
+<p>relationship = graph.match_one(start_node=node_1, end_node=node_2, bidirectional=False)</p>
+
+<p>```</p>
+
+<p><img src="https://raw.githubusercontent.com/chenlini/chenlini.github.io/source/source/images/neo4j.png" alt="" /></p>
+
+<h2>注意问题</h2>
+
+<ol>
+<li>在代码测试阶段最好能够及时清理数据库，直接去图形化界面清理即可。用delete语句清理。不然没调试一次都会有数据插入neo4j。</li>
+<li>注意建立节点或者是关系之前，都去判断一下该节点或关系是否已经存在，避免出现重复的节点和关系。</li>
+</ol>
+
+]]></content>
+  </entry>
+  
+</feed>

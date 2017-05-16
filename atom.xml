@@ -4,7 +4,7 @@
   <title><![CDATA[Chenlini]]></title>
   <link href="http://chenlini.github.io/atom.xml" rel="self"/>
   <link href="http://chenlini.github.io/"/>
-  <updated>2017-05-13T00:43:50+08:00</updated>
+  <updated>2017-05-16T11:14:13+08:00</updated>
   <id>http://chenlini.github.io/</id>
   <author>
     <name><![CDATA[Chenlini]]></name>
@@ -14,6 +14,504 @@
 
   
   <entry>
+    <title type="html"><![CDATA[汉诺塔]]></title>
+    <link href="http://chenlini.github.io/blog/2017/05/16/yi-nuo-ta/"/>
+    <updated>2017-05-16T10:59:25+08:00</updated>
+    <id>http://chenlini.github.io/blog/2017/05/16/yi-nuo-ta</id>
+    <content type="html"><![CDATA[<h2>汉诺塔问题</h2>
+
+<p>递归问题
+n个盘子，三个柱子。一个柱子为起始柱子，一个为终点柱子，一个为中间柱子。
+步骤：</p>
+
+<p>1.将n-1个盘子移到中间柱子。</p>
+
+<p>2.将第n个盘子移到终点柱子。</p>
+
+<p>问题就变成了将n-1个盘子移到终点柱子的问题，重复。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>    #include&lt;iostream&gt;
+</span><span class='line'>    using namespace std;
+</span><span class='line'>    int i;
+</span><span class='line'>    void move(int n,char from,char to){
+</span><span class='line'>           printf("step %d: the number %d from %c to %c ",i++,n,from,to);
+</span><span class='line'>    }
+</span><span class='line'>    void Hanio(int n,char start,char end,char mid){
+</span><span class='line'>           if(n==1)move(n,start,end);
+</span><span class='line'>           else{
+</span><span class='line'>                Hanio(n-1,start,mid,end);
+</span><span class='line'>                move(n,start,end);
+</span><span class='line'>                Hanio(n-1,mid,end,start);
+</span><span class='line'>               }
+</span><span class='line'>    }
+</span><span class='line'>    int main(){
+</span><span class='line'>           int n;  
+</span><span class='line'>        while(cin&lt;&lt;n){  
+</span><span class='line'>        i = 1;   //全局变量赋初始值  
+</span><span class='line'>        Hanio(n,'1','2','3');  
+</span><span class='line'>        printf("最后总的步数为%d\n",i-1);  
+</span><span class='line'>     }  
+</span><span class='line'>    return 0; 
+</span><span class='line'>    }</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[neo4j(1)]]></title>
+    <link href="http://chenlini.github.io/blog/2017/05/14/neo4j-1/"/>
+    <updated>2017-05-14T23:53:49+08:00</updated>
+    <id>http://chenlini.github.io/blog/2017/05/14/neo4j-1</id>
+    <content type="html"><![CDATA[<h1>neo4j安装步骤</h1>
+
+<p>注：</p>
+
+<blockquote><ol>
+<li>先安装好java</li>
+<li>官网上直接通过apt-get不行</li>
+</ol>
+</blockquote>
+
+<p>需要到<a href="http://neo4j.com/download/">http://neo4j.com/download/</a> 下载对应的版本，解压安装。</p>
+
+<ol>
+<li><p>解压：</p>
+
+<blockquote><p>$ tar –zvxf neo4j-community-3.1.3.-unix.tar.gz</p></blockquote></li>
+<li><p>启动neo4j</p>
+
+<blockquote><p>$ ./neo4j console</p></blockquote></li>
+<li><p>打开浏览器进入工作环境  <a href="http://localhost/7474">http://localhost/7474</a></p></li>
+<li>第一次进入会要求修改用户名和密码，该用户名和密码一定要记住，后面会用到！！！</li>
+</ol>
+
+
+<p>注：最新版的neo4j暂时不需要修改配置文件，如果是以前的版本需要去conf/neo4j-server.properties里面下面这句话前面的注释符删掉。</p>
+
+<pre><code>    #org.neo4j.server.webserver.address=0.0.0.0
+</code></pre>
+
+<h1>Python+neo4j 小demo笔记</h1>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+<span class='line-number'>102</span>
+<span class='line-number'>103</span>
+<span class='line-number'>104</span>
+<span class='line-number'>105</span>
+<span class='line-number'>106</span>
+<span class='line-number'>107</span>
+<span class='line-number'>108</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>from __future__ import print_function
+</span><span class='line'>
+</span><span class='line'>import sys
+</span><span class='line'>
+</span><span class='line'>from py2neo import Graph, Node, Relationship
+</span><span class='line'>graph = Graph(
+</span><span class='line'>    "http://localhost:7474",
+</span><span class='line'>    username="xxx",
+</span><span class='line'>    password="xxx"
+</span><span class='line'>)
+</span><span class='line'>#删除所有的点和边
+</span><span class='line'>#graph.delete_all()
+</span><span class='line'>#定义点
+</span><span class='line'>node_1 = Node(label = "Person",name = "node_1")
+</span><span class='line'>node_2 = Node(label = "Person",name = "node_2")
+</span><span class='line'>node_3 = Node(label = "Person",name = "node_3")
+</span><span class='line'>node_4 = Node(label = "Person",name = "node_4")
+</span><span class='line'>node_5 = Node(label = "Person",name = "node_5")
+</span><span class='line'>node_6 = Node(label = "Person",name = "node_6")
+</span><span class='line'>
+</span><span class='line'>#创建点
+</span><span class='line'>graph.create(node_1)
+</span><span class='line'>graph.create(node_2)
+</span><span class='line'>graph.create(node_3)
+</span><span class='line'>graph.create(node_4)
+</span><span class='line'>graph.create(node_5)
+</span><span class='line'>graph.create(node_6)
+</span><span class='line'>#定义关系
+</span><span class='line'>node_1_F_node_2 = Relationship(node_1,'w12',node_2)
+</span><span class='line'>node_1_F_node_3 = Relationship(node_1,'w13',node_3)
+</span><span class='line'>node_1_F_node_4 = Relationship(node_1,'w14',node_4)
+</span><span class='line'>node_2_F_node_1 = Relationship(node_2,'w21',node_1)
+</span><span class='line'>node_2_F_node_3 = Relationship(node_2,'w23',node_3)
+</span><span class='line'>node_2_F_node_4 = Relationship(node_2,'w24',node_4)
+</span><span class='line'>
+</span><span class='line'>node_3_F_node_1 = Relationship(node_3,'w31',node_1)
+</span><span class='line'>node_3_F_node_2 = Relationship(node_3,'w32',node_2)
+</span><span class='line'>node_3_F_node_4 = Relationship(node_3,'w34',node_4)
+</span><span class='line'>
+</span><span class='line'>node_4_F_node_1 = Relationship(node_4,'w41',node_1)
+</span><span class='line'>node_4_F_node_2 = Relationship(node_4,'w42',node_2)
+</span><span class='line'>node_4_F_node_3 = Relationship(node_4,'w43',node_3)
+</span><span class='line'>
+</span><span class='line'>node_5_F_node_4 = Relationship(node_5,'w54',node_4)
+</span><span class='line'>node_4_F_node_5 = Relationship(node_4,'w45',node_5)
+</span><span class='line'>node_5_F_node_6 = Relationship(node_5,'w56',node_6)
+</span><span class='line'>node_6_F_node_5 = Relationship(node_6,'w65',node_5)
+</span><span class='line'>
+</span><span class='line'>#为关系设定权重
+</span><span class='line'>node_1_F_node_2['weight'] = 1
+</span><span class='line'>node_1_F_node_2['weight'] = 2
+</span><span class='line'>node_1_F_node_3['weight'] = 1
+</span><span class='line'>node_2_F_node_1['weight'] = 2
+</span><span class='line'>node_2_F_node_3['weight'] = 1
+</span><span class='line'>node_2_F_node_4['weight'] = 2
+</span><span class='line'>node_3_F_node_1['weight'] = 1
+</span><span class='line'>node_3_F_node_2['weight'] = 2
+</span><span class='line'>node_3_F_node_4['weight'] = 1
+</span><span class='line'>node_4_F_node_1['weight'] = 2
+</span><span class='line'>node_4_F_node_2['weight'] = 1
+</span><span class='line'>node_4_F_node_3['weight'] = 2
+</span><span class='line'>
+</span><span class='line'>node_5_F_node_4['weight'] = 2
+</span><span class='line'>node_4_F_node_5['weight'] = 1
+</span><span class='line'>node_5_F_node_6['weight'] = 2
+</span><span class='line'>node_6_F_node_5['weight'] = 2
+</span><span class='line'>#创建关系
+</span><span class='line'>graph.create(node_1_F_node_2)
+</span><span class='line'>graph.create(node_1_F_node_2)
+</span><span class='line'>graph.create(node_1_F_node_3)
+</span><span class='line'>graph.create(node_2_F_node_1)
+</span><span class='line'>graph.create(node_2_F_node_3)
+</span><span class='line'>graph.create(node_2_F_node_4)
+</span><span class='line'>graph.create(node_3_F_node_1)
+</span><span class='line'>graph.create(node_3_F_node_2)
+</span><span class='line'>graph.create(node_3_F_node_4)
+</span><span class='line'>graph.create(node_4_F_node_1)
+</span><span class='line'>graph.create(node_4_F_node_2)
+</span><span class='line'>graph.create(node_4_F_node_3)
+</span><span class='line'>
+</span><span class='line'>graph.create(node_4_F_node_5)
+</span><span class='line'>graph.create(node_5_F_node_4)
+</span><span class='line'>graph.create(node_5_F_node_6)
+</span><span class='line'>graph.create(node_6_F_node_5)
+</span><span class='line'>#更新
+</span><span class='line'>node_1_F_node_2['count'] += 1
+</span><span class='line'>node_1['name'] = "peter"
+</span><span class='line'>graph.push(node_1_F_node_2)
+</span><span class='line'>graph.push(node_1)
+</span><span class='line'>#查询语句
+</span><span class='line'>## find_one返回一个
+</span><span class='line'>find_1 = graph.find_one(
+</span><span class='line'>  label="Person",
+</span><span class='line'>  property_key="name",
+</span><span class='line'>  property_value="node_1"
+</span><span class='line'>)
+</span><span class='line'>#find返回的是游标
+</span><span class='line'>findA = graph.find(
+</span><span class='line'>    lable="Person"
+</span><span class='line'>)
+</span><span class='line'>for it in findA:
+</span><span class='line'>    print(it['name'])
+</span><span class='line'>#查找关系用mactch和macth_one,用法与上面相似，注意start_node和end_node至少有一个
+</span><span class='line'># bidirectional指的是否可以是双向的，true表示不考虑方向，false表示必须是start指向end的边
+</span><span class='line'>#start_node后面可以是单个的node也可以是查询出来的一系列node.
+</span><span class='line'>relationship = graph.match_one(start_node=node_1, end_node=node_2, bidirectional=False)
+</span><span class='line'>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<pre><code>
+from __future__ import print_function
+
+import sys
+
+from py2neo import Graph, Node, Relationship
+graph = Graph(
+    "http://localhost:7474",
+    username="xxx",
+    password="xxx"
+)
+#删除所有的点和边
+#graph.delete_all()
+#定义点
+node_1 = Node(label = "Person",name = "node_1")
+node_2 = Node(label = "Person",name = "node_2")
+node_3 = Node(label = "Person",name = "node_3")
+node_4 = Node(label = "Person",name = "node_4")
+node_5 = Node(label = "Person",name = "node_5")
+node_6 = Node(label = "Person",name = "node_6")
+
+#创建点
+graph.create(node_1)
+graph.create(node_2)
+graph.create(node_3)
+graph.create(node_4)
+graph.create(node_5)
+graph.create(node_6)
+#定义关系
+node_1_F_node_2 = Relationship(node_1,'w12',node_2)
+node_1_F_node_3 = Relationship(node_1,'w13',node_3)
+node_1_F_node_4 = Relationship(node_1,'w14',node_4)
+node_2_F_node_1 = Relationship(node_2,'w21',node_1)
+node_2_F_node_3 = Relationship(node_2,'w23',node_3)
+node_2_F_node_4 = Relationship(node_2,'w24',node_4)
+
+node_3_F_node_1 = Relationship(node_3,'w31',node_1)
+node_3_F_node_2 = Relationship(node_3,'w32',node_2)
+node_3_F_node_4 = Relationship(node_3,'w34',node_4)
+
+node_4_F_node_1 = Relationship(node_4,'w41',node_1)
+node_4_F_node_2 = Relationship(node_4,'w42',node_2)
+node_4_F_node_3 = Relationship(node_4,'w43',node_3)
+
+node_5_F_node_4 = Relationship(node_5,'w54',node_4)
+node_4_F_node_5 = Relationship(node_4,'w45',node_5)
+node_5_F_node_6 = Relationship(node_5,'w56',node_6)
+node_6_F_node_5 = Relationship(node_6,'w65',node_5)
+
+#为关系设定权重
+node_1_F_node_2['weight'] = 1
+node_1_F_node_2['weight'] = 2
+node_1_F_node_3['weight'] = 1
+node_2_F_node_1['weight'] = 2
+node_2_F_node_3['weight'] = 1
+node_2_F_node_4['weight'] = 2
+node_3_F_node_1['weight'] = 1
+node_3_F_node_2['weight'] = 2
+node_3_F_node_4['weight'] = 1
+node_4_F_node_1['weight'] = 2
+node_4_F_node_2['weight'] = 1
+node_4_F_node_3['weight'] = 2
+
+node_5_F_node_4['weight'] = 2
+node_4_F_node_5['weight'] = 1
+node_5_F_node_6['weight'] = 2
+node_6_F_node_5['weight'] = 2
+#创建关系
+graph.create(node_1_F_node_2)
+graph.create(node_1_F_node_2)
+graph.create(node_1_F_node_3)
+graph.create(node_2_F_node_1)
+graph.create(node_2_F_node_3)
+graph.create(node_2_F_node_4)
+graph.create(node_3_F_node_1)
+graph.create(node_3_F_node_2)
+graph.create(node_3_F_node_4)
+graph.create(node_4_F_node_1)
+graph.create(node_4_F_node_2)
+graph.create(node_4_F_node_3)
+
+graph.create(node_4_F_node_5)
+graph.create(node_5_F_node_4)
+graph.create(node_5_F_node_6)
+graph.create(node_6_F_node_5)
+#更新
+node_1_F_node_2['count'] += 1
+node_1['name'] = "peter"
+graph.push(node_1_F_node_2)
+graph.push(node_1)
+#查询语句
+## find_one返回一个
+find_1 = graph.find_one(
+  label="Person",
+  property_key="name",
+  property_value="node_1"
+)
+#find返回的是游标
+findA = graph.find(
+    lable="Person"
+)
+for it in findA:
+    print(it['name'])
+#查找关系用mactch和macth_one,用法与上面相似，注意start_node和end_node至少有一个
+# bidirectional指的是否可以是双向的，true表示不考虑方向，false表示必须是start指向end的边
+#start_node后面可以是单个的node也可以是查询出来的一系列node.
+relationship = graph.match_one(start_node=node_1, end_node=node_2, bidirectional=False)
+</code></pre>
+
+<p><img src="https://raw.githubusercontent.com/chenlini/chenlini.github.io/source/source/images/neo4j.png" alt="" /></p>
+
+<h2>注意问题</h2>
+
+<ol>
+<li>在代码测试阶段最好能够及时清理数据库，直接去图形化界面清理即可。用delete语句清理。不然没调试一次都会有数据插入neo4j。</li>
+<li>注意建立节点或者是关系之前，都去判断一下该节点或关系是否已经存在，避免出现重复的节点和关系。</li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ruby升级]]></title>
+    <link href="http://chenlini.github.io/blog/2017/05/14/rubysheng-ji/"/>
+    <updated>2017-05-14T23:21:38+08:00</updated>
+    <id>http://chenlini.github.io/blog/2017/05/14/rubysheng-ji</id>
+    <content type="html"><![CDATA[<h2>Mac升级系统后需要更新ruby</h2>
+
+<p>前段时间学学怎么用octopress写博客，更新了mac版本后就发现不能rake preview了，网上查了一下发现需要更新ruby，中间遇到了一些问题，记录如下：</p>
+
+<p>之前没有通过rvm安装ruby，要更新比较麻烦，因此现在从新安装rvm.</p>
+
+<pre><code>#安装rvm
+curl -L https://get.rvm.io | bash -s stable
+source ~/.bashrc
+source ~/.bash_profile
+#查看已知ruby版本
+rvm list know
+#安装版本
+rvm install 2.3.3
+</code></pre>
+
+<p>注意：在install的时候可能会出现错误，错误原因是brew需要update，因此需要执行以下语句</p>
+
+<pre><code>brew update
+</code></pre>
+
+<p>如果brew update 出现错误，"The /usr/local directory is not writable.&ldquo; 需要去到/usr/local/目录下面执行：</p>
+
+<pre><code>sudo chown -R $(whoami) /usr/local
+brew prune
+</code></pre>
+
+<p>这样就可以brew update了。</p>
+
+<p>完成ruby的更新之后，发现还是不能rake preview,还是会报错！发现需要重新安装bundler</p>
+
+<pre><code>gem install bundler
+</code></pre>
+
+<p>但是重新安装完了之后又又问题了，rake不见了！只能再走一遍。</p>
+
+<pre><code>bundle install
+</code></pre>
+
+<h5>补充rvm的命令</h5>
+
+<pre><code>rvm use 2.3.3
+#卸载
+rvm remote 2.3.3
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[hive_note]]></title>
     <link href="http://chenlini.github.io/blog/2017/05/13/hive-note/"/>
     <updated>2017-05-13T00:35:27+08:00</updated>
@@ -21,6 +519,9 @@
     <content type="html"><![CDATA[<h2>Hive 语句简单优化</h2>
 
 <p>使用Hive的过程中，因为数据倾斜的问题可能会造成效率十分地下，以下记录一些hive的简单语句的优化操作。大部分都来自网络，查资料的时候看到就顺便记录一下。</p>
+
+<!--more-->
+
 
 <h3>1. 设置</h3>
 
