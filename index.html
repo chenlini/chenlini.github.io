@@ -9,19 +9,7 @@
 	<meta name="author" content="Chenlini">
 
 	
-	<meta name="description" content="others 汉诺塔 汉诺塔问题 递归问题
-n个盘子，三个柱子。一个柱子为起始柱子，一个为终点柱子，一个为中间柱子。
-步骤： 1.将n-1个盘子移到中间柱子。 2.将第n个盘子移到终点柱子。 问题就变成了将n-1个盘子移到终点柱子的问题，重复。 1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11 &hellip;">
+	<meta name="description" content="python Python字符串连接 python字符串连接 python有若干种字符连接方式，找找资料总结如下： ‘+’号方法 str1='aaa' str2='bbb' print(str1 + str2) 'aaabbb' ‘,’号方法，会有空格。 str1='aaa' str2='bbb &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -101,6 +89,87 @@ n个盘子，三个柱子。一个柱子为起始柱子，一个为终点柱子�
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2017-05-19T11:14:50+08:00" data-updated="true" itemprop="datePublished"></time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/python/'>python</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2017/05/19/pythonzi-fu-chuan-lian-jie/" itemprop="url">Python字符串连接</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<h2>python字符串连接</h2>
+
+<p>python有若干种字符连接方式，找找资料总结如下：</p>
+
+<ol>
+<li><p>‘+’号方法</p>
+
+<pre><code> str1='aaa'
+ str2='bbb'
+ print(str1 + str2)
+ 'aaabbb'
+</code></pre></li>
+<li><p>‘,’号方法，会有空格。</p>
+
+<pre><code> str1='aaa'
+ str2='bbb'
+ print(str1 , str2)
+ 'aaa bbb'
+</code></pre></li>
+<li><p>空格连接</p>
+
+<pre><code> str1='aaa'
+ str2='bbb'
+ print(str1 str2)
+ 'aaabbb'
+</code></pre></li>
+<li><p>‘%’连接</p>
+
+<pre><code> str1='aaa'
+ str2='bbb'
+ print("%s,%s"%(str1,str2))
+ 'aaa,bbb'
+</code></pre></li>
+<li><p>join</p>
+
+<pre><code> str=['aaa','bbb','ccc']
+ t=','
+ print(t.join(str))
+ 'aaa,bbb,ccc'
+</code></pre></li>
+<li><p>&lsquo;*'连接</p>
+
+<pre><code> a = 'abc'
+ a * 3 = 'abcabcabc'
+</code></pre></li>
+</ol>
+
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -593,6 +662,55 @@ relationship = graph.match_one(start_node=node_1, end_node=node_2, bidirectional
 </ol>
 
 
+<h2>利用Neo4j-shell批量导入数据</h2>
+
+<p>新建一个文件 demo.cql</p>
+
+<p>按照以下步骤：</p>
+
+<h3>Neo4j利用load_csv批量导入数据</h3>
+
+<p>注意，neo4j需要导入数据必须是结构化的node和edge。每一种点放在一个表中，每一种关系放在一个表中。</p>
+
+<ol>
+<li><p>把csv文件放在安装目录的import文件夹下面。</p></li>
+<li><p>在demo.cql中写入Neo4j的语句：</p></li>
+</ol>
+
+
+<p>创造node：</p>
+
+<pre><code>    load csv with headers from "file:///family10000.csv" as row
+    create (:Family{familyNum:row.familyno})
+
+    load csv with headers from "file:///user10000.csv" as row
+    create (:User{crt_id:row.crt_id})
+</code></pre>
+
+<p>为点创造索引：</p>
+
+<pre><code>    create index on :User(crt_id)   
+</code></pre>
+
+<p>创造边：</p>
+
+<pre><code>    using periodic commit
+    load csv with headers from "file:///family_relation10000.csv" as row
+    match(user:User{crt_id:row.crt_id})
+    match(family:Family{familyNum:row.familyno})
+    merge(family)-[:include]-&gt;(user);
+</code></pre>
+
+<ol>
+<li><p>在bin目录下执行</p>
+
+<pre><code> ./neo4j-shell -file demo.cql &gt; result.txt
+</code></pre></li>
+</ol>
+
+
+<p>有结果就会写到result.txt里面，没有反回就不会写</p>
+
 		
 		
 	</div>
@@ -618,7 +736,7 @@ relationship = graph.match_one(start_node=node_1, end_node=node_2, bidirectional
 		<div class="tags">
 
 
-	<a class='category' href='/blog/categories/ruby/'>ruby</a>
+	<a class='category' href='/blog/categories/slash-|/'>\|</a>, <a class='category' href='/blog/categories/c/'>c</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>
 
 
 </div>
@@ -918,41 +1036,6 @@ rvm remote 2.3.3
 
 		
 		<a href="/blog/2017/03/15/gan-zhi-ji/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2017-03-15T15:14:26+08:00" data-updated="true" itemprop="datePublished"></time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/algorithm/'>algorithm</a>
-
-
-</div>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2017/03/15/shen-ru-qian-chu-svm/" itemprop="url">深入浅出SVM</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		
-
-		
-		
 	</div>
 
 </article>

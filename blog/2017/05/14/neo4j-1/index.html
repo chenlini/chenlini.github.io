@@ -458,6 +458,55 @@ relationship = graph.match_one(start_node=node_1, end_node=node_2, bidirectional
 <li>注意建立节点或者是关系之前，都去判断一下该节点或关系是否已经存在，避免出现重复的节点和关系。</li>
 </ol>
 
+
+<h2>利用Neo4j-shell批量导入数据</h2>
+
+<p>新建一个文件 demo.cql</p>
+
+<p>按照以下步骤：</p>
+
+<h3>Neo4j利用load_csv批量导入数据</h3>
+
+<p>注意，neo4j需要导入数据必须是结构化的node和edge。每一种点放在一个表中，每一种关系放在一个表中。</p>
+
+<ol>
+<li><p>把csv文件放在安装目录的import文件夹下面。</p></li>
+<li><p>在demo.cql中写入Neo4j的语句：</p></li>
+</ol>
+
+
+<p>创造node：</p>
+
+<pre><code>    load csv with headers from "file:///family10000.csv" as row
+    create (:Family{familyNum:row.familyno})
+
+    load csv with headers from "file:///user10000.csv" as row
+    create (:User{crt_id:row.crt_id})
+</code></pre>
+
+<p>为点创造索引：</p>
+
+<pre><code>    create index on :User(crt_id)   
+</code></pre>
+
+<p>创造边：</p>
+
+<pre><code>    using periodic commit
+    load csv with headers from "file:///family_relation10000.csv" as row
+    match(user:User{crt_id:row.crt_id})
+    match(family:Family{familyNum:row.familyno})
+    merge(family)-[:include]-&gt;(user);
+</code></pre>
+
+<ol>
+<li><p>在bin目录下执行</p>
+
+<pre><code> ./neo4j-shell -file demo.cql &gt; result.txt
+</code></pre></li>
+</ol>
+
+
+<p>有结果就会写到result.txt里面，没有反回就不会写</p>
 </div>
 
 </article>

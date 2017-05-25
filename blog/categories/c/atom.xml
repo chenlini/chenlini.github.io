@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Ruby | Chenlini]]></title>
-  <link href="http://chenlini.github.io/blog/categories/ruby/atom.xml" rel="self"/>
+  <title><![CDATA[Category: C | Chenlini]]></title>
+  <link href="http://chenlini.github.io/blog/categories/c/atom.xml" rel="self"/>
   <link href="http://chenlini.github.io/"/>
   <updated>2017-05-25T11:19:42+08:00</updated>
   <id>http://chenlini.github.io/</id>
