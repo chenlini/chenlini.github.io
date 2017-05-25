@@ -3,7 +3,7 @@ layout: post
 title: "ruby升级"
 date: 2017-05-14 23:21:38 +0800
 comments: true
-categories: ruby
+categories: ruby \| c
 ---
 
 ##Mac升级系统后需要更新ruby

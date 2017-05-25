@@ -261,3 +261,40 @@ relationship = graph.match_one(start_node=node_1, end_node=node_2, bidirectional
 1. 在代码测试阶段最好能够及时清理数据库，直接去图形化界面清理即可。用delete语句清理。不然没调试一次都会有数据插入neo4j。
 2. 注意建立节点或者是关系之前，都去判断一下该节点或关系是否已经存在，避免出现重复的节点和关系。
 
+##利用Neo4j-shell批量导入数据
+新建一个文件 demo.cql
+
+按照以下步骤：
+###Neo4j利用load_csv批量导入数据
+
+注意，neo4j需要导入数据必须是结构化的node和edge。每一种点放在一个表中，每一种关系放在一个表中。
+
+1. 把csv文件放在安装目录的import文件夹下面。
+
+2. 在demo.cql中写入Neo4j的语句：
+
+创造node：
+
+        load csv with headers from "file:///family10000.csv" as row
+        create (:Family{familyNum:row.familyno})
+        
+        load csv with headers from "file:///user10000.csv" as row
+        create (:User{crt_id:row.crt_id})
+
+为点创造索引：
+
+        create index on :User(crt_id)   
+        
+创造边：
+
+        using periodic commit
+        load csv with headers from "file:///family_relation10000.csv" as row
+        match(user:User{crt_id:row.crt_id})
+        match(family:Family{familyNum:row.familyno})
+        merge(family)-[:include]->(user);
+
+3. 在bin目录下执行
+
+        ./neo4j-shell -file demo.cql > result.txt
+
+有结果就会写到result.txt里面，没有反回就不会写
