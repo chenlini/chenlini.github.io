@@ -40,6 +40,7 @@ categories: Java
 >
 >[Deque](#4.2)
 
+<!--more-->
 <h3 id="1.1">1.1 ArrayList</h3>
 
 
