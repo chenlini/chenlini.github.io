@@ -9,7 +9,7 @@
 	<meta name="author" content="Chenlini">
 
 	
-	<meta name="description" content="python Python字符串连接 python字符串连接 python有若干种字符连接方式，找找资料总结如下： ‘+’号方法 str1='aaa' str2='bbb' print(str1 + str2) 'aaabbb' ‘,’号方法，会有空格。 str1='aaa' str2='bbb &hellip;">
+	<meta name="description" content="java javaNote java中的容器 List ArrayList linkedList Map HashTable HashMap LinkedHashMap Treemap WeekHashMap ConcurrentHashMap IdentityHashMap Set &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -89,6 +89,540 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2017-06-10T22:17:52+08:00" data-updated="true" itemprop="datePublished"></time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/java/'>java</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2017/06/10/javanote/" itemprop="url">javaNote</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<h1>java中的容器</h1>
+
+<blockquote><p>List</p>
+
+<blockquote><p><a href="#1.1">ArrayList</a></p>
+
+<p><a href="#1.2">linkedList</a></p></blockquote>
+
+<p>Map</p>
+
+<blockquote><p><a href="#2.1">HashTable</a></p>
+
+<p><a href="#2.2">HashMap</a></p>
+
+<p><a href="#2.3">LinkedHashMap</a></p>
+
+<p><a href="#2.4">Treemap</a></p>
+
+<p><a href="#2.5">WeekHashMap</a></p>
+
+<p><a href="#2.6">ConcurrentHashMap</a></p>
+
+<p><a href="#2.7">IdentityHashMap</a></p></blockquote>
+
+<p>Set</p>
+
+<blockquote><p><a href="#3.1">HashSet</a></p>
+
+<p><a href="#3.2">LinkedHashSet</a></p>
+
+<p><a href="#3.3">TreeSet</a></p></blockquote>
+
+<p><a href="#4.1">Queue</a></p>
+
+<p><a href="#4.2">Deque</a></p></blockquote>
+
+<h3 id="1.1">1.1 ArrayList</h3>
+
+
+<p>ArrayList实现了可变大小的数组,相当于动态数组,存储在连续的地址空间。它允许所有元素，包括null。ArrayList没有同步。</p>
+
+<blockquote><p>ArrayList 实现了RandmoAccess接口，即提供了随机访问功能。</p>
+
+<p>ArrayList 函数clone()，能被克隆。</p>
+
+<p>ArrayList 实现java.io.Serializable接口，这意味着ArrayList支持序列化，能通过序列化去传输。</p>
+
+<p>ArrayList中的操作不是线程安全的！所以，建议在单线程中才使用ArrayList，而在多线程中可以选择Vector或者CopyOnWriteArrayList。</p></blockquote>
+
+<p>现在基本上不怎么用vector了，大部分的性质和ArrayList一样，但是vector是线程安全的。</p>
+
+<h4>方法：</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>// Collection中定义的API
+</span><span class='line'>boolean             add(E object)
+</span><span class='line'>boolean             addAll(Collection&lt;? extends E&gt; collection)
+</span><span class='line'>void                clear()
+</span><span class='line'>boolean             contains(Object object)
+</span><span class='line'>boolean             containsAll(Collection&lt;?&gt; collection)
+</span><span class='line'>boolean             equals(Object object)
+</span><span class='line'>int                 hashCode()
+</span><span class='line'>boolean             isEmpty()
+</span><span class='line'>Iterator&lt;E&gt;         iterator()
+</span><span class='line'>boolean             remove(Object object)
+</span><span class='line'>boolean             removeAll(Collection&lt;?&gt; collection)
+</span><span class='line'>boolean             retainAll(Collection&lt;?&gt; collection)
+</span><span class='line'>int                 size()
+</span><span class='line'>&lt;T&gt; T[]             toArray(T[] array)
+</span><span class='line'>Object[]            toArray()
+</span><span class='line'>// AbstractCollection中定义的API
+</span><span class='line'>void                add(int location, E object)
+</span><span class='line'>boolean             addAll(int location, Collection&lt;? extends E&gt; collection)
+</span><span class='line'>E                   get(int location)
+</span><span class='line'>int                 indexOf(Object object)
+</span><span class='line'>int                 lastIndexOf(Object object)
+</span><span class='line'>ListIterator&lt;E&gt;     listIterator(int location)
+</span><span class='line'>ListIterator&lt;E&gt;     listIterator()
+</span><span class='line'>E                   remove(int location)
+</span><span class='line'>E                   set(int location, E object)
+</span><span class='line'>List&lt;E&gt;             subList(int start, int end)
+</span><span class='line'>// ArrayList新增的API
+</span><span class='line'>Object               clone()
+</span><span class='line'>void                 ensureCapacity(int minimumCapacity)
+</span><span class='line'>void                 trimToSize()
+</span><span class='line'>void                 removeRange(int fromIndex, int toIndex)</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><p>每个ArrayList实例都有一个容量（Capacity），即用于存储元素的数组的大小。这个容量可随着不断添加新元素而自动增加，但是增长算法并没有定义。当需要插入大量元素时，在插入前可以调用ensureCapacity方法来增加ArrayList的容量以提高插入效率。</p></blockquote>
+
+<h3>特性</h3>
+
+<p>(1) ArrayList 通过一个数组去保存数据的。当我们构造ArrayList时，若使用默认构造函数，设置默认的大小，当容量不足时再设置新的容量。</p>
+
+<p>(2) java.io.Serializable的方式。当写入到输出流时，先写入“容量”，再依次写入“每一个元素”；当读出输入流时，先读取“容量”，再依次读取“每一个元素”。</p>
+
+<h3>遍历方式</h3>
+
+<blockquote><p>（1）Iterater
+（2）随机访问，get(i)
+（3）循环 for(m:list)</p></blockquote>
+
+<h3 id="1.2">1.2 linkedList </h3>
+
+
+<p>linkedList是双向循环链表，继承AbstractSequentialList 抽象类，实现了List，Deque，Cloneable，Serializable 几个接口。</p>
+
+<h4>方法：</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>boolean             add(E object)
+</span><span class='line'>void                add(int location, E object)
+</span><span class='line'>public void addFirst(E e)   VS   public boolean offerFirst(E e)
+</span><span class='line'>public void addLast(E e)   VS  public boolean offerLast(E e)
+</span><span class='line'>public void clear()
+</span><span class='line'>public boolean contains(Object o)
+</span><span class='line'>public int indexOf(Object o)
+</span><span class='line'>public E element()等于public E getFirst()
+</span><span class='line'>public E get(int index)  
+</span><span class='line'>public E set(int index, E element)
+</span><span class='line'>public E getLast()
+</span><span class='line'>public int lastIndexOf(Object o)
+</span><span class='line'>public boolean offer(E e)
+</span><span class='line'>public E peek()  VS getfirst()  VS  peekFirst()
+</span><span class='line'>public E peekLast()  VS getlast()
+</span><span class='line'>public E poll() VS pollFirst()  VS  removeFirst()
+</span><span class='line'>public E pollLast()  VS   removeLast()
+</span><span class='line'>public E pop() 等于 removeFirst()
+</span><span class='line'>public void push(E e)  等于 addFirst()
+</span><span class='line'>public E remove() 等于 removeFirst()
+</span><span class='line'>public E remove(int index)
+</span><span class='line'>public boolean remove(Object o)
+</span><span class='line'>public boolean removeFirstOccurrence(Object o)
+</span><span class='line'>public boolean removeLastOccurrence(Object o)
+</span><span class='line'>
+</span><span class='line'>public Object clone()
+</span><span class='line'>public Object[] toArray()
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>迭代器</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ListIterator&lt;String&gt; itr = list.listIterator();
+</span><span class='line'>          while (itr.hasNext()) {
+</span><span class='line'>              System.out.println(itr.next());
+</span><span class='line'>          }</span></code></pre></td></tr></table></div></figure>
+
+
+<p>还有一个反向的迭代器叫做DescendingIterator</p>
+
+<h3 id="2.1">2.1 HashTable </h3>
+
+
+<blockquote><p>（1）hashTable存储的是键值对。</p>
+
+<p>（2）通过单链表解决冲突问题，容量不足时，自动增长。</p>
+
+<p>（3）线程安全的</p>
+
+<p>（4）实现了Serializable,Cloneable接口.</p></blockquote>
+
+<h4>方法：</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>public synchronized V put(K key, V value)
+</span><span class='line'>public synchronized V get(Object key) 
+</span><span class='line'>public synchronized V remove(Object key)
+</span><span class='line'>\\函数很多省略</span></code></pre></td></tr></table></div></figure>
+
+
+<p>HashTable的迭代器：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Map&lt;Integer,String&gt; m=new HashMap&lt;&gt;();
+</span><span class='line'>    m.put(3, "Value3");
+</span><span class='line'>    for(Iterator t=m.keySet().iterator();t.hasNext();){
+</span><span class='line'>        String   key   =   (String)   t.next();
+</span><span class='line'>        Object   value   =   m.get(key);
+</span><span class='line'>    }</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<h3 id="2.2">2.2 HashMap </h3>
+
+
+<ol>
+<li>HashMap默认的initialCapacity为16，loadFactor为0.75：</li>
+</ol>
+
+
+<blockquote><p>HashMap()：构建一个初始容量为 16，负载因子为 0.75 的 HashMap。</p>
+
+<p>HashMap(int initialCapacity)：构建一个初始容量为 initialCapacity，负载因子为 0.75 的 HashMap。</p>
+
+<p>HashMap(int initialCapacity, float loadFactor)：以指定初始容量、指定的负载因子创建一个 HashMap。</p></blockquote>
+
+<ol>
+<li><p>HashMap允许存放null键和null值。key值只允许有一个null，value则可以允许有多个null。当key为null时，键值对永远都放在以table[0]为头结点的链表中。</p></li>
+<li><p>每次根据hashCode()计算键值对存放的位置，还会用equals判断key是否一样，如果一样的化，新的值将会覆盖旧的值，如果不一样的话，新的键值对会插入到相应位置的头部。</p></li>
+<li><p>是动态的链表，会根据threshold扩容，当数据量超过threshold就会扩容，容量增大一倍。</p></li>
+<li><p>hashMap不是线程安全的</p></li>
+<li>因为包含空值，所以不能通过get函数的返回值来判断是非包含某个key或者value，应该使用containKey或者是containValue.</li>
+<li>clear()方法，清空Map</li>
+</ol>
+
+
+<h3 id="2.3">2.3 LinkedHashMap </h3>
+
+
+<p>LinkedHashMap是HashMap的子类，LinkedHashMap维护一个双向链表来保存插入数据或者访问数据的顺序，HashMap遍历的时候，顺序是未知的。同样可以有null的key和value。也不是线程安全的。</p>
+
+<h3>注意</h3>
+
+<p>LinkedHashMap默认根据插入的顺序来维护这个双向链表，但是它也支持访问的顺序。网上看到一个例子：</p>
+
+<p><strong>例子</strong>
+如果你想构造一个LinkedHashMap，并打算按从近期访问最少到近期访问最多的顺序（即访问顺序）来保存元素，那么请使用下面的构造方法构造LinkedHashMap：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>public LinkedHashMap(int initialCapacity,  
+</span><span class='line'>         float loadFactor,  
+</span><span class='line'>                     boolean accessOrder) {  
+</span><span class='line'>    super(initialCapacity, loadFactor);  
+</span><span class='line'>    this.accessOrder = accessOrder;  
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>LinkedHashMap提供了removeEldestEntry(Map.Entry&lt;K,V> eldest)方法。该方法可以提供在每次添加新条目时移除最旧条目的实现程序，默认返回false，这样，此映射的行为将类似于正常映射，即永远不能移除最旧的元素。</p>
+
+<p>重写此方法，维持此映射只保存100个条目的稳定状态，在每次添加新条目时删除最旧的条目。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>private static final int MAX_ENTRIES = 100;  
+</span><span class='line'>protected boolean removeEldestEntry(Map.Entry eldest) {  
+</span><span class='line'>    return size() &gt; MAX_ENTRIES;  
+</span><span class='line'>}  </span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<h3 id="2.4">2.4 Treemap </h3>
+
+
+<p>Treemap实际上就是用红黑树实现的Map。红黑树的原理可以参考：</p>
+
+<p>Treemap中的插入删除等操作都是遵循红黑树的插入删除算法。</p>
+
+<h3 id="2.5">2.5 WeakHashMap </h3>
+
+
+<p>WeakHashMap的键是“弱键”。也就是说weakHashMap的键没有其他地方的引用的时候，就会被回收。WeakHashMap中所有的值都是保存在一个table中的，当某“弱键”不再被其它对象引用，会被回收，这个“弱键”会被添加到ReferenceQueue(queue)队列中，下一次同步这个table和队列就可以了。</p>
+
+<h3 id="2.6">2.6 ConcurrentHashMap </h3>
+
+
+<p>实际上HashMap是线程不安全的，因此在多线程的情况下使用hashMap的put操作时，会引发死循环。而HashTable因为锁机制使得它效率比较低，不允许同时进行put操作。ConcurrentHashMap就是介于这两者之间，采用分段锁机制，使其可以被并行使用。把数据分成多段，给每一段数据都分配一把锁，同一段数据内部不允许同时操作，不同段的数据可以同时操作，因此提高了它的效率。</p>
+
+<h3 id="2.7">2.7 IdentityHashMap </h3>
+
+
+<p>IdentityHashMap会允许Key值重复。个人理解是IdentityHashMap认为key和value都相等的话，才认为是重复的，不然不认为是重复的。</p>
+
+<h3 id="3.1">3.1 HashSet </h3>
+
+
+<p>HashSet是基于HashMap实现的，底层采用HashMap来存储元素。也就是说HashSet中的元素都是存在HashMap的Key中的。</p>
+
+<h4>注意：</h4>
+
+<p>HashSet 中判断两个对象相等需要满足两个要求：</p>
+
+<p>（1）通过 equals() 方法判断比较返回 true</p>
+
+<p>（2）两个对象的 hashCode() 返回值相等</p>
+
+<p>所以当使用某个类的对象作为key值存入hashMap中时，需要注意重写equals()方法和hashCode() 方法。</p>
+
+<h3 id="3.2">3.2 LinkedHashSet </h3>
+
+
+<p>LinkedHashSet以元素插入的顺序来维护集合的链接表，允许以插入的顺序在集合中迭代。其实LinkedHashSet是对LinkedHashMap的简单包装。</p>
+
+<h3 id="3.3">3.3 TreeSet </h3>
+
+
+<blockquote><ul>
+<li><p>提供一个使用树结构存储Set接口的实现，对象以升序顺序存储，访问和遍历的时间很快。</p></li>
+<li><p>TreeSet中的元素支持2种排序方式：</p>
+
+<blockquote><p>自然排序
+根据Comparator 进行排序。</p></blockquote></li>
+<li><p>TreeSet是非同步的。</p></li>
+<li><p>TreeSet不支持快速随机遍历，只能通过迭代器进行遍历。有Iterator和descendingIterator。</p></li>
+</ul>
+</blockquote>
+
+<h3 id="4.1"> Queue </h3>
+
+
+<p>在java里面，Queue是借口，有很多种实现，以下是实现了Queue的一些类。AbstractQueue, ArrayBlockingQueue, ConcurrentLinkedQueue, LinkedBlockingQueue, DelayQueue, LinkedList, PriorityBlockingQueue, PriorityQueue和ArrayDqueue。</p>
+
+<p>其中用的最多的是linkedList实现的。</p>
+
+<h4>方法：</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>boolean add(E e);  
+</span><span class='line'>boolean add(E e);  
+</span><span class='line'>boolean offer(E e);  
+</span><span class='line'>void addFirst(E e);    
+</span><span class='line'>void addLast(E e);    
+</span><span class='line'>boolean offerFirst(E e);    
+</span><span class='line'>boolean offerLast(E e);
+</span><span class='line'>E removeFirst();    
+</span><span class='line'>E removeLast();    
+</span><span class='line'>E pollFirst();    
+</span><span class='line'>E pollLast();    
+</span><span class='line'>E remove();    
+</span><span class='line'>E poll(); 
+</span><span class='line'>E getFirst();   
+</span><span class='line'>E getLast();    
+</span><span class='line'>E peekFirst();    
+</span><span class='line'>E peekLast();    
+</span><span class='line'>E element();    
+</span><span class='line'>E peek(); 
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>PriorityQueue:</p>
+
+<h3 id="4.2">Deque </h3>
+
+
+<p>Deque是双向队列，继承自queue。区别在于Deque可以实现stack的功能，也就是先进后出的功能。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>public interface Deque&lt;E&gt; extends Queue&lt;E&gt; {//继承自Queue接口并进行扩展，支持双端操作  
+</span><span class='line'>    void addFirst(E e);//将指定元素插入此双端队列的开头。如果此队列有容量限制且当前没有可用空间，则抛出异常  
+</span><span class='line'>    void addLast(E e);//将指定元素插入此双端队列的末尾。如果此队列有容量限制且当前没有可用空间，则抛出异常  
+</span><span class='line'>    boolean offerFirst(E e);//将指定的元素插入此双端队列的开头。如果此队列有容量限制且当前没有可用空间，false  
+</span><span class='line'>    boolean offerLast(E e);//将指定的元素插入此双端队列的末尾。如果此队列有容量限制且当前没有可用空间，false  
+</span><span class='line'>    E removeFirst();//获取并移除此双端队列第一个元素;如果此队列为空，则抛出异常。  
+</span><span class='line'>    E removeLast();//获取并移除此双端队列最后一个元素;如果此队列为空，则抛出异常。  
+</span><span class='line'>    E pollFirst();//获取并移除此双端队列第一个元素;如果此队列为空，则返回 null。  
+</span><span class='line'>    E pollLast();//获取并移除此双端队列最后一个元素;如果此队列为空，则返回 null。  
+</span><span class='line'>    E getFirst();//获取但不移除此队列的头；如果此队列为空，则抛出异常。  
+</span><span class='line'>    E getLast();//获取但不移除此双端队列最后一个元素；如果此队列为空，则抛出异常  
+</span><span class='line'>    E peekFirst();//获取但不移除此队列的头；如果此队列为空，则返回 null。  
+</span><span class='line'>    E peekLast();//获取但不移除此队列的头；如果此队列为空，则返回 null。  
+</span><span class='line'>    boolean removeFirstOccurrence(Object o);//从此双端队列移除第一次出现的指定元素。如果此双端队列不包含该元素，则不作更改  
+</span><span class='line'>    boolean removeLastOccurrence(Object o);//从此双端队列移除最后一次出现的指定元素。如果此双端队列不包含该元素，则不作更改  
+</span><span class='line'>    boolean add(E e);//等效于addLast  
+</span><span class='line'>    boolean offer(E e);//等效于offerLast  
+</span><span class='line'>    E remove();//等效于 removeFirst()。   
+</span><span class='line'>    E poll();//此方法等效于 pollFirst()。   
+</span><span class='line'>    E element();//此方法等效于 getFirst()。  
+</span><span class='line'>    E peek();//此方法等效于 peekFirst()。  
+</span><span class='line'>    void push(E e);//此方法等效于 addFirst(E)。  
+</span><span class='line'>    E pop();//此方法等效于 removeFirst()。  
+</span><span class='line'>    boolean remove(Object o);//此方法等效于 removeFirstOccurrence(java.lang.Object)。  
+</span><span class='line'>    boolean contains(Object o);//如果此双端队列包含指定元素，则返回 true  
+</span><span class='line'>    public int size();//返回此双端队列的元素数。  
+</span><span class='line'>    Iterator&lt;E&gt; iterator();//返回以恰当顺序在此双端队列的元素上进行迭代的迭代器  
+</span><span class='line'>    Iterator&lt;E&gt; descendingIterator();//返回以逆向顺序在此双端队列的元素上进行迭代的迭代器  
+</span><span class='line'>  
+</span><span class='line'>} </span></code></pre></td></tr></table></div></figure>
+
+
+<p>参考链接：</p>
+
+<p><a href="http://www.cnblogs.com/skywang12345/p/3308556.html">http://www.cnblogs.com/skywang12345/p/3308556.html</a>
+<a href="http://blog.csdn.net/hla199106/article/details/46912615">http://blog.csdn.net/hla199106/article/details/46912615</a>
+<a href="http://blog.csdn.net/hello_zihan/article/details/52997816">http://blog.csdn.net/hello_zihan/article/details/52997816</a></p>
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -991,51 +1525,6 @@ rvm remote 2.3.3
 
 		
 		<a href="/blog/2017/03/15/pai-xu-hui-zong/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2017-03-15T19:53:19+08:00" data-updated="true" itemprop="datePublished"></time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/algorithm/'>algorithm</a>
-
-
-</div>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2017/03/15/gan-zhi-ji/" itemprop="url">感知机</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-
-
-<h4>总结：感知机属于二分类的算法，输入为一系列的特征向量，输出为＋1或者是－1.输入空间到输出空间用的是sign()函数。</h4>
-
-<h3>感知机定义了一个超平面：WX＋B＝0</h3>
-
-<p>其中W为权重向量，X为输入的特征向量，B为误差常数。</p>
-
-<p>对于感知机算法来说，训练数据集如果能够被一个超平面完美的划分成正实例和负实例，则称这个数据集为线性可分的，否则就是线性不可分的。</p>
-
-
-		
-		<a href="/blog/2017/03/15/gan-zhi-ji/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>
