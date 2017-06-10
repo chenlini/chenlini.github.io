@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Neo4j | Chenlini]]></title>
   <link href="http://chenlini.github.io/blog/categories/neo4j/atom.xml" rel="self"/>
   <link href="http://chenlini.github.io/"/>
-  <updated>2017-06-10T22:29:53+08:00</updated>
+  <updated>2017-06-11T00:14:02+08:00</updated>
   <id>http://chenlini.github.io/</id>
   <author>
     <name><![CDATA[Chenlini]]></name>
@@ -30,6 +30,9 @@
 
 <p>需要到<a href="http://neo4j.com/download/">http://neo4j.com/download/</a> 下载对应的版本，解压安装。</p>
 
+<!--more-->
+
+
 <ol>
 <li><p>解压：</p>
 
@@ -49,8 +52,7 @@
 
 <h1>Python+neo4j 小demo笔记</h1>
 
-<pre><code>
-from __future__ import print_function
+<pre><code>from __future__ import print_function
 
 import sys
 
@@ -157,136 +159,6 @@ for it in findA:
 #start_node后面可以是单个的node也可以是查询出来的一系列node.
 relationship = graph.match_one(start_node=node_1, end_node=node_2, bidirectional=False)
 </code></pre>
-
-<p>from <strong>future</strong> import print_function</p>
-
-<p>import sys</p>
-
-<p>from py2neo import Graph, Node, Relationship
-graph = Graph(
-    &ldquo;<a href="http://localhost:7474">http://localhost:7474</a>&rdquo;,
-    username=&ldquo;xxx&rdquo;,
-    password=&ldquo;xxx&rdquo;
-)</p>
-
-<h1>删除所有的点和边</h1>
-
-<h1>graph.delete_all()</h1>
-
-<h1>定义点</h1>
-
-<p>node_1 = Node(label = &ldquo;Person&rdquo;,name = &ldquo;node_1&rdquo;)
-node_2 = Node(label = &ldquo;Person&rdquo;,name = &ldquo;node_2&rdquo;)
-node_3 = Node(label = &ldquo;Person&rdquo;,name = &ldquo;node_3&rdquo;)
-node_4 = Node(label = &ldquo;Person&rdquo;,name = &ldquo;node_4&rdquo;)
-node_5 = Node(label = &ldquo;Person&rdquo;,name = &ldquo;node_5&rdquo;)
-node_6 = Node(label = &ldquo;Person&rdquo;,name = &ldquo;node_6&rdquo;)</p>
-
-<h1>创建点</h1>
-
-<p>graph.create(node_1)
-graph.create(node_2)
-graph.create(node_3)
-graph.create(node_4)
-graph.create(node_5)
-graph.create(node_6)</p>
-
-<h1>定义关系</h1>
-
-<p>node_1_F_node_2 = Relationship(node_1,&lsquo;w12&rsquo;,node_2)
-node_1_F_node_3 = Relationship(node_1,&lsquo;w13&rsquo;,node_3)
-node_1_F_node_4 = Relationship(node_1,&lsquo;w14&rsquo;,node_4)
-node_2_F_node_1 = Relationship(node_2,&lsquo;w21&rsquo;,node_1)
-node_2_F_node_3 = Relationship(node_2,&lsquo;w23&rsquo;,node_3)
-node_2_F_node_4 = Relationship(node_2,&lsquo;w24&rsquo;,node_4)</p>
-
-<p>node_3_F_node_1 = Relationship(node_3,&lsquo;w31&rsquo;,node_1)
-node_3_F_node_2 = Relationship(node_3,&lsquo;w32&rsquo;,node_2)
-node_3_F_node_4 = Relationship(node_3,&lsquo;w34&rsquo;,node_4)</p>
-
-<p>node_4_F_node_1 = Relationship(node_4,&lsquo;w41&rsquo;,node_1)
-node_4_F_node_2 = Relationship(node_4,&lsquo;w42&rsquo;,node_2)
-node_4_F_node_3 = Relationship(node_4,&lsquo;w43&rsquo;,node_3)</p>
-
-<p>node_5_F_node_4 = Relationship(node_5,&lsquo;w54&rsquo;,node_4)
-node_4_F_node_5 = Relationship(node_4,&lsquo;w45&rsquo;,node_5)
-node_5_F_node_6 = Relationship(node_5,&lsquo;w56&rsquo;,node_6)
-node_6_F_node_5 = Relationship(node_6,&lsquo;w65&rsquo;,node_5)</p>
-
-<h1>为关系设定权重</h1>
-
-<p>node_1_F_node_2[&lsquo;weight&rsquo;] = 1
-node_1_F_node_2[&lsquo;weight&rsquo;] = 2
-node_1_F_node_3[&lsquo;weight&rsquo;] = 1
-node_2_F_node_1[&lsquo;weight&rsquo;] = 2
-node_2_F_node_3[&lsquo;weight&rsquo;] = 1
-node_2_F_node_4[&lsquo;weight&rsquo;] = 2
-node_3_F_node_1[&lsquo;weight&rsquo;] = 1
-node_3_F_node_2[&lsquo;weight&rsquo;] = 2
-node_3_F_node_4[&lsquo;weight&rsquo;] = 1
-node_4_F_node_1[&lsquo;weight&rsquo;] = 2
-node_4_F_node_2[&lsquo;weight&rsquo;] = 1
-node_4_F_node_3[&lsquo;weight&rsquo;] = 2</p>
-
-<p>node_5_F_node_4[&lsquo;weight&rsquo;] = 2
-node_4_F_node_5[&lsquo;weight&rsquo;] = 1
-node_5_F_node_6[&lsquo;weight&rsquo;] = 2
-node_6_F_node_5[&lsquo;weight&rsquo;] = 2</p>
-
-<h1>创建关系</h1>
-
-<p>graph.create(node_1_F_node_2)
-graph.create(node_1_F_node_2)
-graph.create(node_1_F_node_3)
-graph.create(node_2_F_node_1)
-graph.create(node_2_F_node_3)
-graph.create(node_2_F_node_4)
-graph.create(node_3_F_node_1)
-graph.create(node_3_F_node_2)
-graph.create(node_3_F_node_4)
-graph.create(node_4_F_node_1)
-graph.create(node_4_F_node_2)
-graph.create(node_4_F_node_3)</p>
-
-<p>graph.create(node_4_F_node_5)
-graph.create(node_5_F_node_4)
-graph.create(node_5_F_node_6)
-graph.create(node_6_F_node_5)</p>
-
-<h1>更新</h1>
-
-<p>node_1_F_node_2[&lsquo;count&rsquo;] += 1
-node_1[&lsquo;name&rsquo;] = &ldquo;peter&rdquo;
-graph.push(node_1_F_node_2)
-graph.push(node_1)</p>
-
-<h1>查询语句</h1>
-
-<h2>find_one返回一个</h2>
-
-<p>find_1 = graph.find_one(
-  label=&ldquo;Person&rdquo;,
-  property_key=&ldquo;name&rdquo;,
-  property_value=&ldquo;node_1&rdquo;
-)</p>
-
-<h1>find返回的是游标</h1>
-
-<p>findA = graph.find(
-    lable=&ldquo;Person&rdquo;
-)
-for it in findA:
-    print(it[&lsquo;name&rsquo;])</p>
-
-<h1>查找关系用mactch和macth_one,用法与上面相似，注意start_node和end_node至少有一个</h1>
-
-<h1>bidirectional指的是否可以是双向的，true表示不考虑方向，false表示必须是start指向end的边</h1>
-
-<h1>start_node后面可以是单个的node也可以是查询出来的一系列node.</h1>
-
-<p>relationship = graph.match_one(start_node=node_1, end_node=node_2, bidirectional=False)</p>
-
-<p>```</p>
 
 <p><img src="https://raw.githubusercontent.com/chenlini/chenlini.github.io/source/source/images/neo4j.png" alt="" /></p>
 

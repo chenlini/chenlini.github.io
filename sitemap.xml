@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://chenlini.github.io/blog/2017/06/11/zheng-ze-biao-da-shi-1/</loc>
+<lastmod>2017-06-11T00:10:27+08:00</lastmod>
+</url>
+<url>
 <loc>http://chenlini.github.io/blog/2017/06/10/javanote/</loc>
 <lastmod>2017-06-10T22:17:52+08:00</lastmod>
 </url>
@@ -105,6 +109,9 @@
 </url>
 <url>
 <loc>http://chenlini.github.io/blog/categories/java/</loc>
+</url>
+<url>
+<loc>http://chenlini.github.io/blog/categories/regularexpression/</loc>
 </url>
 <url>
 <loc>http://chenlini.github.io/posts/2/</loc>
