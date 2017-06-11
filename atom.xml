@@ -4,7 +4,7 @@
   <title><![CDATA[Chenlini]]></title>
   <link href="http://chenlini.github.io/atom.xml" rel="self"/>
   <link href="http://chenlini.github.io/"/>
-  <updated>2017-06-11T00:14:02+08:00</updated>
+  <updated>2017-06-11T21:16:35+08:00</updated>
   <id>http://chenlini.github.io/</id>
   <author>
     <name><![CDATA[Chenlini]]></name>
@@ -12,6 +12,217 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[java并行编程(1)]]></title>
+    <link href="http://chenlini.github.io/blog/2017/06/11/javabing-xing-bian-cheng-1/"/>
+    <updated>2017-06-11T21:15:14+08:00</updated>
+    <id>http://chenlini.github.io/blog/2017/06/11/javabing-xing-bian-cheng-1</id>
+    <content type="html"><![CDATA[<h1>Java并行编程（1）实现多线程的方法</h1>
+
+<h3>简单基础知识：</h3>
+
+<p>java的并发编程一定要考虑四个方面的内容。</p>
+
+<blockquote><ol>
+<li><p>共享性：当多个线程共享一份数据的时候就会有数据的安全问题。</p></li>
+<li><p>互斥性：最基本的就是需要保证数据在同一时间只被一个线程锁修改。</p></li>
+<li><p>原子性：类似于数据库的一致性，在数据修改到一半的时候，又被其他的操作修改。</p></li>
+<li><p>可见性：比如线程1对数据进行了修改，但是还没有同步到最终版本，因此线程2对这次就该就是不可见的，会出现问题。</p></li>
+<li><p>有序性:编译器会对代码做重排序的操作，这种排序有可能遵照原始线程的代码顺序，也可能是无序的优化，会有线程不安全的问题。</p></li>
+</ol>
+</blockquote>
+
+<!--more-->
+
+
+<p>java中主要有以下几种实现多线程的方法：</p>
+
+<ol>
+<li>继承Thread类</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>class Mytest extends Thread{
+</span><span class='line'>    private int num = 8;
+</span><span class='line'>    public void run(){
+</span><span class='line'>        for (int i=0;i&lt;4;i++)
+</span><span class='line'>        {
+</span><span class='line'>            if(num &gt; 0){
+</span><span class='line'>                System.out.print(num);num--;
+</span><span class='line'>            }
+</span><span class='line'>        }
+</span><span class='line'>    }
+</span><span class='line'>}
+</span><span class='line'>public class javatest {
+</span><span class='line'>
+</span><span class='line'>    public static void main(String args[]) {
+</span><span class='line'>        new Mytest().start();
+</span><span class='line'>        new Mytest().start();
+</span><span class='line'>        new Mytest().start();
+</span><span class='line'>    }
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>输出的是：876587658765
+这里new了三个Thread对象，每个对象是互不干扰的，因此相当于做了三遍操作。</p>
+
+<ol>
+<li>实现Runnable接口</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>class Mytest  implements Runnable{
+</span><span class='line'>    private int num = 8;
+</span><span class='line'>    public void run(){
+</span><span class='line'>        for (int i=0;i&lt;10;i++)
+</span><span class='line'>        {
+</span><span class='line'>            if(num &gt; 0){
+</span><span class='line'>               System.out.print(num);num--;            }
+</span><span class='line'>        }
+</span><span class='line'>    }
+</span><span class='line'>}
+</span><span class='line'>public class javatest {
+</span><span class='line'>
+</span><span class='line'>    public static void main(String args[]) {
+</span><span class='line'>        Mytest test=new Mytest();
+</span><span class='line'>        new Thread(test).start();
+</span><span class='line'>        new Thread(test).start();
+</span><span class='line'>    }
+</span><span class='line'>}
+</span><span class='line'>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>输出的是：87654321
+这里同样new了两个Thread，但是它们操作的是一个Runnable对象，虽然这里顺序是对的，但是是有可能出现86754312的情况的。这里就需要用到下一节讲到的同步方法：synchronized</p>
+
+<ol>
+<li>匿名的多线程方法：</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>lass Mytest  {
+</span><span class='line'>    private int num = 8;
+</span><span class='line'>    public void method(){
+</span><span class='line'>        for (int i=0;i&lt;4;i++)
+</span><span class='line'>        {
+</span><span class='line'>            if(num &gt; 0){
+</span><span class='line'>                System.out.print(num);num--;
+</span><span class='line'>            }
+</span><span class='line'>        }
+</span><span class='line'>    }
+</span><span class='line'>}
+</span><span class='line'>public class javatest {
+</span><span class='line'>
+</span><span class='line'>    public static void main(String args[]) {
+</span><span class='line'>        Mytest test =new Mytest();
+</span><span class='line'>        new Thread(new Runnable() {
+</span><span class='line'>            public void run() {
+</span><span class='line'>                test.method();
+</span><span class='line'>            }
+</span><span class='line'>        }).start();
+</span><span class='line'>        new Thread(new Runnable() {
+</span><span class='line'>            public void run() {
+</span><span class='line'>                test.method();
+</span><span class='line'>            }
+</span><span class='line'>        }).start();
+</span><span class='line'>    }
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>方法3的作用和方法2是一样的，只不过是匿名的线程，同时也更加灵活，可以让每个线程执行不同的内容。方法3还可以改成lambda的形式：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>public static void main(String args[]) {
+</span><span class='line'>        Mytest test =new Mytest();
+</span><span class='line'>        new Thread(() -&gt; {
+</span><span class='line'>            test.method();
+</span><span class='line'>        }).start();
+</span><span class='line'>        new Thread(() -&gt; {
+</span><span class='line'>            test.method();
+</span><span class='line'>        }).start();
+</span><span class='line'>    }</span></code></pre></td></tr></table></div></figure>
+
+
+<p>参考材料：
+<a href="http://www.cnblogs.com/paddix/p/5374810.html">http://www.cnblogs.com/paddix/p/5374810.html</a>
+<a href="http://blog.csdn.net/ns_code/article/details/17161237">http://blog.csdn.net/ns_code/article/details/17161237</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[正则表达式1]]></title>

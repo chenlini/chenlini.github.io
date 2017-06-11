@@ -1,0 +1,344 @@
+
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>java并行编程(1) - Chenlini</title>
+	<meta name="author" content="Chenlini">
+
+	
+	<meta name="description" content="Java并行编程(1) Java并行编程（1）实现多线程的方法 简单基础知识： java的并发编程一定要考虑四个方面的内容。 共享性：当多个线程共享一份数据的时候就会有数据的安全问题。
+互斥性：最基本的就是需要保证数据在同一时间只被一个线程锁修改。
+原子性：类似于数据库的一致性， &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="" rel="alternate" title="Chenlini" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://chenlini.github.io/blog/2017/06/11/javabing-xing-bian-cheng-1/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	
+	<!--[if lt IE 9]><script src="//libs.baidu.com/jquery/1.7.2/jquery.min.js></script><![endif]-->
+<script>
+	function addBlankTargetForLinks () {
+	  $('a[href^="http"]').each(function(){
+		  $(this).attr('target', '_blank');
+	  });
+	}
+	$(document).bind('DOMNodeInserted', function(event) {
+	  addBlankTargetForLinks();
+	});
+</script>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="/stylesheets/pygments.css">
+	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+	<script src="/javascripts/md5.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('.profilepic').append("<img src='/images/timg-2.jpeg' alt='Profile Picture' style='width: 160px;' />");
+		});
+	</script>
+</div>
+<hgroup>
+  <h1><a href="/">Chenlini</a></h1>
+  
+    <h2>Stay hundry stay foolish.</h2>
+  
+</hgroup>
+
+<nav id="main-nav">
+<ul class="main-navigation">
+<li><a href="/">Blog</a></li>
+<li><a href="/blog/archives">Archives</a></li>
+<li><a href="/blog/categories">Categories</a></li>
+<li><a href="/about">About me</a></li>
+</ul>
+</nav>
+
+
+
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<h1 class="title" itemprop="name">Java并行编程(1)</h1>
+	<div class="entry-content" itemprop="articleBody"><h1>Java并行编程（1）实现多线程的方法</h1>
+
+<h3>简单基础知识：</h3>
+
+<p>java的并发编程一定要考虑四个方面的内容。</p>
+
+<blockquote><ol>
+<li><p>共享性：当多个线程共享一份数据的时候就会有数据的安全问题。</p></li>
+<li><p>互斥性：最基本的就是需要保证数据在同一时间只被一个线程锁修改。</p></li>
+<li><p>原子性：类似于数据库的一致性，在数据修改到一半的时候，又被其他的操作修改。</p></li>
+<li><p>可见性：比如线程1对数据进行了修改，但是还没有同步到最终版本，因此线程2对这次就该就是不可见的，会出现问题。</p></li>
+<li><p>有序性:编译器会对代码做重排序的操作，这种排序有可能遵照原始线程的代码顺序，也可能是无序的优化，会有线程不安全的问题。</p></li>
+</ol>
+</blockquote>
+
+<!--more-->
+
+
+<p>java中主要有以下几种实现多线程的方法：</p>
+
+<ol>
+<li>继承Thread类</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>class Mytest extends Thread{
+</span><span class='line'>    private int num = 8;
+</span><span class='line'>    public void run(){
+</span><span class='line'>        for (int i=0;i&lt;4;i++)
+</span><span class='line'>        {
+</span><span class='line'>            if(num &gt; 0){
+</span><span class='line'>                System.out.print(num);num--;
+</span><span class='line'>            }
+</span><span class='line'>        }
+</span><span class='line'>    }
+</span><span class='line'>}
+</span><span class='line'>public class javatest {
+</span><span class='line'>
+</span><span class='line'>    public static void main(String args[]) {
+</span><span class='line'>        new Mytest().start();
+</span><span class='line'>        new Mytest().start();
+</span><span class='line'>        new Mytest().start();
+</span><span class='line'>    }
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>输出的是：876587658765
+这里new了三个Thread对象，每个对象是互不干扰的，因此相当于做了三遍操作。</p>
+
+<ol>
+<li>实现Runnable接口</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>class Mytest  implements Runnable{
+</span><span class='line'>    private int num = 8;
+</span><span class='line'>    public void run(){
+</span><span class='line'>        for (int i=0;i&lt;10;i++)
+</span><span class='line'>        {
+</span><span class='line'>            if(num &gt; 0){
+</span><span class='line'>               System.out.print(num);num--;            }
+</span><span class='line'>        }
+</span><span class='line'>    }
+</span><span class='line'>}
+</span><span class='line'>public class javatest {
+</span><span class='line'>
+</span><span class='line'>    public static void main(String args[]) {
+</span><span class='line'>        Mytest test=new Mytest();
+</span><span class='line'>        new Thread(test).start();
+</span><span class='line'>        new Thread(test).start();
+</span><span class='line'>    }
+</span><span class='line'>}
+</span><span class='line'>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>输出的是：87654321
+这里同样new了两个Thread，但是它们操作的是一个Runnable对象，虽然这里顺序是对的，但是是有可能出现86754312的情况的。这里就需要用到下一节讲到的同步方法：synchronized</p>
+
+<ol>
+<li>匿名的多线程方法：</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>lass Mytest  {
+</span><span class='line'>    private int num = 8;
+</span><span class='line'>    public void method(){
+</span><span class='line'>        for (int i=0;i&lt;4;i++)
+</span><span class='line'>        {
+</span><span class='line'>            if(num &gt; 0){
+</span><span class='line'>                System.out.print(num);num--;
+</span><span class='line'>            }
+</span><span class='line'>        }
+</span><span class='line'>    }
+</span><span class='line'>}
+</span><span class='line'>public class javatest {
+</span><span class='line'>
+</span><span class='line'>    public static void main(String args[]) {
+</span><span class='line'>        Mytest test =new Mytest();
+</span><span class='line'>        new Thread(new Runnable() {
+</span><span class='line'>            public void run() {
+</span><span class='line'>                test.method();
+</span><span class='line'>            }
+</span><span class='line'>        }).start();
+</span><span class='line'>        new Thread(new Runnable() {
+</span><span class='line'>            public void run() {
+</span><span class='line'>                test.method();
+</span><span class='line'>            }
+</span><span class='line'>        }).start();
+</span><span class='line'>    }
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>方法3的作用和方法2是一样的，只不过是匿名的线程，同时也更加灵活，可以让每个线程执行不同的内容。方法3还可以改成lambda的形式：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>public static void main(String args[]) {
+</span><span class='line'>        Mytest test =new Mytest();
+</span><span class='line'>        new Thread(() -&gt; {
+</span><span class='line'>            test.method();
+</span><span class='line'>        }).start();
+</span><span class='line'>        new Thread(() -&gt; {
+</span><span class='line'>            test.method();
+</span><span class='line'>        }).start();
+</span><span class='line'>    }</span></code></pre></td></tr></table></div></figure>
+
+
+<p>参考材料：
+<a href="http://www.cnblogs.com/paddix/p/5374810.html">http://www.cnblogs.com/paddix/p/5374810.html</a>
+<a href="http://blog.csdn.net/ns_code/article/details/17161237">http://blog.csdn.net/ns_code/article/details/17161237</a></p>
+</div>
+
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+	
+	
+	
+	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+</div>
+			</div>
+			<footer id="footer" class="inner"><!-- mathjax config similar to math.stackexchange -->
+<p>
+  Copyright &copy; 2017 - Chenlini -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			<script src="/javascripts/slash.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+
+
+
+
+
+		</div>
+	</div>
+</body>
+</html>
