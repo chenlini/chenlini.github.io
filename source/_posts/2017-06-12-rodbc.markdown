@@ -1,0 +1,62 @@
+---
+layout: post
+title: "RODBC"
+date: 2017-06-12 16:01:23 +0800
+comments: true
+categories: R
+---
+##Mac R语言访问SQLServer远程数据库－－－－－ODBC
+
+描述：想用R来访问数据库，但是远程数据库是SQL Server的，没有Mac版的客户端，因此建议去下载navicat for SQL Server .找一下破解版。
+
+####1.下载ODBC
+
+    brew brew install unixodbc
+####2.配置数据源
+
+找到odbc.ini文件，一般在usr/local/etc里面。
+    
+第一种方式：直接配置
+
+    [ODBC Data Sources]
+    TESTdsn=Test DSN1
+    [TESTdsn]
+    Driver          = /usr/local/lib/libtdsodbc.so
+    Description     = Test DSN1
+    Trace           = No
+    Server          = 地址    
+    Database        = 数据库名
+    Port            = 1433
+    TDS_Version     = 7.0
+    client charset  = UTF-8 
+
+第二种方法：用freetds
+
+    brew install freetds --with-unixodbc
+配置freetds的数据源
+/usr/local/etc/freetds.conf
+
+    [testdsn]                     # SQL Server数据源名称,可以任意取有意义的名称
+      host=192.168.10.22   # 数据库主机
+     port=1344                   #数据库监听端口
+     tds version=8.0 #默认7.0
+配置odbcinst.ini和odbc.ini
+odbcinst.ini：
+
+
+    [FREETDS]
+    Description=freetds driver
+    Driver=/usr/local/freetds/lib/libtdsodbc.so  #指定TDS驱动路径
+    
+    odbc.ini：
+
+
+    [testdsn]  # 数据源名称
+    Driver=FREETDS # 指向odbcinst.ini的驱动配置
+    Description=MSSQL Server
+    Servername=testdsn # 数据源名称
+    Database=sqlscada    #数据库名称
+
+
+
+
