@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Cpp | Chenlini]]></title>
+  <link href="http://chenlini.github.io/blog/categories/cpp/atom.xml" rel="self"/>
+  <link href="http://chenlini.github.io/"/>
+  <updated>2017-06-13T17:03:30+08:00</updated>
+  <id>http://chenlini.github.io/</id>
+  <author>
+    <name><![CDATA[Chenlini]]></name>
+    <email><![CDATA[chenlini1234@126.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[堆vs栈]]></title>
+    <link href="http://chenlini.github.io/blog/2017/06/12/dui-vszhan/"/>
+    <updated>2017-06-12T15:44:14+08:00</updated>
+    <id>http://chenlini.github.io/blog/2017/06/12/dui-vszhan</id>
+    <content type="html"><![CDATA[<h2>堆和栈的区别</h2>
+
+<p>在C++中，内存分成5个区，他们分别是堆、栈、自由存储区、全局/静态存储区和常量存储区。
+ 栈，就是那些由编译器在需要的时候分配，在不需要的时候自动清楚的变量 的存储区。里面的变量通常是局部变量、函数参数等。<br/>
+堆，就是那些由new分配的内存块，他们的释放编译器不去管，由我们的应用程序去控制，一般一个new就要对应一个delete。如果程序员没有释放掉，那么在程序结束后，操作系统会自动回收。</p>
+
+<pre><code>    int* p=new int[5];//在栈内存中存放了一个指向一块堆内存的指针p。
+</code></pre>
+
+<p>1、管理方式不同；<br/>
+2、空间大小不同；<br/>
+3、能否产生碎片不同；<br/>
+4、生长方向不同；
+5、分配方式不同；<br/>
+6、分配效率不同；</p>
+
+<h4>管理方式：</h4>
+
+<p>对于栈来讲，是由编译器自动管理，无需我们手工控制；对于堆
+来说，释放工作由程序员控制，容易产生memory leak。</p>
+
+<h4>空间大小：</h4>
+
+<p>一般来讲在32位系统下，堆内存可以达到4G的空间，从这个角
+度来看堆内存几乎是没有什么限制的。但是对于栈来讲，一般都是有一定的空间
+大小的</p>
+
+<h4>碎片问题：</h4>
+
+<p>对于堆来讲，频繁的new/delete势必会造成内存空间的不连续， 对于栈来讲，遵循先进后出的规则，是一块连续的内存空间。堆用链表来存储空闲空间，是不连续的。</p>
+
+<h4>生长方向：</h4>
+
+<p>对于堆来讲，是向高地址拓展的数据结构；对于栈来讲，是向低地址拓展的数据结构。</p>
+
+<h4>分配方式：</h4>
+
+<p>堆都是动态分配的，没有静态分配的堆。栈有2种分配方式：静态分配和动态分配。静态分配是编译器完成的，比如局部变量的分配。动态分配 由alloca，new函数进行分配，但是栈的动态分配和堆是不同的，他的动态分配是由
+编译器进行释放，无需我们手工实现。</p>
+
+<h4>分配效率：</h4>
+
+<p>栈是机器系统提供的数据结构,堆则是C/C++函数库提供的，堆的效率比栈要低得多。</p>
+]]></content>
+  </entry>
+  
+</feed>

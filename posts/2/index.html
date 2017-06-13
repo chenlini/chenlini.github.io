@@ -9,7 +9,7 @@
 	<meta name="author" content="Chenlini">
 
 	
-	<meta name="description" content="os TCP and UDP TCP(Transmission Control protocal) TCP is based on connection which means sending end must creat a stable connection to receiving end &hellip;">
+	<meta name="description" content="\|, c, ruby Ruby升级 Mac升级系统后需要更新ruby 前段时间学学怎么用octopress写博客，更新了mac版本后就发现不能rake preview了，网上查了一下发现需要更新ruby，中间遇到了一些问题，记录如下： 之前没有通过rvm安装ruby，要更新比较麻烦， &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -89,6 +89,206 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2017-05-14T23:21:38+08:00" data-updated="true" itemprop="datePublished"></time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/slash-|/'>\|</a>, <a class='category' href='/blog/categories/c/'>c</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2017/05/14/rubysheng-ji/" itemprop="url">Ruby升级</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<h2>Mac升级系统后需要更新ruby</h2>
+
+<p>前段时间学学怎么用octopress写博客，更新了mac版本后就发现不能rake preview了，网上查了一下发现需要更新ruby，中间遇到了一些问题，记录如下：</p>
+
+<p>之前没有通过rvm安装ruby，要更新比较麻烦，因此现在从新安装rvm.</p>
+
+<pre><code>#安装rvm
+curl -L https://get.rvm.io | bash -s stable
+source ~/.bashrc
+source ~/.bash_profile
+#查看已知ruby版本
+rvm list know
+#安装版本
+rvm install 2.3.3
+</code></pre>
+
+<p>注意：在install的时候可能会出现错误，错误原因是brew需要update，因此需要执行以下语句</p>
+
+<pre><code>brew update
+</code></pre>
+
+<p>如果brew update 出现错误，"The /usr/local directory is not writable.&ldquo; 需要去到/usr/local/目录下面执行：</p>
+
+<pre><code>sudo chown -R $(whoami) /usr/local
+brew prune
+</code></pre>
+
+<p>这样就可以brew update了。</p>
+
+<p>完成ruby的更新之后，发现还是不能rake preview,还是会报错！发现需要重新安装bundler</p>
+
+<pre><code>gem install bundler
+</code></pre>
+
+<p>但是重新安装完了之后又又问题了，rake不见了！只能再走一遍。</p>
+
+<pre><code>bundle install
+</code></pre>
+
+<h5>补充rvm的命令</h5>
+
+<pre><code>rvm use 2.3.3
+#卸载
+rvm remote 2.3.3
+</code></pre>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2017-05-13T00:35:27+08:00" data-updated="true" itemprop="datePublished"></time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/hive/'>hive</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2017/05/13/hive-note/" itemprop="url">Hive_note</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<h2>Hive 语句简单优化</h2>
+
+<p>使用Hive的过程中，因为数据倾斜的问题可能会造成效率十分地下，以下记录一些hive的简单语句的优化操作。大部分都来自网络，查资料的时候看到就顺便记录一下。</p>
+
+
+		
+		<a href="/blog/2017/05/13/hive-note/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2017-04-18T13:21:33+08:00" data-updated="true" itemprop="datePublished"></time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/python/'>python</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2017/04/18/python-algorithm/" itemprop="url">Python_algorithm</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<h1>Python 常用的机器学习算法库介绍</h1>
+
+<hr />
+
+<p>Python作为目前最火的学习机器学习算法的语言之一拥有如下三个优点：</p>
+
+<blockquote><ol>
+<li>语法简单，上手容易</li>
+<li>功能多样</li>
+<li>强大的社区</li>
+<li>丰富的机器学习库</li>
+</ol>
+</blockquote>
+
+
+		
+		<a href="/blog/2017/04/18/python-algorithm/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2017-03-19T23:14:19+08:00" data-updated="true" itemprop="datePublished"></time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/linux/'>linux</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2017/03/19/linuxchang-yong-zhi-ling/" itemprop="url">Linux常用指令</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<h3>linux</h3>
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">

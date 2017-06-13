@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: R | Chenlini]]></title>
+  <link href="http://chenlini.github.io/blog/categories/r/atom.xml" rel="self"/>
+  <link href="http://chenlini.github.io/"/>
+  <updated>2017-06-13T17:03:30+08:00</updated>
+  <id>http://chenlini.github.io/</id>
+  <author>
+    <name><![CDATA[Chenlini]]></name>
+    <email><![CDATA[chenlini1234@126.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[RODBC]]></title>
+    <link href="http://chenlini.github.io/blog/2017/06/12/rodbc/"/>
+    <updated>2017-06-12T16:01:23+08:00</updated>
+    <id>http://chenlini.github.io/blog/2017/06/12/rodbc</id>
+    <content type="html"><![CDATA[<h2>Mac R语言访问SQLServer远程数据库－－－－－ODBC</h2>
+
+<p>描述：想用R来访问数据库，但是远程数据库是SQL Server的，没有Mac版的客户端，因此建议去下载navicat for SQL Server .找一下破解版。</p>
+
+<h4>1.下载ODBC</h4>
+
+<pre><code>brew brew install unixodbc
+</code></pre>
+
+<h4>2.配置数据源</h4>
+
+<p>找到odbc.ini文件，一般在usr/local/etc里面。</p>
+
+<p>第一种方式：直接配置</p>
+
+<pre><code>[ODBC Data Sources]
+TESTdsn=Test DSN1
+[TESTdsn]
+Driver          = /usr/local/lib/libtdsodbc.so
+Description     = Test DSN1
+Trace           = No
+Server          = 地址    
+Database        = 数据库名
+Port            = 1433
+TDS_Version     = 7.0
+client charset  = UTF-8 
+</code></pre>
+
+<p>第二种方法：用freetds</p>
+
+<pre><code>brew install freetds --with-unixodbc
+</code></pre>
+
+<p>配置freetds的数据源
+/usr/local/etc/freetds.conf</p>
+
+<pre><code>[testdsn]                     # SQL Server数据源名称,可以任意取有意义的名称
+  host=192.168.10.22   # 数据库主机
+ port=1344                   #数据库监听端口
+ tds version=8.0 #默认7.0
+</code></pre>
+
+<p>配置odbcinst.ini和odbc.ini
+odbcinst.ini：</p>
+
+<pre><code>[FREETDS]
+Description=freetds driver
+Driver=/usr/local/freetds/lib/libtdsodbc.so  #指定TDS驱动路径
+
+odbc.ini：
+
+
+[testdsn]  # 数据源名称
+Driver=FREETDS # 指向odbcinst.ini的驱动配置
+Description=MSSQL Server
+Servername=testdsn # 数据源名称
+Database=sqlscada    #数据库名称
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>

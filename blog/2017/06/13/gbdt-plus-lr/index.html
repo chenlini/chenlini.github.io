@@ -1,0 +1,271 @@
+
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>GBDT+LR - Chenlini</title>
+	<meta name="author" content="Chenlini">
+
+	
+	<meta name="description" content="GBDT+LR GBDT+LR融合 原理 工业界LR模型用的比较多的原因就是它非常容易可以并行化，处理起大规模的数据来比较容易。但是LR的学习能力有限，必须要经历大量的特征选择，特征组合等工作。因此找到合适的方法简化特征工程是非常重要的。facebook在KDD上发表了一篇文章，讲的就是GBDT &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="" rel="alternate" title="Chenlini" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://chenlini.github.io/blog/2017/06/13/gbdt-plus-lr/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	
+	<!--[if lt IE 9]><script src="//libs.baidu.com/jquery/1.7.2/jquery.min.js></script><![endif]-->
+<script>
+	function addBlankTargetForLinks () {
+	  $('a[href^="http"]').each(function(){
+		  $(this).attr('target', '_blank');
+	  });
+	}
+	$(document).bind('DOMNodeInserted', function(event) {
+	  addBlankTargetForLinks();
+	});
+</script>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="/stylesheets/pygments.css">
+	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+	<script src="/javascripts/md5.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('.profilepic').append("<img src='/images/timg-2.jpeg' alt='Profile Picture' style='width: 160px;' />");
+		});
+	</script>
+</div>
+<hgroup>
+  <h1><a href="/">Chenlini</a></h1>
+  
+    <h2>Stay hundry stay foolish.</h2>
+  
+</hgroup>
+
+<nav id="main-nav">
+<ul class="main-navigation">
+<li><a href="/">Blog</a></li>
+<li><a href="/blog/archives">Archives</a></li>
+<li><a href="/blog/categories">Categories</a></li>
+<li><a href="/about">About me</a></li>
+</ul>
+</nav>
+
+
+
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<h1 class="title" itemprop="name">GBDT+LR</h1>
+	<div class="entry-content" itemprop="articleBody"><h1>GBDT+LR融合</h1>
+
+<h2>原理</h2>
+
+<p>工业界LR模型用的比较多的原因就是它非常容易可以并行化，处理起大规模的数据来比较容易。但是LR的学习能力有限，必须要经历大量的特征选择，特征组合等工作。因此找到合适的方法简化特征工程是非常重要的。facebook在KDD上发表了一篇文章，讲的就是GBDT+LR，为我们提供了一些思路，论文中的基本原理很简单，搞清楚下面这幅图就行了：</p>
+
+<p><img src="%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-13%2016.41.39.png" alt="" /></p>
+
+<blockquote><ol>
+<li><p>使用GBDT训练数据，得到如下2棵树，第一棵树3个叶子结点，第二棵树2个叶子结点，总共5个叶子结点。因此最后用于LR的特征向量就是5维的[0,0,0,0,0]。</p></li>
+<li><p>训练数据共有n个样本，那么对于其中一个样本x,查看x最终会出现在哪些树的结点上面。比如x出现在树1的第1个结点以及树2的第2个结点，那么特征向量就是[1,0,0,0,1]
+得到的特征向量可以选择和原本的特征一起带入逻辑回归中，也可以单独作为特征进行学习。</p></li>
+</ol>
+</blockquote>
+
+<h2>demo</h2>
+
+<p>sklearn分别实现了GBDT和LR的算法，所以做一个小例子测试融合算法是否会比原始的算法好。重点介绍方法，结果不确定，因为参数没有调到最优。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>import numpy as np
+</span><span class='line'>from sklearn import ensemble
+</span><span class='line'>from sklearn import  datasets
+</span><span class='line'>from sklearn.linear_model import LogisticRegression
+</span><span class='line'>from sklearn.datasets import make_hastie_10_2
+</span><span class='line'>from sklearn.ensemble import GradientBoostingClassifier</span></code></pre></td></tr></table></div></figure>
+
+
+<h6>注意：Boosting的方法也分分类树和回归树，这里选择的是分类树，因为make_hastie_10_2这个数据集是一个二分类的数据集</h6>
+
+<h3>单纯使用GradientBoostingClassifier</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>X, y = make_hastie_10_2(random_state=0)
+</span><span class='line'>X_train, X_test = X[:2000], X[2000:]
+</span><span class='line'>y_train, y_test = y[:2000], y[2000:]
+</span><span class='line'>clf = GradientBoostingClassifier(n_estimators=100, learning_rate=1.0,    max_depth=1, random_state=0).fit(X_train, y_train)
+</span><span class='line'>sum(clf.predict(X_test)==y_test)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>最后一行是统计分类正确的数目，这里的结果是9130</p>
+
+<h4>单纯使用LogisticRegression</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>paramsLr={ 'multi_class':'multinomial',
+</span><span class='line'>          'penalty':'l2','solver':'sag', 'tol':0.0001
+</span><span class='line'>          }
+</span><span class='line'>lr1 = LogisticRegression(C=1.0,solver='sag', max_iter=100,penalty='l2',
+</span><span class='line'>                             multi_class='multinomial',tol=0.0001)
+</span><span class='line'>lr1.fit(X_train, y_train)
+</span><span class='line'>sum(lr1.predict(X_test)==y_test)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>最后一行是统计分类正确的数目，这里的结果是5149</p>
+
+<h4>GBDT+LR融合</h4>
+
+<p>基于原理中介绍到的思想，需要将GBDT运行的结果转化为LR能够接受的数据结构。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>def PreLR_GBDT(clf,Features):
+</span><span class='line'>    result=clf.apply(Features)[:,:,0]
+</span><span class='line'>    classT=np.zeros(result.shape[1]+1)
+</span><span class='line'>    for num in range(0,result.shape[1]):
+</span><span class='line'>        classT[num+1]=max(result[:,num])
+</span><span class='line'>
+</span><span class='line'>    classT=classT.cumsum()
+</span><span class='line'>    classT=classT.astype(np.int32)
+</span><span class='line'>
+</span><span class='line'>    M=np.zeros((result.shape[0],classT[-1]))
+</span><span class='line'>
+</span><span class='line'>    for num in range(0, result.shape[0]):
+</span><span class='line'>        for num2 in range(0, result.shape[1]):
+</span><span class='line'>            M[num, classT[num2] + result[num][num2] - 1] = 1
+</span><span class='line'>
+</span><span class='line'>    return M</span></code></pre></td></tr></table></div></figure>
+
+
+<p>有了上面的函数之后就可以再建立LR的模型了：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>X_train_LR_GBDT=np.append(X_train,PreLR_GBDT(clf, X_train),axis=1)
+</span><span class='line'>X_test_LR_GBDT=np.append(X_test,PreLR_GBDT(clf, X_test),axis=1)
+</span><span class='line'>
+</span><span class='line'>lr_GBDT = LogisticRegression(solver='sag', max_iter=100,penalty='l2',
+</span><span class='line'>                             multi_class='multinomial',tol=0.0001)
+</span><span class='line'>lr_GBDT.fit(X_train_LR_GBDT, y_train)
+</span><span class='line'>
+</span><span class='line'>sum(lr_GBDT.predict(X_test_LR_GBDT)==y_test)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>最后一行是统计分类正确的数目，这里的结果是9140，这里采用的是GBDT训练过后的feature和原始组合的方式，当然和可以不组合，直接用新的feature进行训练。</p>
+
+<p>以上展示的是如何把GBDT与LR融合到一起，每个模型都没有进行调参，因此结果参考意义不大。</p>
+</div>
+
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+	
+	
+	
+	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+</div>
+			</div>
+			<footer id="footer" class="inner"><!-- mathjax config similar to math.stackexchange -->
+<p>
+  Copyright &copy; 2017 - Chenlini -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			<script src="/javascripts/slash.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+
+
+
+
+
+		</div>
+	</div>
+</body>
+</html>

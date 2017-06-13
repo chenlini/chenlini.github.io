@@ -4,7 +4,7 @@
   <title><![CDATA[Chenlini]]></title>
   <link href="http://chenlini.github.io/atom.xml" rel="self"/>
   <link href="http://chenlini.github.io/"/>
-  <updated>2017-06-11T21:16:35+08:00</updated>
+  <updated>2017-06-13T17:03:30+08:00</updated>
   <id>http://chenlini.github.io/</id>
   <author>
     <name><![CDATA[Chenlini]]></name>
@@ -12,6 +12,317 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[GBDT+LR]]></title>
+    <link href="http://chenlini.github.io/blog/2017/06/13/gbdt-plus-lr/"/>
+    <updated>2017-06-13T16:52:56+08:00</updated>
+    <id>http://chenlini.github.io/blog/2017/06/13/gbdt-plus-lr</id>
+    <content type="html"><![CDATA[<h1>GBDT+LR融合</h1>
+
+<h2>原理</h2>
+
+<p>工业界LR模型用的比较多的原因就是它非常容易可以并行化，处理起大规模的数据来比较容易。但是LR的学习能力有限，必须要经历大量的特征选择，特征组合等工作。因此找到合适的方法简化特征工程是非常重要的。facebook在KDD上发表了一篇文章，讲的就是GBDT+LR，为我们提供了一些思路，论文中的基本原理很简单，搞清楚下面这幅图就行了：</p>
+
+<p><img src="%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-13%2016.41.39.png" alt="" /></p>
+
+<blockquote><ol>
+<li><p>使用GBDT训练数据，得到如下2棵树，第一棵树3个叶子结点，第二棵树2个叶子结点，总共5个叶子结点。因此最后用于LR的特征向量就是5维的[0,0,0,0,0]。</p></li>
+<li><p>训练数据共有n个样本，那么对于其中一个样本x,查看x最终会出现在哪些树的结点上面。比如x出现在树1的第1个结点以及树2的第2个结点，那么特征向量就是[1,0,0,0,1]
+得到的特征向量可以选择和原本的特征一起带入逻辑回归中，也可以单独作为特征进行学习。</p></li>
+</ol>
+</blockquote>
+
+<h2>demo</h2>
+
+<p>sklearn分别实现了GBDT和LR的算法，所以做一个小例子测试融合算法是否会比原始的算法好。重点介绍方法，结果不确定，因为参数没有调到最优。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>import numpy as np
+</span><span class='line'>from sklearn import ensemble
+</span><span class='line'>from sklearn import  datasets
+</span><span class='line'>from sklearn.linear_model import LogisticRegression
+</span><span class='line'>from sklearn.datasets import make_hastie_10_2
+</span><span class='line'>from sklearn.ensemble import GradientBoostingClassifier</span></code></pre></td></tr></table></div></figure>
+
+
+<h6>注意：Boosting的方法也分分类树和回归树，这里选择的是分类树，因为make_hastie_10_2这个数据集是一个二分类的数据集</h6>
+
+<h3>单纯使用GradientBoostingClassifier</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>X, y = make_hastie_10_2(random_state=0)
+</span><span class='line'>X_train, X_test = X[:2000], X[2000:]
+</span><span class='line'>y_train, y_test = y[:2000], y[2000:]
+</span><span class='line'>clf = GradientBoostingClassifier(n_estimators=100, learning_rate=1.0,    max_depth=1, random_state=0).fit(X_train, y_train)
+</span><span class='line'>sum(clf.predict(X_test)==y_test)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>最后一行是统计分类正确的数目，这里的结果是9130</p>
+
+<h4>单纯使用LogisticRegression</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>paramsLr={ 'multi_class':'multinomial',
+</span><span class='line'>          'penalty':'l2','solver':'sag', 'tol':0.0001
+</span><span class='line'>          }
+</span><span class='line'>lr1 = LogisticRegression(C=1.0,solver='sag', max_iter=100,penalty='l2',
+</span><span class='line'>                             multi_class='multinomial',tol=0.0001)
+</span><span class='line'>lr1.fit(X_train, y_train)
+</span><span class='line'>sum(lr1.predict(X_test)==y_test)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>最后一行是统计分类正确的数目，这里的结果是5149</p>
+
+<h4>GBDT+LR融合</h4>
+
+<p>基于原理中介绍到的思想，需要将GBDT运行的结果转化为LR能够接受的数据结构。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>def PreLR_GBDT(clf,Features):
+</span><span class='line'>    result=clf.apply(Features)[:,:,0]
+</span><span class='line'>    classT=np.zeros(result.shape[1]+1)
+</span><span class='line'>    for num in range(0,result.shape[1]):
+</span><span class='line'>        classT[num+1]=max(result[:,num])
+</span><span class='line'>
+</span><span class='line'>    classT=classT.cumsum()
+</span><span class='line'>    classT=classT.astype(np.int32)
+</span><span class='line'>
+</span><span class='line'>    M=np.zeros((result.shape[0],classT[-1]))
+</span><span class='line'>
+</span><span class='line'>    for num in range(0, result.shape[0]):
+</span><span class='line'>        for num2 in range(0, result.shape[1]):
+</span><span class='line'>            M[num, classT[num2] + result[num][num2] - 1] = 1
+</span><span class='line'>
+</span><span class='line'>    return M</span></code></pre></td></tr></table></div></figure>
+
+
+<p>有了上面的函数之后就可以再建立LR的模型了：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>X_train_LR_GBDT=np.append(X_train,PreLR_GBDT(clf, X_train),axis=1)
+</span><span class='line'>X_test_LR_GBDT=np.append(X_test,PreLR_GBDT(clf, X_test),axis=1)
+</span><span class='line'>
+</span><span class='line'>lr_GBDT = LogisticRegression(solver='sag', max_iter=100,penalty='l2',
+</span><span class='line'>                             multi_class='multinomial',tol=0.0001)
+</span><span class='line'>lr_GBDT.fit(X_train_LR_GBDT, y_train)
+</span><span class='line'>
+</span><span class='line'>sum(lr_GBDT.predict(X_test_LR_GBDT)==y_test)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>最后一行是统计分类正确的数目，这里的结果是9140，这里采用的是GBDT训练过后的feature和原始组合的方式，当然和可以不组合，直接用新的feature进行训练。</p>
+
+<p>以上展示的是如何把GBDT与LR融合到一起，每个模型都没有进行调参，因此结果参考意义不大。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[抽象类和接口]]></title>
+    <link href="http://chenlini.github.io/blog/2017/06/12/chou-xiang-lei-he-jie-kou/"/>
+    <updated>2017-06-12T17:31:48+08:00</updated>
+    <id>http://chenlini.github.io/blog/2017/06/12/chou-xiang-lei-he-jie-kou</id>
+    <content type="html"><![CDATA[<h1>java基础知识&ndash;抽象类和接口的区别</h1>
+
+<h2>1. 抽象类</h2>
+
+<p>抽象类就是为了实现面向对象设计的，因此必然是为了能够被继承。</p>
+
+<blockquote><p>1）抽象方法默认为public。可以是protected，但是不能是private。</p>
+
+<p>2）抽象类不能直接创建一个对象；</p>
+
+<p>3）子类必须实现父类所有的抽象方法。否则的话必须定义该子类也是抽象类。</p>
+
+<p>4)抽象类中也可以有不是abstract的成员方法和数据成员。</p></blockquote>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>abstract class Class1 {
+</span><span class='line'>    abstract void method();
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>2.接口</h2>
+
+<p>接口同样是为了实现面向对象而设计的。但是接口中的数据成员都是默认为public static final的,但是一般不会定义数据成员，而所有的成员函数都是public abstract的。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>interface interface1{
+</span><span class='line'>    void method();
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>两者区别</h2>
+
+<blockquote><ol>
+<li>抽象类可以多种类型的数据成员以及成员函数，因此抽象类可以定义一些默认的行为。接口只能有abstract的函数以及public static final的数据成员。</li>
+<li>一个类只能继承自一个对象，但是可以实现多个接口。</li>
+<li>设计理念：其实abstract class表示的是"is-a"关系，interface表示的是"like-a"关系。 要明确设计理念，该类的本质是什么，实现了哪些方法。可以查找AlarmDoor的例子。</li>
+<li>注意接口的数据成员必须赋予初始值，使得实现的类无法改变该值。抽象类中的数据成员默认为friendly类型。</li>
+</ol>
+</blockquote>
+
+<p>参考资料：
+<a href="http://www.cnblogs.com/beanmoon/archive/2012/12/06/2805221.html">http://www.cnblogs.com/beanmoon/archive/2012/12/06/2805221.html</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[RODBC]]></title>
+    <link href="http://chenlini.github.io/blog/2017/06/12/rodbc/"/>
+    <updated>2017-06-12T16:01:23+08:00</updated>
+    <id>http://chenlini.github.io/blog/2017/06/12/rodbc</id>
+    <content type="html"><![CDATA[<h2>Mac R语言访问SQLServer远程数据库－－－－－ODBC</h2>
+
+<p>描述：想用R来访问数据库，但是远程数据库是SQL Server的，没有Mac版的客户端，因此建议去下载navicat for SQL Server .找一下破解版。</p>
+
+<h4>1.下载ODBC</h4>
+
+<pre><code>brew brew install unixodbc
+</code></pre>
+
+<h4>2.配置数据源</h4>
+
+<p>找到odbc.ini文件，一般在usr/local/etc里面。</p>
+
+<p>第一种方式：直接配置</p>
+
+<pre><code>[ODBC Data Sources]
+TESTdsn=Test DSN1
+[TESTdsn]
+Driver          = /usr/local/lib/libtdsodbc.so
+Description     = Test DSN1
+Trace           = No
+Server          = 地址    
+Database        = 数据库名
+Port            = 1433
+TDS_Version     = 7.0
+client charset  = UTF-8 
+</code></pre>
+
+<p>第二种方法：用freetds</p>
+
+<pre><code>brew install freetds --with-unixodbc
+</code></pre>
+
+<p>配置freetds的数据源
+/usr/local/etc/freetds.conf</p>
+
+<pre><code>[testdsn]                     # SQL Server数据源名称,可以任意取有意义的名称
+  host=192.168.10.22   # 数据库主机
+ port=1344                   #数据库监听端口
+ tds version=8.0 #默认7.0
+</code></pre>
+
+<p>配置odbcinst.ini和odbc.ini
+odbcinst.ini：</p>
+
+<pre><code>[FREETDS]
+Description=freetds driver
+Driver=/usr/local/freetds/lib/libtdsodbc.so  #指定TDS驱动路径
+
+odbc.ini：
+
+
+[testdsn]  # 数据源名称
+Driver=FREETDS # 指向odbcinst.ini的驱动配置
+Description=MSSQL Server
+Servername=testdsn # 数据源名称
+Database=sqlscada    #数据库名称
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[堆VS栈]]></title>
+    <link href="http://chenlini.github.io/blog/2017/06/12/dui-vszhan/"/>
+    <updated>2017-06-12T15:44:14+08:00</updated>
+    <id>http://chenlini.github.io/blog/2017/06/12/dui-vszhan</id>
+    <content type="html"><![CDATA[<h2>堆和栈的区别</h2>
+
+<p>在C++中，内存分成5个区，他们分别是堆、栈、自由存储区、全局/静态存储区和常量存储区。
+ 栈，就是那些由编译器在需要的时候分配，在不需要的时候自动清楚的变量 的存储区。里面的变量通常是局部变量、函数参数等。<br/>
+堆，就是那些由new分配的内存块，他们的释放编译器不去管，由我们的应用程序去控制，一般一个new就要对应一个delete。如果程序员没有释放掉，那么在程序结束后，操作系统会自动回收。</p>
+
+<pre><code>    int* p=new int[5];//在栈内存中存放了一个指向一块堆内存的指针p。
+</code></pre>
+
+<p>1、管理方式不同；<br/>
+2、空间大小不同；<br/>
+3、能否产生碎片不同；<br/>
+4、生长方向不同；
+5、分配方式不同；<br/>
+6、分配效率不同；</p>
+
+<h4>管理方式：</h4>
+
+<p>对于栈来讲，是由编译器自动管理，无需我们手工控制；对于堆
+来说，释放工作由程序员控制，容易产生memory leak。</p>
+
+<h4>空间大小：</h4>
+
+<p>一般来讲在32位系统下，堆内存可以达到4G的空间，从这个角
+度来看堆内存几乎是没有什么限制的。但是对于栈来讲，一般都是有一定的空间
+大小的</p>
+
+<h4>碎片问题：</h4>
+
+<p>对于堆来讲，频繁的new/delete势必会造成内存空间的不连续， 对于栈来讲，遵循先进后出的规则，是一块连续的内存空间。堆用链表来存储空闲空间，是不连续的。</p>
+
+<h4>生长方向：</h4>
+
+<p>对于堆来讲，是向高地址拓展的数据结构；对于栈来讲，是向低地址拓展的数据结构。</p>
+
+<h4>分配方式：</h4>
+
+<p>堆都是动态分配的，没有静态分配的堆。栈有2种分配方式：静态分配和动态分配。静态分配是编译器完成的，比如局部变量的分配。动态分配 由alloca，new函数进行分配，但是栈的动态分配和堆是不同的，他的动态分配是由
+编译器进行释放，无需我们手工实现。</p>
+
+<h4>分配效率：</h4>
+
+<p>栈是机器系统提供的数据结构,堆则是C/C++函数库提供的，堆的效率比栈要低得多。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[java并行编程(1)]]></title>
