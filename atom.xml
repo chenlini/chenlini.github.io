@@ -4,7 +4,7 @@
   <title><![CDATA[Chenlini]]></title>
   <link href="http://chenlini.github.io/atom.xml" rel="self"/>
   <link href="http://chenlini.github.io/"/>
-  <updated>2017-06-13T17:03:30+08:00</updated>
+  <updated>2017-06-20T16:27:51+08:00</updated>
   <id>http://chenlini.github.io/</id>
   <author>
     <name><![CDATA[Chenlini]]></name>
@@ -12,6 +12,289 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[softmax]]></title>
+    <link href="http://chenlini.github.io/blog/2017/06/16/softmax/"/>
+    <updated>2017-06-16T17:52:28+08:00</updated>
+    <id>http://chenlini.github.io/blog/2017/06/16/softmax</id>
+    <content type="html"><![CDATA[<h1>SoftMax</h1>
+
+<h3>原理：</h3>
+
+<p>LR实际上是针对二分类问题的，但是SoftMax其实就是LR推广到多分类的形式。
+在逻辑回归中：</p>
+
+<p>$P(y=1|x)=\frac{e^{-\theta<sup>Tx</sup>}}{1+e^{-\theta<sup>Tx</sup>}}$
+$P(y=0|X)=\frac{1}{1+e^{-\theta<sup>Tx</sup>}}$</p>
+
+<p>那么loss function就是：</p>
+
+<p>$L(\theta)=\sum_{i=1}^n{y<sup>i</sup>}log\frac{e^{-\theta<sup>Tx</sup>}}{1+e^{-\theta<sup>Tx</sup>}}+(1-y<sup>i</sup>)log\frac{1}{1+e^{-\theta<sup>Tx</sup>}}$</p>
+
+<p>推广到多分类问题：</p>
+
+<p>$P(y=k|x)=\frac{e^{-\theta_k<sup>Tx</sup>}}{\sum_k<sup>Ke</sup>^{-\theta_k<sup>Tx</sup>}}$</p>
+
+<p>那么loss function就变成了：</p>
+
+<p>$L(\theta)=\sum_{i=1}^n{I{y<sup>i</sup>=k}}log\frac{e^{-\theta_k<sup>Tx</sup>}}{1+e^{-\theta_k<sup>Tx</sup>}}$</p>
+
+<p>$I{y<sup>i</sup> = k}$表示当y<sup>i</sup> = k时为1，其他为0.</p>
+
+<p>同样可以采用梯度下降的方式求解。</p>
+
+<h3>实现demo</h3>
+
+<p>SKlean中关于逻辑回归的多分类问题，可以选择muti参数，它是有多个二分类器组合实现的。SKlean没有实现softmax的回归分类算法。在Theano包中有SoftMax函数，用与计算公式3中的值，可以自己实现基于SoftMax的分类算法。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+<span class='line-number'>102</span>
+<span class='line-number'>103</span>
+<span class='line-number'>104</span>
+<span class='line-number'>105</span>
+<span class='line-number'>106</span>
+<span class='line-number'>107</span>
+<span class='line-number'>108</span>
+<span class='line-number'>109</span>
+<span class='line-number'>110</span>
+<span class='line-number'>111</span>
+<span class='line-number'>112</span>
+<span class='line-number'>113</span>
+<span class='line-number'>114</span>
+<span class='line-number'>115</span>
+<span class='line-number'>116</span>
+<span class='line-number'>117</span>
+<span class='line-number'>118</span>
+<span class='line-number'>119</span>
+<span class='line-number'>120</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># encoding:utf-8
+</span><span class='line'>"""
+</span><span class='line'>@version:1
+</span><span class='line'>@author:Chenlini
+</span><span class='line'>@file:softmax.py
+</span><span class='line'>@time:2017/6/15 11:22
+</span><span class='line'>"""
+</span><span class='line'>
+</span><span class='line'># coding:utf8
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>from theano import *
+</span><span class='line'>from sklearn.datasets import *
+</span><span class='line'>from pandas import *
+</span><span class='line'>from sklearn.model_selection import *
+</span><span class='line'>from numpy import *
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>class SoftMax:
+</span><span class='line'>    def __init__(self, Iter=1, learnrate=0.01, alpha=0.1):
+</span><span class='line'>
+</span><span class='line'>        self.Iter = Iter
+</span><span class='line'>        self.learnrate = learnrate
+</span><span class='line'>        self.alpha = alpha
+</span><span class='line'>
+</span><span class='line'>    def training(self, X, Y, typenum, batch_size=500):
+</span><span class='line'>        ##featuresnum是X的纬度，batchesnum是分区的数目
+</span><span class='line'>        featuresnum = X.shape[1]
+</span><span class='line'>        batchesnum = int(X.shape[0] / batch_size)
+</span><span class='line'>        ###因为在softMax中theta和x都是全局变量，所以这里应该声明为全局变量
+</span><span class='line'>        X = theano.shared(np.asarray(X, dtype=float))
+</span><span class='line'>        ###保证Y是整型的
+</span><span class='line'>        Y = theano.tensor.cast(theano.shared(np.asarray(Y)), 'int32')
+</span><span class='line'>        #x是一个矩阵，y是一个向量
+</span><span class='line'>        x = theano.tensor.matrix('x')
+</span><span class='line'>        y = theano.tensor.ivector('y')
+</span><span class='line'>        ##表示index是整型标量
+</span><span class='line'>        index = theano.tensor.lscalar()
+</span><span class='line'>        theta = theano.shared(value=0.001 * zeros((featuresnum, typenum),
+</span><span class='line'>                                                     dtype=theano.config.floatX),
+</span><span class='line'>                              name='theta', borrow=True)
+</span><span class='line'>        ###hx就是计算softmax()的值
+</span><span class='line'>        hx = theano.tensor.nnet.softmax(theano.tensor.dot(x, theta))
+</span><span class='line'>        ##这个就是loss
+</span><span class='line'>        cost = -theano.tensor.mean(theano.tensor.log(hx)[theano.tensor.arange(y.shape[0]), y]) + 0.5 * self.alpha * theano.tensor.sum(theta ** 2)
+</span><span class='line'>        #grad可以自动计算倒数
+</span><span class='line'>        g_theta = theano.tensor.grad(cost, theta)
+</span><span class='line'>        ##这里就是用一个结构保存更新的值
+</span><span class='line'>        updates = [(theta, theta - self.learnrate * g_theta)]
+</span><span class='line'>        #批量更新
+</span><span class='line'>        train_model = theano.function(
+</span><span class='line'>            inputs=[index], outputs=cost, updates=updates, givens={
+</span><span class='line'>                x: X[index * batch_size: (index + 1) * batch_size],
+</span><span class='line'>                y: Y[index * batch_size: (index + 1) * batch_size]
+</span><span class='line'>            }, allow_input_downcast=True
+</span><span class='line'>        )
+</span><span class='line'>
+</span><span class='line'>        lastcostJ = np.inf
+</span><span class='line'>        stop = False
+</span><span class='line'>        epoch = 0
+</span><span class='line'>        costj = []
+</span><span class='line'>        ###总体的循环执行，当达到最大循环次数或者cost不再下降的时候结束
+</span><span class='line'>        while (epoch &lt; self.Iter) and (not stop):
+</span><span class='line'>            epoch = epoch + 1
+</span><span class='line'>            for minibatch_index in range(batchesnum):
+</span><span class='line'>                costj.append(train_model(minibatch_index))
+</span><span class='line'>            if np.mean(costj) &gt;= lastcostJ:
+</span><span class='line'>                print("costJ is increasing !!!")
+</span><span class='line'>                stop = True
+</span><span class='line'>            else:
+</span><span class='line'>                lastcostJ = np.mean(costj)
+</span><span class='line'>                print(('epoch %i, minibatch %i/%i,averange cost is %f') %
+</span><span class='line'>                      (epoch, minibatch_index + 1, batchesnum, lastcostJ))
+</span><span class='line'>        self.theta = theta
+</span><span class='line'>        return self.theta.get_value()
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>    def testing(self, X, Y, batch_size=500):
+</span><span class='line'>
+</span><span class='line'>        batchesnum = int(X.shape[0] / batch_size)
+</span><span class='line'>        X = theano.shared(np.asarray(X, dtype=float))
+</span><span class='line'>        Y = theano.tensor.cast(theano.shared(np.asarray(Y)), 'int32')
+</span><span class='line'>
+</span><span class='line'>        x = theano.tensor.matrix('x')
+</span><span class='line'>        y = theano.tensor.ivector('y')
+</span><span class='line'>
+</span><span class='line'>        index = theano.tensor.lscalar()
+</span><span class='line'>        hx = theano.tensor.nnet.softmax(theano.tensor.dot(x, self.theta))
+</span><span class='line'>        ###求最后的类别结果和误差
+</span><span class='line'>        predict = theano.tensor.argmax(hx, axis=1)
+</span><span class='line'>
+</span><span class='line'>        errors = theano.tensor.mean(theano.tensor.neq(predict, y))
+</span><span class='line'>
+</span><span class='line'>        test_model = theano.function(
+</span><span class='line'>            inputs=[index], outputs=errors, givens={
+</span><span class='line'>                x: X[index * batch_size: (index + 1) * batch_size],
+</span><span class='line'>                y: Y[index * batch_size: (index + 1) * batch_size]
+</span><span class='line'>            }, allow_input_downcast=True
+</span><span class='line'>        )
+</span><span class='line'>        test_losses = []
+</span><span class='line'>        for minibatch_index in range(batchesnum):
+</span><span class='line'>            test_losses.append(test_model(minibatch_index))
+</span><span class='line'>        test_score = np.mean(test_losses)
+</span><span class='line'>        print(('minibatch %i/%i, test error of model %f %%') %
+</span><span class='line'>              (minibatch_index + 1, batchesnum, test_score * 100.))
+</span><span class='line'>
+</span><span class='line'>    
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>if __name__ == '__main__':
+</span><span class='line'>
+</span><span class='line'>    X, y = make_classification(n_samples=80000)
+</span><span class='line'>    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.5)
+</span><span class='line'>    Testsoftmax = SoftMax()
+</span><span class='line'>    ###typenum=len(set(y)
+</span><span class='line'>    Testsoftmax.training(X_train, y_train, typenum=len(set(y)))
+</span><span class='line'>    Testsoftmax.testing(X_test, y_test)
+</span><span class='line'>
+</span><span class='line'>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>基本代码参考：
+<a href="http://www.cnblogs.com/qw12/p/5962430.html">http://www.cnblogs.com/qw12/p/5962430.html</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[GBDT+LR]]></title>
@@ -24,7 +307,7 @@
 
 <p>工业界LR模型用的比较多的原因就是它非常容易可以并行化，处理起大规模的数据来比较容易。但是LR的学习能力有限，必须要经历大量的特征选择，特征组合等工作。因此找到合适的方法简化特征工程是非常重要的。facebook在KDD上发表了一篇文章，讲的就是GBDT+LR，为我们提供了一些思路，论文中的基本原理很简单，搞清楚下面这幅图就行了：</p>
 
-<p><img src="%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-13%2016.41.39.png" alt="" /></p>
+<p><img src="./images/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-13%2016.41.39.png" alt="" /></p>
 
 <blockquote><ol>
 <li><p>使用GBDT训练数据，得到如下2棵树，第一棵树3个叶子结点，第二棵树2个叶子结点，总共5个叶子结点。因此最后用于LR的特征向量就是5维的[0,0,0,0,0]。</p></li>
