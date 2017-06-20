@@ -1,0 +1,167 @@
+---
+layout: post
+title: "softmax"
+date: 2017-06-16 17:52:28 +0800
+comments: true
+categories: Algorithm
+---
+
+
+#SoftMax
+###原理：
+LR实际上是针对二分类问题的，但是SoftMax其实就是LR推广到多分类的形式。
+在逻辑回归中：
+
+$P(y=1|x)=\frac{e^{-\theta^Tx}}{1+e^{-\theta^Tx}}$
+$P(y=0|X)=\frac{1}{1+e^{-\theta^Tx}}$
+
+那么loss function就是：
+
+$L(\theta)=\sum_{i=1}^n{y^i}log\frac{e^{-\theta^Tx}}{1+e^{-\theta^Tx}}+(1-y^i)log\frac{1}{1+e^{-\theta^Tx}}$
+
+推广到多分类问题：
+
+$P(y=k|x)=\frac{e^{-\theta_k^Tx}}{\sum_k^Ke^{-\theta_k^Tx}}$
+
+那么loss function就变成了：
+
+$L(\theta)=\sum_{i=1}^n{I\{y^i=k\}}log\frac{e^{-\theta_k^Tx}}{1+e^{-\theta_k^Tx}}$
+
+$I\{y^i = k\}$表示当y^i = k时为1，其他为0.
+
+同样可以采用梯度下降的方式求解。
+
+
+###实现demo
+SKlean中关于逻辑回归的多分类问题，可以选择muti参数，它是有多个二分类器组合实现的。SKlean没有实现softmax的回归分类算法。在Theano包中有SoftMax函数，用与计算公式3中的值，可以自己实现基于SoftMax的分类算法。
+
+```
+# encoding:utf-8
+"""
+@version:1
+@author:Chenlini
+@file:softmax.py
+@time:2017/6/15 11:22
+"""
+
+# coding:utf8
+
+
+from theano import *
+from sklearn.datasets import *
+from pandas import *
+from sklearn.model_selection import *
+from numpy import *
+
+
+class SoftMax:
+    def __init__(self, Iter=1, learnrate=0.01, alpha=0.1):
+
+        self.Iter = Iter
+        self.learnrate = learnrate
+        self.alpha = alpha
+
+    def training(self, X, Y, typenum, batch_size=500):
+        ##featuresnum是X的纬度，batchesnum是分区的数目
+        featuresnum = X.shape[1]
+        batchesnum = int(X.shape[0] / batch_size)
+        ###因为在softMax中theta和x都是全局变量，所以这里应该声明为全局变量
+        X = theano.shared(np.asarray(X, dtype=float))
+        ###保证Y是整型的
+        Y = theano.tensor.cast(theano.shared(np.asarray(Y)), 'int32')
+        #x是一个矩阵，y是一个向量
+        x = theano.tensor.matrix('x')
+        y = theano.tensor.ivector('y')
+        ##表示index是整型标量
+        index = theano.tensor.lscalar()
+        theta = theano.shared(value=0.001 * zeros((featuresnum, typenum),
+                                                     dtype=theano.config.floatX),
+                              name='theta', borrow=True)
+        ###hx就是计算softmax()的值
+        hx = theano.tensor.nnet.softmax(theano.tensor.dot(x, theta))
+        ##这个就是loss
+        cost = -theano.tensor.mean(theano.tensor.log(hx)[theano.tensor.arange(y.shape[0]), y]) + 0.5 * self.alpha * theano.tensor.sum(theta ** 2)
+        #grad可以自动计算倒数
+        g_theta = theano.tensor.grad(cost, theta)
+        ##这里就是用一个结构保存更新的值
+        updates = [(theta, theta - self.learnrate * g_theta)]
+        #批量更新
+        train_model = theano.function(
+            inputs=[index], outputs=cost, updates=updates, givens={
+                x: X[index * batch_size: (index + 1) * batch_size],
+                y: Y[index * batch_size: (index + 1) * batch_size]
+            }, allow_input_downcast=True
+        )
+
+        lastcostJ = np.inf
+        stop = False
+        epoch = 0
+        costj = []
+        ###总体的循环执行，当达到最大循环次数或者cost不再下降的时候结束
+        while (epoch < self.Iter) and (not stop):
+            epoch = epoch + 1
+            for minibatch_index in range(batchesnum):
+                costj.append(train_model(minibatch_index))
+            if np.mean(costj) >= lastcostJ:
+                print("costJ is increasing !!!")
+                stop = True
+            else:
+                lastcostJ = np.mean(costj)
+                print(('epoch %i, minibatch %i/%i,averange cost is %f') %
+                      (epoch, minibatch_index + 1, batchesnum, lastcostJ))
+        self.theta = theta
+        return self.theta.get_value()
+
+
+
+    def testing(self, X, Y, batch_size=500):
+
+        batchesnum = int(X.shape[0] / batch_size)
+        X = theano.shared(np.asarray(X, dtype=float))
+        Y = theano.tensor.cast(theano.shared(np.asarray(Y)), 'int32')
+
+        x = theano.tensor.matrix('x')
+        y = theano.tensor.ivector('y')
+
+        index = theano.tensor.lscalar()
+        hx = theano.tensor.nnet.softmax(theano.tensor.dot(x, self.theta))
+        ###求最后的类别结果和误差
+        predict = theano.tensor.argmax(hx, axis=1)
+
+        errors = theano.tensor.mean(theano.tensor.neq(predict, y))
+
+        test_model = theano.function(
+            inputs=[index], outputs=errors, givens={
+                x: X[index * batch_size: (index + 1) * batch_size],
+                y: Y[index * batch_size: (index + 1) * batch_size]
+            }, allow_input_downcast=True
+        )
+        test_losses = []
+        for minibatch_index in range(batchesnum):
+            test_losses.append(test_model(minibatch_index))
+        test_score = np.mean(test_losses)
+        print(('minibatch %i/%i, test error of model %f %%') %
+              (minibatch_index + 1, batchesnum, test_score * 100.))
+
+    
+
+
+if __name__ == '__main__':
+
+    X, y = make_classification(n_samples=80000)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.5)
+    Testsoftmax = SoftMax()
+    ###typenum=len(set(y)
+    Testsoftmax.training(X_train, y_train, typenum=len(set(y)))
+    Testsoftmax.testing(X_test, y_test)
+
+
+
+```
+
+
+基本代码参考：
+http://www.cnblogs.com/qw12/p/5962430.html
+
+
+
